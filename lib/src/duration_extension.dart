@@ -7,6 +7,10 @@ extension DurationExtension on Duration {
     return Future.delayed(this, callback);
   }
 
+  String format() {
+    return toString().split('.').first.padLeft(8, '0');
+  }
+
   int get daysPerYear => 365;
   int get weeksPerYear => 52;
   int get monthsPerYear => 12;
