@@ -1,5 +1,5 @@
 import 'package:dart_extensions/dart_extensions.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 void main() {
   test('getters', () {
