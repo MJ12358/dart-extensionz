@@ -7,39 +7,55 @@ extension DurationExtension on Duration {
     return Future.delayed(this, callback);
   }
 
+  // https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
+  // https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
   String format() {
-    // this does not include milliseconds
-    return toString().split('.').first.padLeft(8, '0');
-  }
+    List<String> result = <String>[];
 
-  static Duration parse(String value) {
-    int hours = 0;
-    int minutes = 0;
-    int microseconds;
-    List<String> parts = value.split(':');
+    List<String> parts = toString().split(':');
+    List<String> sParts = parts[parts.length - 1].split('.');
 
     if (parts.length > 2) {
-      hours = int.parse(parts[parts.length - 3]);
+      final int hours = int.parse(parts[parts.length - 3]);
+
+      if (hours != 0) {
+        result.add('$hours h');
+      }
     }
 
     if (parts.length > 1) {
-      minutes = int.parse(parts[parts.length - 2]);
+      final minutes = int.parse(parts[parts.length - 2]);
+
+      if (minutes != 0) {
+        result.add('$minutes m');
+      }
     }
 
-    microseconds = (double.parse(parts[parts.length - 1]) * 1000000).round();
+    if (sParts.length > 1) {
+      final seconds = int.parse(sParts[sParts.length - 2]);
 
-    return Duration(
-      hours: hours,
-      minutes: minutes,
-      microseconds: microseconds,
-    );
-  }
-
-  static Duration tryParse(String? value) {
-    if (value == null || value.isBlank) {
-      return Duration.zero;
+      if (seconds != 0) {
+        result.add('$seconds s');
+      }
     }
-    return parse(value);
+
+    if (sParts.isNotEmpty) {
+      final String mParts = sParts[sParts.length - 1];
+
+      final milliseconds = int.parse(mParts.substring(0, mParts.length ~/ 2));
+      final microseconds =
+          int.parse(mParts.substring(mParts.length ~/ 2, mParts.length));
+
+      if (milliseconds != 0) {
+        result.add('$milliseconds ms');
+      }
+
+      if (microseconds != 0) {
+        result.add('$microseconds µs');
+      }
+    }
+
+    return result.join(' ');
   }
 
   static const int daysPerYear = 365;

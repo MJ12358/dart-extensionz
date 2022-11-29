@@ -20,6 +20,28 @@ void main() {
     expect(result.microseconds, 1);
   });
 
+  test('format', () {
+    Duration result1 = Duration(
+      minutes: 1,
+      seconds: 32,
+    );
+
+    Duration result2 = Duration(
+      seconds: 48,
+      milliseconds: 860,
+    );
+
+    Duration result3 = Duration(
+      seconds: 48,
+      milliseconds: 860,
+      microseconds: 96,
+    );
+
+    expect(result1.format(), '1 m 32 s');
+    expect(result2.format(), '48 s 860 ms');
+    expect(result3.format(), '48 s 860 ms 96 µs');
+  });
+
   test('toISO', () {
     expect(Duration(days: 1212, minutes: 30).toISO(), 'P3Y16W5DT30M');
     expect(Duration(days: 3).toISO(), 'P3D');

@@ -79,6 +79,7 @@ extension StringExtension on String {
     return int.parse(timeMatch.group(1) ?? '0');
   }
 
+  /// https://github.com/desktop-dart/duration/blob/master/lib/src/parse/parse.dart
   Duration _parseDartDuration() {
     final List<String> parts = split(':');
 
