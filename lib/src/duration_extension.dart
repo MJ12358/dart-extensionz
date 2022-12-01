@@ -7,9 +7,14 @@ extension DurationExtension on Duration {
     return Future.delayed(this, callback);
   }
 
+  num operator /(Duration other) => inMicroseconds / other.inMicroseconds;
+
   // https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
   // https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
-  String format() {
+  String format({
+    String partSeparator = ' ',
+    String valueSeparator = ' ',
+  }) {
     List<String> result = <String>[];
 
     List<String> parts = toString().split(':');
@@ -19,7 +24,7 @@ extension DurationExtension on Duration {
       final int hours = int.parse(parts[parts.length - 3]);
 
       if (hours != 0) {
-        result.add('$hours h');
+        result.add('$hours${valueSeparator}h');
       }
     }
 
@@ -27,7 +32,7 @@ extension DurationExtension on Duration {
       final minutes = int.parse(parts[parts.length - 2]);
 
       if (minutes != 0) {
-        result.add('$minutes m');
+        result.add('$minutes${valueSeparator}m');
       }
     }
 
@@ -35,7 +40,7 @@ extension DurationExtension on Duration {
       final seconds = int.parse(sParts[sParts.length - 2]);
 
       if (seconds != 0) {
-        result.add('$seconds s');
+        result.add('$seconds${valueSeparator}s');
       }
     }
 
@@ -47,15 +52,15 @@ extension DurationExtension on Duration {
           int.parse(mParts.substring(mParts.length ~/ 2, mParts.length));
 
       if (milliseconds != 0) {
-        result.add('$milliseconds ms');
+        result.add('$milliseconds${valueSeparator}ms');
       }
 
       if (microseconds != 0) {
-        result.add('$microseconds µs');
+        result.add('$microseconds$valueSeparatorµs');
       }
     }
 
-    return result.join(' ');
+    return result.join(partSeparator);
   }
 
   static const int daysPerYear = 365;
