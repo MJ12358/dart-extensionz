@@ -1,7 +1,48 @@
 extension DateTimeExtension on DateTime {
-  DateTime get tommorrow => DateTime(year, month, day + 1);
+  DateTime get clone =>
+      DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
 
-  DateTime get yesterday => DateTime(year, month, day - 1);
+  int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
+
+  DateTime get tommorrow => DateTime.now().nextDay;
+
+  DateTime get yesterday => DateTime.now().previousDay;
+
+  DateTime get nextDay => addDays(1);
+
+  DateTime get previousDay => addDays(-1);
+
+  DateTime get nextWeek => addWeeks(1);
+
+  DateTime get previousWeek => addWeeks(-1);
+
+  DateTime get nextMonth => clone.setMonth(month + 1);
+
+  DateTime get previousMonth => clone.setMonth(month - 1);
+
+  DateTime get nextYear => clone.setYear(year + 1);
+
+  DateTime get previousYear => clone.setYear(year - 1);
+
+  DateTime addMicroseconds(int value) {
+    return add(Duration(microseconds: value));
+  }
+
+  DateTime addMilliseconds(int value) {
+    return add(Duration(milliseconds: value));
+  }
+
+  DateTime addSeconds(int value) {
+    return add(Duration(seconds: value));
+  }
+
+  DateTime addMinutes(int value) {
+    return add(Duration(minutes: value));
+  }
+
+  DateTime addHours(int value) {
+    return add(Duration(hours: value));
+  }
 
   DateTime addDays(int value) {
     return add(Duration(days: value));
@@ -15,11 +56,79 @@ extension DateTimeExtension on DateTime {
     return setYear(year + value);
   }
 
+  DateTime get endOfYear => clone.setYear(year, DateTime.december).endOfMonth;
+
+  DateTime get endOfMonth => DateTime(year, month + 1).addMicroseconds(-1);
+
+  DateTime get endOfWeek => nextWeek.startOfWeek.addMicroseconds(-1);
+
   DateTime get endOfDay => setHour(23, 59, 999, 999);
 
   DateTime get endOfHour => setMinute(59, 59, 999, 999);
 
   DateTime get endOfMinute => setSecond(59, 999, 999);
+
+  DateTime get endOfSecond => clone.setMillisecond(999, 999);
+
+  DateTime get startOfYear =>
+      clone.setMonth(DateTime.january, 1, 0, 0, 0, 0, 0);
+
+  DateTime get startOfMonth => clone.setDay(1, 0, 0, 0, 0, 0);
+
+  DateTime get startOfWeek =>
+      weekday == DateTime.sunday ? startOfDay : addDays(weekday).startOfDay;
+
+  DateTime get startOfDay => clone.setHour(0, 0, 0, 0, 0);
+
+  DateTime get startOfHour => clone.setMinute(0, 0, 0, 0);
+
+  DateTime get startOfMinute => clone.setSecond(0, 0, 0);
+
+  DateTime get startOfSecond => clone.setMillisecond(0, 0);
+
+  bool isSameYear(DateTime other) {
+    return year == other.year;
+  }
+
+  bool isSameMonth(DateTime other) {
+    return startOfMonth == other.startOfMonth;
+  }
+
+  bool isSameWeek(DateTime other) {
+    return startOfWeek == other.startOfWeek;
+  }
+
+  bool isSameDay(DateTime other) {
+    return startOfDay == other.startOfDay;
+  }
+
+  bool isSameHour(DateTime other) {
+    return startOfHour == other.startOfHour;
+  }
+
+  bool isSameMinute(DateTime other) {
+    return startOfMinute == other.startOfMinute;
+  }
+
+  bool isSameSecond(DateTime other) {
+    return secondsSinceEpoch == other.secondsSinceEpoch;
+  }
+
+  bool get isWeekend =>
+      weekday == DateTime.saturday || weekday == DateTime.sunday;
+
+  bool operator <(DateTime other) => isBefore(other);
+
+  bool operator <=(DateTime other) =>
+      isBefore(other) || isAtSameMomentAs(other);
+
+  bool operator >(DateTime other) => isAfter(other);
+
+  bool operator >=(DateTime other) => isAfter(other) || isAtSameMomentAs(other);
+
+  DateTime operator -(Duration duration) => subtract(duration);
+
+  DateTime operator +(Duration duration) => add(duration);
 
   DateTime setYear(
     int year, [

@@ -38,6 +38,11 @@ extension StringExtension on String {
     return <String>[substring(0, length), substring(length)];
   }
 
+  /// Convert this string to a Duration
+  ///
+  ///   Can be used with an ISO formatted string
+  ///   or a Duration object that has been stringified
+  ///
   Duration toDuration() {
     String isoRegex =
         r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
@@ -53,7 +58,10 @@ extension StringExtension on String {
     }
   }
 
+  /// Convert ISO duration string to a Dart Duration
+  ///
   /// https://dart-review.googlesource.com/c/sdk/+/118566/1/sdk/lib/core/duration.dart#116
+  ///
   Duration _parseISODuration() {
     final int years = _parseTime('Y');
     // final int months = _parseTime('M');
@@ -79,7 +87,10 @@ extension StringExtension on String {
     return int.parse(timeMatch.group(1) ?? '0');
   }
 
+  /// Convert a Dart duration string to a Dart Duration
+  ///
   /// https://github.com/desktop-dart/duration/blob/master/lib/src/parse/parse.dart
+  ///
   Duration _parseDartDuration() {
     final List<String> parts = split(':');
 

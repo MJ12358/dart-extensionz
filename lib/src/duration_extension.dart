@@ -3,14 +3,27 @@ import 'dart:async';
 import 'package:dart_extensions/dart_extensions.dart';
 
 extension DurationExtension on Duration {
-  Future<dynamic> delay([FutureOr Function()? callback]) async {
-    return Future.delayed(this, callback);
-  }
+  static const int daysPerYear = 365;
+  static const int weeksPerYear = 52;
+  static const int monthsPerYear = 12;
+  static const int daysPerWeek = 7;
+
+  int get years => inDays ~/ daysPerYear;
+  int get weeks => (inDays % daysPerYear) ~/ daysPerWeek;
+  int get days => (inDays % daysPerYear) % daysPerWeek;
+  int get hours => inHours % Duration.hoursPerDay;
+  int get minutes => inMinutes % Duration.minutesPerHour;
+  int get seconds => inSeconds % Duration.secondsPerMinute;
+  int get milliseconds => inMilliseconds % Duration.millisecondsPerSecond;
+  int get microseconds => inMicroseconds % Duration.microsecondsPerMillisecond;
 
   num operator /(Duration other) => inMicroseconds / other.inMicroseconds;
 
-  // https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
-  // https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
+  /// Format a Duration
+  ///
+  /// https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
+  /// https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
+  ///
   String format({
     String partSeparator = ' ',
     String valueSeparator = ' ',
@@ -63,25 +76,10 @@ extension DurationExtension on Duration {
     return result.join(partSeparator);
   }
 
-  static const int daysPerYear = 365;
-  static const int weeksPerYear = 52;
-  static const int monthsPerYear = 12;
-  static const int daysPerWeek = 7;
-
-  // int get inYears => inDays ~/ daysPerYear;
-  // int get inWeeks => inDays ~/ daysPerWeek;
-
-  int get years => inDays ~/ daysPerYear;
-  // int get months => ((inDays * daysPerYear) ~/ monthsPerYear) % monthsPerYear;
-  int get weeks => (inDays % daysPerYear) ~/ daysPerWeek;
-  int get days => (inDays % daysPerYear) % daysPerWeek;
-  int get hours => inHours % Duration.hoursPerDay;
-  int get minutes => inMinutes % Duration.minutesPerHour;
-  int get seconds => inSeconds % Duration.secondsPerMinute;
-  int get milliseconds => inMilliseconds % Duration.millisecondsPerSecond;
-  int get microseconds => inMicroseconds % Duration.microsecondsPerMillisecond;
-
+  /// Convert a Duration to an ISO string
+  ///
   /// https://github.com/mzdm/iso_duration_parser/blob/master/lib/src/parser.dart
+  ///
   String toISO() {
     if (this == Duration.zero) {
       return 'PT0S';
@@ -93,9 +91,6 @@ extension DurationExtension on Duration {
     if (years != 0) {
       strBuffer.write('${years.abs().deleteTrailingZero()}Y');
     }
-    // if (months != 0) {
-    //   strBuffer.write('${months.abs().deleteTrailingZero()}M');
-    // }
     if (weeks != 0) {
       strBuffer.write('${weeks.abs().deleteTrailingZero()}W');
     }
@@ -118,5 +113,9 @@ extension DurationExtension on Duration {
     }
 
     return strBuffer.toString();
+  }
+
+  Future<dynamic> delay([FutureOr Function()? callback]) async {
+    return Future.delayed(this, callback);
   }
 }
