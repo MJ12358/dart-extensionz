@@ -23,7 +23,6 @@ extension DurationExtension on Duration {
   ///
   /// https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
   /// https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
-  ///
   String format({
     String partSeparator = ' ',
     String valueSeparator = ' ',
@@ -79,7 +78,6 @@ extension DurationExtension on Duration {
   /// Convert a Duration to an ISO string
   ///
   /// https://github.com/mzdm/iso_duration_parser/blob/master/lib/src/parser.dart
-  ///
   String toISO() {
     if (this == Duration.zero) {
       return 'PT0S';

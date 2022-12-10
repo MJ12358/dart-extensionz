@@ -86,12 +86,19 @@ extension DateTimeExtension on DateTime {
 
   DateTime get startOfSecond => clone.setMillisecond(0, 0);
 
+  bool isSameMoment(DateTime other) {
+    return isAtSameMomentAs(other);
+  }
+
   bool isSameYear(DateTime other) {
     return year == other.year;
   }
 
+  // TODO: determine which you want to use here....
+
   bool isSameMonth(DateTime other) {
-    return startOfMonth == other.startOfMonth;
+    return isSameYear(other) && month == other.month;
+    // return startOfMonth == other.startOfMonth;
   }
 
   bool isSameWeek(DateTime other) {
@@ -99,6 +106,7 @@ extension DateTimeExtension on DateTime {
   }
 
   bool isSameDay(DateTime other) {
+    return isSameMonth(other) && month == other.month;
     return startOfDay == other.startOfDay;
   }
 
@@ -117,18 +125,17 @@ extension DateTimeExtension on DateTime {
   bool get isWeekend =>
       weekday == DateTime.saturday || weekday == DateTime.sunday;
 
-  bool operator <(DateTime other) => isBefore(other);
-
-  bool operator <=(DateTime other) =>
-      isBefore(other) || isAtSameMomentAs(other);
-
-  bool operator >(DateTime other) => isAfter(other);
-
-  bool operator >=(DateTime other) => isAfter(other) || isAtSameMomentAs(other);
+  DateTime operator +(Duration duration) => add(duration);
 
   DateTime operator -(Duration duration) => subtract(duration);
 
-  DateTime operator +(Duration duration) => add(duration);
+  bool operator <(DateTime other) => isBefore(other);
+
+  bool operator <=(DateTime other) => isBefore(other) || isSameMoment(other);
+
+  bool operator >(DateTime other) => isAfter(other);
+
+  bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
 
   DateTime setYear(
     int year, [

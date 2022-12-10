@@ -4,6 +4,14 @@ extension StringExtension on String {
         .contains(trim().toLowerCase());
   }
 
+  DateTime? toDateTime() {
+    try {
+      return DateTime.tryParse(this);
+    } catch (_) {
+      return null;
+    }
+  }
+
   String get initials {
     if (isBlank) {
       return 'NA';
@@ -40,9 +48,8 @@ extension StringExtension on String {
 
   /// Convert this string to a Duration
   ///
-  ///   Can be used with an ISO formatted string
-  ///   or a Duration object that has been stringified
-  ///
+  /// Can be used with an ISO formatted string
+  /// or a Duration object that has been stringified
   Duration toDuration() {
     String isoRegex =
         r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
@@ -90,7 +97,6 @@ extension StringExtension on String {
   /// Convert a Dart duration string to a Dart Duration
   ///
   /// https://github.com/desktop-dart/duration/blob/master/lib/src/parse/parse.dart
-  ///
   Duration _parseDartDuration() {
     final List<String> parts = split(':');
 
