@@ -20,7 +20,10 @@ extension StringExtension on String {
     if (split.length >= 2) {
       return '${split[0].substring(0, 1)} ${split[1].substring(0, 1)}';
     }
-    return '${split[0].substring(0, 1)} ${split[0].substring(1, 2)}';
+    if (split[0].length >= 2) {
+      return '${split[0].substring(0, 1)} ${split[0].substring(1, 2)}';
+    }
+    return split[0].substring(0, 1);
   }
 
   String get capitalize {

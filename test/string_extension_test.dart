@@ -2,7 +2,16 @@ import 'package:dart_extensions/dart_extensions.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('getters', () {});
+  test('getters', () {
+    expect('C'.initials, 'C');
+    expect('C '.initials, 'C');
+    expect('Jon'.initials, 'J o');
+    expect('Jon '.initials, 'J o');
+    expect('Jon Snow'.initials, 'J S');
+    expect('Jon  Snow'.initials, 'J S');
+    expect('Ramsey Bolton Snow'.initials, 'R B');
+    expect('Ramsey  Bolton  Snow'.initials, 'R B');
+  });
 
   test('toDurationISO', () {
     Duration result1 = Duration(
