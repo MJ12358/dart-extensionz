@@ -1,3 +1,13 @@
+extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
+  T get max {
+    return reduce((a, b) => a.compareTo(b) >= 0 ? a : b);
+  }
+
+  T get min {
+    return reduce((a, b) => a.compareTo(b) >= 0 ? b : a);
+  }
+}
+
 extension IterableNullableNumberExtension on Iterable<num?> {
   num? get nullableSum {
     Iterable<num> iterable = whereType<num>();
