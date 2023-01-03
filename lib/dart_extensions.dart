@@ -1,4 +1,5 @@
 export 'src/boolean_extension.dart';
+export 'src/datetime_extension.dart';
 export 'src/double_extension.dart';
 export 'src/duration_extension.dart';
 export 'src/integer_extension.dart';

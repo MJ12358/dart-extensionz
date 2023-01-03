@@ -116,4 +116,22 @@ extension DurationExtension on Duration {
   Future<dynamic> delay([FutureOr Function()? callback]) async {
     return Future.delayed(this, callback);
   }
+
+  Duration copyWith({
+    int? days,
+    int? hours,
+    int? minutes,
+    int? seconds,
+    int? milliseconds,
+    int? microseconds,
+  }) {
+    return Duration(
+      days: days ?? this.days,
+      hours: hours ?? this.hours,
+      minutes: minutes ?? this.minutes,
+      seconds: seconds ?? this.seconds,
+      milliseconds: milliseconds ?? this.milliseconds,
+      microseconds: microseconds ?? this.microseconds,
+    );
+  }
 }

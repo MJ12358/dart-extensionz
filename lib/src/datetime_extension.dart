@@ -16,13 +16,13 @@ extension DateTimeExtension on DateTime {
 
   DateTime get previousWeek => addWeeks(-1);
 
-  DateTime get nextMonth => clone.setMonth(month + 1);
+  DateTime get nextMonth => clone.copyWith(month: month + 1);
 
-  DateTime get previousMonth => clone.setMonth(month - 1);
+  DateTime get previousMonth => clone.copyWith(month: month - 1);
 
-  DateTime get nextYear => clone.setYear(year + 1);
+  DateTime get nextYear => clone.copyWith(year: year + 1);
 
-  DateTime get previousYear => clone.setYear(year - 1);
+  DateTime get previousYear => clone.copyWith(year: year - 1);
 
   DateTime addMicroseconds(int value) {
     return add(Duration(microseconds: value));
@@ -53,38 +53,88 @@ extension DateTimeExtension on DateTime {
   }
 
   DateTime addYears(int value) {
-    return setYear(year + value);
+    return copyWith(year: year + value);
   }
 
-  DateTime get endOfYear => clone.setYear(year, DateTime.december).endOfMonth;
+  DateTime get endOfYear =>
+      clone.copyWith(year: year, month: DateTime.december).endOfMonth;
 
   DateTime get endOfMonth => DateTime(year, month + 1).addMicroseconds(-1);
 
   DateTime get endOfWeek => nextWeek.startOfWeek.addMicroseconds(-1);
 
-  DateTime get endOfDay => setHour(23, 59, 999, 999);
+  DateTime get endOfDay => copyWith(
+        hour: 23,
+        minute: 59,
+        millisecond: 999,
+        microsecond: 999,
+      );
 
-  DateTime get endOfHour => setMinute(59, 59, 999, 999);
+  DateTime get endOfHour => copyWith(
+        hour: 59,
+        minute: 59,
+        millisecond: 999,
+        microsecond: 999,
+      );
 
-  DateTime get endOfMinute => setSecond(59, 999, 999);
+  DateTime get endOfMinute => copyWith(
+        minute: 59,
+        millisecond: 999,
+        microsecond: 999,
+      );
 
-  DateTime get endOfSecond => clone.setMillisecond(999, 999);
+  DateTime get endOfSecond => clone.copyWith(
+        millisecond: 999,
+        microsecond: 999,
+      );
 
-  DateTime get startOfYear =>
-      clone.setMonth(DateTime.january, 1, 0, 0, 0, 0, 0);
+  DateTime get startOfYear => clone.copyWith(
+        month: DateTime.january,
+        day: 1,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
 
-  DateTime get startOfMonth => clone.setDay(1, 0, 0, 0, 0, 0);
+  DateTime get startOfMonth => clone.copyWith(
+        day: 1,
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
 
   DateTime get startOfWeek =>
       weekday == DateTime.sunday ? startOfDay : addDays(weekday).startOfDay;
 
-  DateTime get startOfDay => clone.setHour(0, 0, 0, 0, 0);
+  DateTime get startOfDay => clone.copyWith(
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
 
-  DateTime get startOfHour => clone.setMinute(0, 0, 0, 0);
+  DateTime get startOfHour => clone.copyWith(
+        minute: 0,
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
 
-  DateTime get startOfMinute => clone.setSecond(0, 0, 0);
+  DateTime get startOfMinute => clone.copyWith(
+        second: 0,
+        millisecond: 0,
+        microsecond: 0,
+      );
 
-  DateTime get startOfSecond => clone.setMillisecond(0, 0);
+  DateTime get startOfSecond => clone.copyWith(
+        millisecond: 0,
+        microsecond: 0,
+      );
 
   bool isSameMoment(DateTime other) {
     return isAtSameMomentAs(other);
@@ -107,7 +157,7 @@ extension DateTimeExtension on DateTime {
 
   bool isSameDay(DateTime other) {
     return isSameMonth(other) && month == other.month;
-    return startOfDay == other.startOfDay;
+    // return startOfDay == other.startOfDay;
   }
 
   bool isSameHour(DateTime other) {
@@ -137,8 +187,8 @@ extension DateTimeExtension on DateTime {
 
   bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
 
-  DateTime setYear(
-    int year, [
+  DateTime copyWith({
+    int? year,
     int? month,
     int? day,
     int? hour,
@@ -146,9 +196,9 @@ extension DateTimeExtension on DateTime {
     int? second,
     int? millisecond,
     int? microsecond,
-  ]) {
+  }) {
     return DateTime(
-      year,
+      year ?? this.year,
       month ?? this.month,
       day ?? this.day,
       hour ?? this.hour,
@@ -156,130 +206,6 @@ extension DateTimeExtension on DateTime {
       second ?? this.second,
       millisecond ?? this.millisecond,
       microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setMonth(
-    int month, [
-    int? day,
-    int? hour,
-    int? minute,
-    int? second,
-    int? millisecond,
-    int? microsecond,
-  ]) {
-    return DateTime(
-      year,
-      month,
-      day ?? this.day,
-      hour ?? this.hour,
-      minute ?? this.minute,
-      second ?? this.second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setDay(
-    int day, [
-    int? hour,
-    int? minute,
-    int? second,
-    int? millisecond,
-    int? microsecond,
-  ]) {
-    return DateTime(
-      year,
-      month,
-      day,
-      hour ?? this.hour,
-      minute ?? this.minute,
-      second ?? this.second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setHour(
-    int hour, [
-    int? minute,
-    int? second,
-    int? millisecond,
-    int? microsecond,
-  ]) {
-    return DateTime(
-      year,
-      month,
-      day,
-      hour,
-      minute ?? this.minute,
-      second ?? this.second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setMinute(
-    int minute, [
-    int? second,
-    int? millisecond,
-    int? microsecond,
-  ]) {
-    return DateTime(
-      year,
-      month,
-      day,
-      hour,
-      minute,
-      second ?? this.second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setSecond(
-    int second, [
-    int? millisecond,
-    int? microsecond,
-  ]) {
-    return DateTime(
-      year,
-      month,
-      day,
-      hour,
-      minute,
-      second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setMillisecond(
-    int millisecond, [
-    int? microsecond,
-  ]) {
-    return DateTime(
-      year,
-      month,
-      day,
-      hour,
-      minute,
-      second,
-      millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
-
-  DateTime setMicrosecond(int microsecond) {
-    return DateTime(
-      year,
-      month,
-      day,
-      hour,
-      minute,
-      second,
-      millisecond,
-      microsecond,
     );
   }
 }
