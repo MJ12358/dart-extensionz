@@ -1,4 +1,4 @@
-import 'package:dart_extensions/src/map_extension.dart';
+import 'package:dart_extensionz/src/map_extension.dart';
 
 extension ListExtension<T> on List<T> {
   List<T> removeNull() {

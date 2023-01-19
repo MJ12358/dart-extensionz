@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:dart_extensions/dart_extensions.dart';
+import 'package:dart_extensionz/dart_extensionz.dart';
 
 extension DurationExtension on Duration {
   static const int daysPerYear = 365;

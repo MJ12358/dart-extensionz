@@ -1,4 +1,4 @@
-# Dart Extensions
+# Dart Extensionz
 
 A set of dart extensions that I use in various projects.
 
@@ -7,13 +7,13 @@ A set of dart extensions that I use in various projects.
 Add this to your `pubspec.yaml` under `dependencies`
 
 ```yaml
-dart_extensions: ^1.0.0
+dart_extensionz: ^1.0.0
 ```
 
 ## Usage
 
 ```dart
-import 'package:dart_extensions/dart_extensions.dart';
+import 'package:dart_extensionz/dart_extensionz.dart';
 
 int value = 12;
 String result = value.ordinal;

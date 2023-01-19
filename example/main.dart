@@ -1,4 +1,4 @@
-import 'package:dart_extensions/dart_extensions.dart';
+import 'package:dart_extensionz/dart_extensionz.dart';
 
 class MyClass {
   const MyClass({
