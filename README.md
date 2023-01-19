@@ -1,12 +1,13 @@
 # Dart Extensions
 
+A set of dart extensions that I use in various projects.
+
 ## Getting started
 
 Add this to your `pubspec.yaml` under `dependencies`
 
 ```yaml
-dart_extensions:
-  git: https://github.com/mj12358/dart-extensions
+dart_extensions: ^1.0.0
 ```
 
 ## Usage

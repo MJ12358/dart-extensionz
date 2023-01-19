@@ -144,11 +144,8 @@ extension DateTimeExtension on DateTime {
     return year == other.year;
   }
 
-  // TODO: determine which you want to use here....
-
   bool isSameMonth(DateTime other) {
     return isSameYear(other) && month == other.month;
-    // return startOfMonth == other.startOfMonth;
   }
 
   bool isSameWeek(DateTime other) {
@@ -157,7 +154,6 @@ extension DateTimeExtension on DateTime {
 
   bool isSameDay(DateTime other) {
     return isSameMonth(other) && month == other.month;
-    // return startOfDay == other.startOfDay;
   }
 
   bool isSameHour(DateTime other) {

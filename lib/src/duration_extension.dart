@@ -22,15 +22,16 @@ extension DurationExtension on Duration {
   /// Format a Duration
   ///
   /// https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
+  ///
   /// https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
   String format({
     String partSeparator = ' ',
     String valueSeparator = ' ',
   }) {
-    List<String> result = <String>[];
+    final List<String> result = <String>[];
 
-    List<String> parts = toString().split(':');
-    List<String> sParts = parts[parts.length - 1].split('.');
+    final List<String> parts = toString().split(':');
+    final List<String> sParts = parts[parts.length - 1].split('.');
 
     if (parts.length > 2) {
       final int hours = int.parse(parts[parts.length - 3]);
@@ -41,7 +42,7 @@ extension DurationExtension on Duration {
     }
 
     if (parts.length > 1) {
-      final minutes = int.parse(parts[parts.length - 2]);
+      final int minutes = int.parse(parts[parts.length - 2]);
 
       if (minutes != 0) {
         result.add('$minutes${valueSeparator}m');
@@ -49,7 +50,7 @@ extension DurationExtension on Duration {
     }
 
     if (sParts.length > 1) {
-      final seconds = int.parse(sParts[sParts.length - 2]);
+      final int seconds = int.parse(sParts[sParts.length - 2]);
 
       if (seconds != 0) {
         result.add('$seconds${valueSeparator}s');
@@ -59,8 +60,9 @@ extension DurationExtension on Duration {
     if (sParts.isNotEmpty) {
       final String mParts = sParts[sParts.length - 1];
 
-      final milliseconds = int.parse(mParts.substring(0, mParts.length ~/ 2));
-      final microseconds =
+      final int milliseconds =
+          int.parse(mParts.substring(0, mParts.length ~/ 2));
+      final int microseconds =
           int.parse(mParts.substring(mParts.length ~/ 2, mParts.length));
 
       if (milliseconds != 0) {
