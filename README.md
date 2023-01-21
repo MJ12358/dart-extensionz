@@ -1,6 +1,6 @@
 # Dart Extensionz
 
-A set of dart extensions that I use in various projects.
+A set of [Dart](https://dart.dev) extensions I use in various projects.
 
 ## Getting started
 

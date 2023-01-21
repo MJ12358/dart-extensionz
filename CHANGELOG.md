@@ -1,3 +1,9 @@
-# 1.0.0
+# Dart Extensionz
+
+## 1.0.1
+
+- Update readme
+
+## 1.0.0
 
 - Initial version.
