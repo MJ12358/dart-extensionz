@@ -1,17 +1,32 @@
 extension StringExtension on String {
+  /// Get the bool equivalent of this string
+  ///
+  /// Possible true values are:
+  ///   "y", "yes", "on", "ok", "true", "t", "1"
   bool toBool() {
     return ['y', 'yes', 'on', 'ok', 'true', 't', '1']
         .contains(trim().toLowerCase());
   }
 
   DateTime? toDateTime() {
-    try {
-      return DateTime.tryParse(this);
-    } catch (_) {
-      return null;
-    }
+    return DateTime.tryParse(this);
   }
 
+  int? toInt() {
+    return int.tryParse(this);
+  }
+
+  num? toNum() {
+    return num.tryParse(this);
+  }
+
+  double? toDouble() {
+    return double.tryParse(this);
+  }
+
+  /// Get this initials of this string
+  ///
+  /// When the string is empty returns "NA"
   String get initials {
     if (isBlank) {
       return 'NA';

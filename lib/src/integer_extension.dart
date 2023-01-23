@@ -1,28 +1,7 @@
 extension IntegerExtension on int {
-  Duration toMicroseconds() {
-    return Duration(microseconds: this);
-  }
-
-  Duration toMilliseconds() {
-    return Duration(milliseconds: this);
-  }
-
-  Duration toSeconds() {
-    return Duration(seconds: this);
-  }
-
-  Duration toMinutes() {
-    return Duration(minutes: this);
-  }
-
-  Duration toHours() {
-    return Duration(hours: this);
-  }
-
-  Duration toDays() {
-    return Duration(days: this);
-  }
-
+  /// Get the ordinal of this integer
+  ///
+  /// Example: 3 == 3rd, 10 == 10th
   String get ordinal {
     if (this == 11 || this == 12 || this == 13) {
       return '${this}th';
