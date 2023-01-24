@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 1.1.0
+
+- Introduce `PlatformExtension`.
+
 ## 1.0.2
 
 - Add some comments and extra String methods.
