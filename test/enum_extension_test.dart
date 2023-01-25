@@ -19,12 +19,24 @@ void main() {
   });
 
   test('labels', () {
-    expect(TestEnum.values.labels,
-        ['One', 'Hello World', 'Xml Http Request', 'Separate Words']);
+    final List<String> result = <String>[
+      'One',
+      'Hello World',
+      'Xml Http Request',
+      'Separate Words'
+    ];
+    expect(TestEnum.values.labels, result);
+    expect(Set<TestEnum>.from(TestEnum.values).labels, result);
   });
 
   test('names', () {
-    expect(TestEnum.values.names,
-        ['one', 'helloWorld', 'XmlHttpRequest', 'separate_words']);
+    final List<String> result = <String>[
+      'one',
+      'helloWorld',
+      'XmlHttpRequest',
+      'separate_words'
+    ];
+    expect(TestEnum.values.names, result);
+    expect(Set<TestEnum>.from(TestEnum.values).names, result);
   });
 }

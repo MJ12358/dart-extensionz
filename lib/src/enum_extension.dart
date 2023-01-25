@@ -13,7 +13,7 @@ extension EnumExtension on Enum {
   }
 }
 
-extension EnumsExtension on List<Enum> {
+extension EnumsExtension on Iterable<Enum> {
   List<String> get labels => map((Enum e) => e.label).toList();
 
   List<String> get names => asNameMap().keys.toList();

@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 1.2.1
+
+- Fix EnumExtension to allow Iterable
+
 ## 1.2.0
 
 - Introduce `EnumExtension`.
