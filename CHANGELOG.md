@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 1.2.0
+
+- Introduce `EnumExtension`.
+
 ## 1.1.0
 
 - Introduce `PlatformExtension`.
