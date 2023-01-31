@@ -1,6 +1,6 @@
 name: dart_extensionz
 description: A set of Dart extensions I use in various projects. Including Boolean, DateTime extensions and more.
-version: 1.2.1
+version: 1.3.0
 repository: https://github.com/mj12358/dart-extensions
 
 environment:

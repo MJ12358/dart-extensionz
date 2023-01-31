@@ -3,6 +3,8 @@ export 'src/datetime_extension.dart';
 export 'src/double_extension.dart';
 export 'src/duration_extension.dart';
 export 'src/enum_extension.dart';
+export 'src/file_extension.dart';
+export 'src/future_extension.dart';
 export 'src/integer_extension.dart';
 export 'src/iterable_extension.dart';
 export 'src/list_extension.dart';

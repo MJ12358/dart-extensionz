@@ -29,7 +29,7 @@ extension StringExtension on String {
   }
 
   String normalizeSpace() {
-    return trim().replaceAll(RegExp(r' +'), ' ');
+    return replaceAll(RegExp(r' +'), ' ').trim();
   }
 
   bool get isNumeric => hasMatch(r'^\d+$');
@@ -83,7 +83,7 @@ extension StringExtension on String {
   /// Convert this string to a Duration
   ///
   /// Can be used with an ISO formatted string
-  /// or a Duration object that has been stringified
+  ///   or a Duration object that has been stringified
   Duration toDuration() {
     String isoRegex =
         r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
@@ -102,7 +102,6 @@ extension StringExtension on String {
   /// Convert ISO duration string to a Dart Duration
   ///
   /// https://dart-review.googlesource.com/c/sdk/+/118566/1/sdk/lib/core/duration.dart#116
-  ///
   Duration _parseISODuration() {
     final int years = _parseTime('Y');
     // final int months = _parseTime('M');
@@ -180,28 +179,33 @@ extension StringExtension on String {
         microseconds: microseconds);
   }
 
+  /// Get the Levenshtein distance between two strings
+  ///
+  /// The Levenshtein distance between two strings is defined as
+  ///   the minimum number of edits needed to transform one string into the other
   int levenshtein(String other) {
     /* if either string is empty, difference is inserting all chars 
      * from the other
      */
-    if (length == 0) {
+    if (isEmpty) {
       return other.length;
     }
-    if (length == 0) {
-      return other.length;
+    if (other.isEmpty) {
+      return length;
     }
 
     /* if first letters are the same, the difference is whatever is
      * required to edit the rest of the strings
      */
-    if (codeUnitAt(0) == other.codeUnitAt(0)) {
+    // if (codeUnitAt(0) == other.codeUnitAt(0)) {
+    if (this[0] == other[0]) {
       return substring(1).levenshtein(other.substring(1));
     }
 
     /* else try:
-     *      changing first letter of s to that of t,
-     *      remove first letter of s, or
-     *      remove first letter of t
+     *      changing first letter of [this] to that of [other],
+     *      remove first letter of [this], or
+     *      remove first letter of [other]
      */
     int a = substring(1).levenshtein(other.substring(1));
     int b = levenshtein(other.substring(1));
@@ -219,10 +223,20 @@ extension StringExtension on String {
   }
 
   String repeat(int times, [String separator = '']) {
-    String result = '';
-    for (int i = 0; i <= times; i++) {
-      result += '$times$separator';
+    if (times <= 0) {
+      return this;
     }
+
+    String result = '';
+
+    for (int i = 1; i <= times; i++) {
+      if (i == times) {
+        result += this;
+      } else {
+        result += '$this$separator';
+      }
+    }
+
     return result;
   }
 }

@@ -7,7 +7,7 @@ A set of [Dart](https://dart.dev) extensions I use in various projects.
 Add this to your `pubspec.yaml` under `dependencies`
 
 ```yaml
-dart_extensionz: ^1.2.1
+dart_extensionz: ^1.3.0
 ```
 
 ## Usage

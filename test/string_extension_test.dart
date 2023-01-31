@@ -13,6 +13,27 @@ void main() {
     expect('Ramsey  Bolton  Snow'.initials, 'R B');
   });
 
+  test('normalizeSpace', () {
+    expect('       '.normalizeSpace(), '');
+    expect('Jon       Snow'.normalizeSpace(), 'Jon Snow');
+    expect('   Jon      Snow'.normalizeSpace(), 'Jon Snow');
+    expect(' Jon   Snow   '.normalizeSpace(), 'Jon Snow');
+  });
+
+  test('isNumeric', () {
+    expect('123'.isNumeric, true);
+    expect('A1B2C3'.isNumeric, false);
+    expect('ABC'.isNumeric, false);
+    expect('\$&@!'.isNumeric, false);
+  });
+
+  test('isAlpha', () {
+    expect('123'.isAlpha, false);
+    expect('A1B2C3'.isAlpha, false);
+    expect('ABC'.isAlpha, true);
+    expect('\$&@!'.isAlpha, false);
+  });
+
   test('toDurationISO', () {
     Duration result1 = Duration(
       days: 1212,
@@ -60,5 +81,21 @@ void main() {
 
     expect(result1.toString().toDuration(), result1);
     expect(result2.toString().toDuration(), result2);
+  });
+
+  test('levenshtein', () {
+    expect('kitten'.levenshtein('kitten'), 0);
+    expect('kitten'.levenshtein('sitten'), 1);
+    expect('kitten'.levenshtein('sitting'), 3);
+    expect('saturday'.levenshtein('sunday'), 3);
+    expect('rosettacode'.levenshtein('raisethysword'), 8);
+  });
+
+  test('repeat', () {
+    expect('test'.repeat(-1), 'test');
+    expect('test'.repeat(0), 'test');
+    expect('test'.repeat(2), 'testtest');
+    expect('test'.repeat(2, '-'), 'test-test');
+    expect('test'.repeat(4, '-'), 'test-test-test-test');
   });
 }

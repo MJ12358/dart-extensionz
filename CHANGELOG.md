@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 1.3.0
+
+- Fix DateTime isSameDay, add more String extensions and introduce File and Future extensions.
+
 ## 1.2.1
 
 - Fix EnumExtension to allow Iterable
