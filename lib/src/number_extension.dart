@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 extension NumberExtension on num {
   bool toBool() {
     return this == 1;
   }
+
+  num toRadians() => this * (math.pi / 180.0);
+
+  num toDegrees() => this * (180.0 / math.pi);
 
   Future<dynamic> delay([FutureOr Function()? callback]) async {
     Future.delayed(

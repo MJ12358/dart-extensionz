@@ -24,6 +24,22 @@ extension StringExtension on String {
     return double.tryParse(this);
   }
 
+  bool hasMatch(String pattern) {
+    return RegExp(pattern).hasMatch(this);
+  }
+
+  String normalizeSpace() {
+    return trim().replaceAll(RegExp(r' +'), ' ');
+  }
+
+  bool get isNumeric => hasMatch(r'^\d+$');
+
+  bool get isAlpha => hasMatch(r'^[a-zA-Z]+$');
+
+  bool get isAlphanumeric => isNumeric || isAlpha;
+
+  int get lineLength => '/n'.allMatches(this).length + 1;
+
   /// Get this initials of this string
   ///
   /// When the string is empty returns "NA"
@@ -74,9 +90,9 @@ extension StringExtension on String {
 
     String dartRegex = r'^(\d+:)?(\d+:)?(\d+.)?(\d+)?$';
 
-    if (RegExp(isoRegex).hasMatch(this)) {
+    if (hasMatch(isoRegex)) {
       return _parseISODuration();
-    } else if (RegExp(dartRegex).hasMatch(this)) {
+    } else if (hasMatch(dartRegex)) {
       return _parseDartDuration();
     } else {
       return Duration.zero;
@@ -162,5 +178,51 @@ extension StringExtension on String {
         seconds: seconds,
         milliseconds: milliseconds,
         microseconds: microseconds);
+  }
+
+  int levenshtein(String other) {
+    /* if either string is empty, difference is inserting all chars 
+     * from the other
+     */
+    if (length == 0) {
+      return other.length;
+    }
+    if (length == 0) {
+      return other.length;
+    }
+
+    /* if first letters are the same, the difference is whatever is
+     * required to edit the rest of the strings
+     */
+    if (codeUnitAt(0) == other.codeUnitAt(0)) {
+      return substring(1).levenshtein(other.substring(1));
+    }
+
+    /* else try:
+     *      changing first letter of s to that of t,
+     *      remove first letter of s, or
+     *      remove first letter of t
+     */
+    int a = substring(1).levenshtein(other.substring(1));
+    int b = levenshtein(other.substring(1));
+    int c = substring(1).levenshtein(other);
+
+    if (a > b) {
+      a = b;
+    }
+    if (a > c) {
+      a = c;
+    }
+
+    // any of which is 1 edit plus editing the rest of the strings
+    return a + 1;
+  }
+
+  String repeat(int times, [String separator = '']) {
+    String result = '';
+    for (int i = 0; i <= times; i++) {
+      result += '$times$separator';
+    }
+    return result;
   }
 }

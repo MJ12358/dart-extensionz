@@ -153,7 +153,7 @@ extension DateTimeExtension on DateTime {
   }
 
   bool isSameDay(DateTime other) {
-    return isSameMonth(other) && month == other.month;
+    return isSameMonth(other) && day == other.day;
   }
 
   bool isSameHour(DateTime other) {
@@ -170,6 +170,18 @@ extension DateTimeExtension on DateTime {
 
   bool get isWeekend =>
       weekday == DateTime.saturday || weekday == DateTime.sunday;
+
+  bool get isToday {
+    final nowDate = DateTime.now();
+    return year == nowDate.year && month == nowDate.month && day == nowDate.day;
+  }
+
+  bool get isYesterday {
+    final nowDate = DateTime.now();
+    return year == nowDate.year &&
+        month == nowDate.month &&
+        day == nowDate.day - 1;
+  }
 
   DateTime operator +(Duration duration) => add(duration);
 
