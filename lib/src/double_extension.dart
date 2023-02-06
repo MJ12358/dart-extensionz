@@ -27,6 +27,6 @@ extension DoubleExtension on double {
 
   double toPrecision(int fractionDigits) {
     final double mod = pow(10, fractionDigits.toDouble()).toDouble();
-    return ((this * mod).round().toDouble() / mod);
+    return (this * mod).round().toDouble() / mod;
   }
 }

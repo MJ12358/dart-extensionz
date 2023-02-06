@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math' as math;
 
 enum FileType {
   image,
@@ -9,18 +10,21 @@ enum FileType {
 }
 
 extension FileExtension on File {
+  // Gets the file extension
   String get extension {
-    final index = path.lastIndexOf('.');
+    final int index = path.lastIndexOf('.');
     if (index < 0 || index + 1 >= path.length) {
       return path;
     }
     return path.substring(index + 1).toLowerCase();
   }
 
+  // Gets the file mimeType
   String get mimeType {
     return _mimeTypeMap[extension] ?? '';
   }
 
+  // Get the file type as an enum
   FileType get type {
     if (mimeType.startsWith('image/')) {
       return FileType.image;
@@ -44,6 +48,42 @@ extension FileExtension on File {
   bool get isAudio => type == FileType.audio;
 
   bool get isText => type == FileType.text;
+
+  /// Get the file size as a string eg. 5 KB
+  ///
+  /// Use [decimals] to specify the number of decimal places
+  String size([
+    int decimals = 0,
+  ]) {
+    int bytes = 0;
+
+    try {
+      bytes = lengthSync();
+    } on FileSystemException catch (_) {
+      return '';
+    }
+
+    if (bytes <= 0) {
+      return '0 B';
+    }
+
+    const List<String> suffixes = <String>[
+      'B',
+      'KB',
+      'MB',
+      'GB',
+      'TB',
+      'PB',
+      'EB',
+      'ZB',
+      'YB'
+    ];
+
+    final int i = (math.log(bytes) / math.log(1024)).floor();
+    final String size = (bytes / math.pow(1024, i)).toStringAsFixed(decimals);
+
+    return '$size ${suffixes[i]}';
+  }
 
   static const Map<String, String> _mimeTypeMap = <String, String>{
     '123': 'application/vnd.lotus-1-2-3',

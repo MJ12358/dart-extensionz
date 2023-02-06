@@ -24,33 +24,33 @@ void main() {
     expect('123'.isNumeric, true);
     expect('A1B2C3'.isNumeric, false);
     expect('ABC'.isNumeric, false);
-    expect('\$&@!'.isNumeric, false);
+    expect(r'$&@!'.isNumeric, false);
   });
 
   test('isAlpha', () {
     expect('123'.isAlpha, false);
     expect('A1B2C3'.isAlpha, false);
     expect('ABC'.isAlpha, true);
-    expect('\$&@!'.isAlpha, false);
+    expect(r'$&@!'.isAlpha, false);
   });
 
   test('toDurationISO', () {
-    Duration result1 = Duration(
+    const Duration result1 = Duration(
       days: 1212,
       minutes: 30,
     );
 
-    Duration result2 = Duration(
+    const Duration result2 = Duration(
       days: 3,
     );
 
-    Duration result3 = Duration(
+    const Duration result3 = Duration(
       days: 1,
       hours: 1,
       minutes: 30,
     );
 
-    Duration result4 = Duration(
+    const Duration result4 = Duration(
       hours: 1,
       minutes: 30,
     );
@@ -62,7 +62,7 @@ void main() {
   });
 
   test('toDurationDart', () {
-    Duration result1 = Duration(
+    const Duration result1 = Duration(
       days: 6,
       hours: 5,
       minutes: 4,
@@ -71,7 +71,7 @@ void main() {
       microseconds: 1,
     );
 
-    Duration result2 = Duration(
+    const Duration result2 = Duration(
       hours: 5,
       minutes: 4,
       seconds: 3,

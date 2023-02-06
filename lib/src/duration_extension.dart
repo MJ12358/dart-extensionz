@@ -85,8 +85,8 @@ extension DurationExtension on Duration {
       return 'PT0S';
     }
 
-    final strNegative = isNegative ? '-' : '';
-    final strBuffer = StringBuffer('${strNegative}P');
+    final String strNegative = isNegative ? '-' : '';
+    final StringBuffer strBuffer = StringBuffer('${strNegative}P');
 
     if (years != 0) {
       strBuffer.write('${years.abs().deleteTrailingZero()}Y');
@@ -98,7 +98,7 @@ extension DurationExtension on Duration {
       strBuffer.write('${days.abs().deleteTrailingZero()}D');
     }
 
-    if (<num>[hours, minutes, seconds].any((e) => e != 0)) {
+    if (<num>[hours, minutes, seconds].any((num e) => e != 0)) {
       strBuffer.write('T');
 
       if (hours != 0) {
@@ -115,8 +115,8 @@ extension DurationExtension on Duration {
     return strBuffer.toString();
   }
 
-  Future<dynamic> delay([FutureOr Function()? callback]) async {
-    return Future.delayed(this, callback);
+  Future<dynamic> delay([FutureOr<dynamic> Function()? callback]) async {
+    return Future<dynamic>.delayed(this, callback);
   }
 
   Duration copyWith({

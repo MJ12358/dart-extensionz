@@ -172,15 +172,22 @@ extension DateTimeExtension on DateTime {
       weekday == DateTime.saturday || weekday == DateTime.sunday;
 
   bool get isToday {
-    final nowDate = DateTime.now();
+    final DateTime nowDate = DateTime.now();
     return year == nowDate.year && month == nowDate.month && day == nowDate.day;
   }
 
   bool get isYesterday {
-    final nowDate = DateTime.now();
+    final DateTime nowDate = DateTime.now();
     return year == nowDate.year &&
         month == nowDate.month &&
         day == nowDate.day - 1;
+  }
+
+  bool get isTommorrow {
+    final DateTime nowDate = DateTime.now();
+    return year == nowDate.year &&
+        month == nowDate.month &&
+        day == nowDate.day + 1;
   }
 
   DateTime operator +(Duration duration) => add(duration);

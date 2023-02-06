@@ -12,4 +12,5 @@ export 'src/map_extension.dart';
 export 'src/number_extension.dart';
 export 'src/object_extension.dart';
 export 'src/platform_extension.dart';
+export 'src/stream_extension.dart';
 export 'src/string_extension.dart';

@@ -4,7 +4,7 @@ extension StringExtension on String {
   /// Possible true values are:
   ///   "y", "yes", "on", "ok", "true", "t", "1"
   bool toBool() {
-    return ['y', 'yes', 'on', 'ok', 'true', 't', '1']
+    return <String>['y', 'yes', 'on', 'ok', 'true', 't', '1']
         .contains(trim().toLowerCase());
   }
 
@@ -13,7 +13,7 @@ extension StringExtension on String {
   }
 
   int? toInt() {
-    return int.tryParse(this);
+    return int.tryParse(this) ?? toDouble()?.round();
   }
 
   num? toNum() {
@@ -29,7 +29,7 @@ extension StringExtension on String {
   }
 
   String normalizeSpace() {
-    return replaceAll(RegExp(r' +'), ' ').trim();
+    return replaceAll(RegExp(' +'), ' ').trim();
   }
 
   bool get isNumeric => hasMatch(r'^\d+$');
@@ -85,10 +85,10 @@ extension StringExtension on String {
   /// Can be used with an ISO formatted string
   ///   or a Duration object that has been stringified
   Duration toDuration() {
-    String isoRegex =
+    const String isoRegex =
         r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
 
-    String dartRegex = r'^(\d+:)?(\d+:)?(\d+.)?(\d+)?$';
+    const String dartRegex = r'^(\d+:)?(\d+:)?(\d+.)?(\d+)?$';
 
     if (hasMatch(isoRegex)) {
       return _parseISODuration();
@@ -134,7 +134,7 @@ extension StringExtension on String {
     final List<String> parts = split(':');
 
     if (parts.length != 3) {
-      throw FormatException('Invalid duration format');
+      throw const FormatException('Invalid duration format');
     }
 
     int days;
@@ -145,15 +145,15 @@ extension StringExtension on String {
     int microseconds;
 
     {
-      final p = parts[2].split('.');
+      final List<String> p = parts[2].split('.');
 
       if (p.length != 2) {
-        throw FormatException('Invalid time format');
+        throw const FormatException('Invalid time format');
       }
 
       // If fractional seconds is passed, but less than 6 digits
       // Pad out to the right so we can calculate the ms/us correctly
-      final p2 = int.parse(p[1].padRight(6, '0'));
+      final int p2 = int.parse(p[1].padRight(6, '0'));
       microseconds = p2 % 1000;
       milliseconds = p2 ~/ 1000;
 
@@ -163,7 +163,7 @@ extension StringExtension on String {
     minutes = int.parse(parts[1]);
 
     {
-      int p = int.parse(parts[0]);
+      final int p = int.parse(parts[0]);
       hours = p % 24;
       days = p ~/ 24;
     }
@@ -171,18 +171,19 @@ extension StringExtension on String {
     // TODO verify that there are no negative parts
 
     return Duration(
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
-        milliseconds: milliseconds,
-        microseconds: microseconds);
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+      milliseconds: milliseconds,
+      microseconds: microseconds,
+    );
   }
 
   /// Get the Levenshtein distance between two strings
   ///
   /// The Levenshtein distance between two strings is defined as
-  ///   the minimum number of edits needed to transform one string into the other
+  /// the minimum number of edits needed to transform one string into the other
   int levenshtein(String other) {
     /* if either string is empty, difference is inserting all chars 
      * from the other
@@ -195,9 +196,8 @@ extension StringExtension on String {
     }
 
     /* if first letters are the same, the difference is whatever is
-     * required to edit the rest of the strings
+     *  required to edit the rest of the strings
      */
-    // if (codeUnitAt(0) == other.codeUnitAt(0)) {
     if (this[0] == other[0]) {
       return substring(1).levenshtein(other.substring(1));
     }
@@ -208,8 +208,8 @@ extension StringExtension on String {
      *      remove first letter of [other]
      */
     int a = substring(1).levenshtein(other.substring(1));
-    int b = levenshtein(other.substring(1));
-    int c = substring(1).levenshtein(other);
+    final int b = levenshtein(other.substring(1));
+    final int c = substring(1).levenshtein(other);
 
     if (a > b) {
       a = b;

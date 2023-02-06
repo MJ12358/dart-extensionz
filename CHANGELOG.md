@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 1.4.0
+
+- Use better lint rules. Add `File.size()` and more.
+
 ## 1.3.0
 
 - Fix DateTime isSameDay, add more String extensions and introduce File and Future extensions.

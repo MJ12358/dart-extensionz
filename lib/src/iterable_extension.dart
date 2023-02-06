@@ -1,34 +1,50 @@
+extension IterableExtension<T> on Iterable<T> {
+  /// Split one large list into limited sub lists
+  /// ```dart
+  /// [1, 2, 3, 4, 5, 6, 7, 8, 9].chunks(2)
+  /// // => [[1, 2], [3, 4], [5, 6], [7, 8], [9]]
+  /// ```
+  Iterable<List<T>> chunks(int chunkSize) sync* {
+    final int len = length;
+
+    for (int i = 0; i < len; i += chunkSize) {
+      final int start = i > len ? i - len : i;
+      yield skip(start).take(chunkSize).toList();
+    }
+  }
+}
+
 extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
   T get max {
-    return reduce((a, b) => a.compareTo(b) >= 0 ? a : b);
+    return reduce((T a, T b) => a.compareTo(b) >= 0 ? a : b);
   }
 
   T get min {
-    return reduce((a, b) => a.compareTo(b) >= 0 ? b : a);
+    return reduce((T a, T b) => a.compareTo(b) >= 0 ? b : a);
   }
 }
 
 extension IterableNullableNumberExtension on Iterable<num?> {
   num? get nullableSum {
-    Iterable<num> iterable = whereType<num>();
+    final Iterable<num> iterable = whereType<num>();
     if (iterable.isEmpty) {
       return null;
     }
     num result = 0;
-    for (var value in iterable) {
+    for (final num value in iterable) {
       result += value;
     }
     return result;
   }
 
   num? get nullableAverage {
-    Iterable<num> iterable = whereType<num>();
+    final Iterable<num> iterable = whereType<num>();
     if (iterable.isEmpty) {
       return null;
     }
     num result = 0.0;
     int count = 0;
-    for (var value in iterable) {
+    for (final num value in iterable) {
       count++;
       result += (value - result) / count;
     }

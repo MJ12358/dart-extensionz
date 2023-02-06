@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('getters', () {
-    Duration result = Duration(
+    const Duration result = Duration(
       days: 6,
       hours: 5,
       minutes: 4,
@@ -21,17 +21,17 @@ void main() {
   });
 
   test('format', () {
-    Duration result1 = Duration(
+    const Duration result1 = Duration(
       minutes: 1,
       seconds: 32,
     );
 
-    Duration result2 = Duration(
+    const Duration result2 = Duration(
       seconds: 48,
       milliseconds: 860,
     );
 
-    Duration result3 = Duration(
+    const Duration result3 = Duration(
       seconds: 48,
       milliseconds: 860,
       microseconds: 96,
@@ -43,9 +43,9 @@ void main() {
   });
 
   test('toISO', () {
-    expect(Duration(days: 1212, minutes: 30).toISO(), 'P3Y16W5DT30M');
-    expect(Duration(days: 3).toISO(), 'P3D');
-    expect(Duration(days: 1, hours: 1, minutes: 30).toISO(), 'P1DT1H30M');
-    expect(Duration(hours: 1, minutes: 30).toISO(), 'PT1H30M');
+    expect(const Duration(days: 1212, minutes: 30).toISO(), 'P3Y16W5DT30M');
+    expect(const Duration(days: 3).toISO(), 'P3D');
+    expect(const Duration(days: 1, hours: 1, minutes: 30).toISO(), 'P1DT1H30M');
+    expect(const Duration(hours: 1, minutes: 30).toISO(), 'PT1H30M');
   });
 }

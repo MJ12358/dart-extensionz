@@ -4,11 +4,11 @@ extension ObjectExtension on Object {
       return toString().trim().isEmpty;
     }
     if (this is Iterable) {
-      Iterable value = this as Iterable;
+      final Iterable<dynamic> value = this as Iterable<dynamic>;
       return value.isEmpty;
     }
     if (this is Map) {
-      Map value = this as Map;
+      final Map<dynamic, dynamic> value = this as Map<dynamic, dynamic>;
       return value.isEmpty;
     }
     return false;

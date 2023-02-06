@@ -19,7 +19,7 @@ extension PlatformExtension on Platform {
   /// Get the target plaform as an enum
   ///
   /// This requires the caller to instance
-  /// the [Plaform] class as `Platform()`.
+  /// the `Plaform` class as `Platform()`.
   ///
   /// This is due to this issue:
   /// https://github.com/dart-lang/language/issues/723

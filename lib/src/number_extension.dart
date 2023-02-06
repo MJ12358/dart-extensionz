@@ -10,8 +10,8 @@ extension NumberExtension on num {
 
   num toDegrees() => this * (180.0 / math.pi);
 
-  Future<dynamic> delay([FutureOr Function()? callback]) async {
-    Future.delayed(
+  Future<dynamic> delay([FutureOr<dynamic> Function()? callback]) async {
+    Future<dynamic>.delayed(
       Duration(milliseconds: (this * 1000).round()),
       callback,
     );
@@ -43,5 +43,37 @@ extension NumberExtension on num {
       return toStringAsFixed(0);
     }
     return toString();
+  }
+
+  /// Transforms `this` into a `String` and pads it on the left if it's shorter
+  /// than the given [width].
+  String padLeft(int width, [String padding = '0']) {
+    return toString().padLeft(width, padding);
+  }
+
+  /// Transforms `this` into a `String` and pads it on the right if it's shorter
+  /// than the given [width].
+  String padRight(int width, [String padding = '0']) {
+    return toString().padRight(width, padding);
+  }
+
+  /// Returns `true` if `this` is between the given range
+  /// of [min] (inclusive) and [max] (exclusive).
+  bool isBetween(num min, num max) {
+    assert(
+      min <= max,
+      'Invalid bounds: $min and $max, min cannot be greater than max',
+    );
+    return min <= this && this < max;
+  }
+
+  /// Returns `true` if this number is outside the given range
+  /// of [min] (exclusive) and [max] (exclusive).
+  bool isOutside(num min, num max) {
+    assert(
+      min <= max,
+      'Invalid bounds: $min and $max, min cannot be greater than max',
+    );
+    return this < min || this > max;
   }
 }

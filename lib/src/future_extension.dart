@@ -5,9 +5,9 @@ extension FutureExtension<T> on Future<T> {
     void Function(T)? cleanUp,
   }) async {
     final List<T> result = await Future.wait<T>(
-      [
+      <Future<T>>[
         this,
-        Future.delayed(duration),
+        Future<T>.delayed(duration),
       ],
       eagerError: eagerError,
       cleanUp: cleanUp,
@@ -16,15 +16,17 @@ extension FutureExtension<T> on Future<T> {
   }
 
   Future<T> dumpError() {
-    return catchError((error, stackTrace) {
+    return catchError((Object error, StackTrace stackTrace) {
+      // ignore: avoid_print
       print(error);
+      // ignore: avoid_print
       print(stackTrace);
     });
   }
 }
 
 extension FuturesExtension<T> on Iterable<Future<T>> {
-  void progressWait(Function(num) callback) async {
+  Future<void> progressWait(Function(num) callback) async {
     int completed = 0;
     void complete() {
       completed++;
@@ -32,7 +34,10 @@ extension FuturesExtension<T> on Iterable<Future<T>> {
     }
 
     await Future.wait<T>(
-        [for (final Future<T> future in this) future.whenComplete(complete)]);
+      <Future<T>>[
+        for (final Future<T> future in this) future.whenComplete(complete)
+      ],
+    );
   }
 }
 
@@ -40,6 +45,6 @@ extension FutureFunctionExtension<T> on Future<T> Function() {
   Future<T> delayed({
     Duration duration = const Duration(milliseconds: 350),
   }) async {
-    return Future.delayed(duration, this);
+    return Future<T>.delayed(duration, this);
   }
 }
