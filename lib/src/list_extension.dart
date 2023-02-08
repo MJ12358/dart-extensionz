@@ -1,6 +1,9 @@
-import 'package:dart_extensionz/src/map_extension.dart';
+part of '../dart_extensionz.dart';
 
 extension ListExtension<T> on List<T> {
+  /// Returns the last index integer
+  int get lastIndex => length - 1;
+
   /// Split one large list into limited sub lists
   /// ```dart
   /// [1, 2, 3, 4, 5, 6, 7, 8, 9].chunks(2)

@@ -1,3 +1,5 @@
+part of '../dart_extensionz.dart';
+
 extension ObjectExtension on Object {
   bool get isEmpty {
     if (this is String) {

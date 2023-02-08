@@ -1,4 +1,4 @@
-import 'dart:io';
+part of '../dart_extensionz.dart';
 
 enum TargetPlatform {
   android,

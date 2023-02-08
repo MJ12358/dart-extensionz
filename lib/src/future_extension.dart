@@ -1,3 +1,5 @@
+part of '../dart_extensionz.dart';
+
 extension FutureExtension<T> on Future<T> {
   Future<T> delayed({
     Duration duration = const Duration(milliseconds: 350),
@@ -15,6 +17,9 @@ extension FutureExtension<T> on Future<T> {
     return result.first;
   }
 
+  /// Dump any errors to the console
+  ///
+  /// Calls `catchError` while printing the `error` and `stackTrace`
   Future<T> dumpError() {
     return catchError((Object error, StackTrace stackTrace) {
       // ignore: avoid_print

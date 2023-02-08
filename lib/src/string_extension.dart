@@ -1,3 +1,5 @@
+part of '../dart_extensionz.dart';
+
 extension StringExtension on String {
   /// Get the bool equivalent of this string
   ///
@@ -38,7 +40,7 @@ extension StringExtension on String {
 
   bool get isAlphanumeric => isNumeric || isAlpha;
 
-  int get lineLength => '/n'.allMatches(this).length + 1;
+  int get lineLength => '\n'.allMatches(this).length + 1;
 
   /// Get this initials of this string
   ///
@@ -57,6 +59,7 @@ extension StringExtension on String {
     return split[0].substring(0, 1);
   }
 
+  /// Capitalize the first letter
   String get capitalize {
     if (isBlank) {
       return this;
@@ -64,6 +67,9 @@ extension StringExtension on String {
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
+  /// Title case the string
+  ///
+  /// The first letter of each word is capitalized
   String get titleCase {
     if (isBlank) {
       return this;

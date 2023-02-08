@@ -1,5 +1,4 @@
-import 'dart:io';
-import 'dart:math' as math;
+part of '../dart_extensionz.dart';
 
 enum FileType {
   image,

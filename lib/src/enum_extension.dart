@@ -1,4 +1,4 @@
-import 'package:dart_extensionz/dart_extensionz.dart';
+part of '../dart_extensionz.dart';
 
 extension EnumExtension on Enum {
   /// Get a human readable display label for this enum

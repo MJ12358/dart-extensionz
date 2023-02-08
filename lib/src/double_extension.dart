@@ -1,13 +1,16 @@
-import 'dart:math';
+part of '../dart_extensionz.dart';
 
 enum RoundingMode { ceiling, floor, half }
 
 extension DoubleExtension on double {
+  /// Round a double
+  ///
+  /// Use [mode] to specify ceil, floor or half (default)
   double roundDouble({
     int places = 2,
     RoundingMode mode = RoundingMode.half,
   }) {
-    final num mod = pow(10.0, places);
+    final num mod = math.pow(10.0, places);
     final int temp;
 
     switch (mode) {
@@ -23,10 +26,5 @@ extension DoubleExtension on double {
     }
 
     return temp / mod;
-  }
-
-  double toPrecision(int fractionDigits) {
-    final double mod = pow(10, fractionDigits.toDouble()).toDouble();
-    return (this * mod).round().toDouble() / mod;
   }
 }

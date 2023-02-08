@@ -1,5 +1,4 @@
-import 'dart:async';
-import 'dart:math' as math;
+part of '../dart_extensionz.dart';
 
 extension NumberExtension on num {
   bool toBool() {
@@ -75,5 +74,13 @@ extension NumberExtension on num {
       'Invalid bounds: $min and $max, min cannot be greater than max',
     );
     return this < min || this > max;
+  }
+
+  /// Works similar to `num.toStringAsFixed(fractionDigits)`
+  ///
+  /// But without the need to convert back yourself
+  num toPrecision([int fractionDigits = 0]) {
+    final double mod = math.pow(10, fractionDigits.toDouble()).toDouble();
+    return (this * mod).round().toDouble() / mod;
   }
 }

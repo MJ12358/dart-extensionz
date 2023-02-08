@@ -34,6 +34,19 @@ void main() {
     expect(r'$&@!'.isAlpha, false);
   });
 
+  test('lineLength', () {
+    const String test0 = 'No Lines Here';
+    const String test1 = 'T\n';
+    const String test2 = 'T\nT\n';
+    const String test3 = 'T\nT\nT\n';
+
+    // there is always at least one line
+    expect(test0.lineLength, 1);
+    expect(test1.lineLength, 2);
+    expect(test2.lineLength, 3);
+    expect(test3.lineLength, 4);
+  });
+
   test('toDurationISO', () {
     const Duration result1 = Duration(
       days: 1212,

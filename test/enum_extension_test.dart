@@ -25,6 +25,7 @@ void main() {
       'Xml Http Request',
       'Separate Words'
     ];
+
     expect(TestEnum.values.labels, result);
     expect(Set<TestEnum>.from(TestEnum.values).labels, result);
   });
@@ -36,6 +37,7 @@ void main() {
       'XmlHttpRequest',
       'separate_words'
     ];
+
     expect(TestEnum.values.names, result);
     expect(Set<TestEnum>.from(TestEnum.values).names, result);
   });

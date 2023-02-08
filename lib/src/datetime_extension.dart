@@ -1,3 +1,5 @@
+part of '../dart_extensionz.dart';
+
 extension DateTimeExtension on DateTime {
   DateTime get clone =>
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
@@ -202,6 +204,8 @@ extension DateTimeExtension on DateTime {
 
   bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
 
+  /// Creates a copy of this `DateTime` but with the given fields
+  /// replaced with the new values.
   DateTime copyWith({
     int? year,
     int? month,

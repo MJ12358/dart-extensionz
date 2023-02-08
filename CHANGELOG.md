@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## 2.0.0
+
+- **BREAKING**: Use `part` and `part of` instead of imports.
+  - This is to ensure only the `dart_extensionz.dart` file can be imported.
+- Move `toPrecision` into `NumberExtension`.
+
 ## 1.4.0
 
 - Use better lint rules. Add `File.size()` and more.

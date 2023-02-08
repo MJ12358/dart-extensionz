@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:dart_extensionz/dart_extensionz.dart';
+part of '../dart_extensionz.dart';
 
 extension DurationExtension on Duration {
   static const int daysPerYear = 365;
@@ -119,6 +117,8 @@ extension DurationExtension on Duration {
     return Future<dynamic>.delayed(this, callback);
   }
 
+  /// Creates a copy of this `Duration` but with the given fields
+  /// replaced with the new values.
   Duration copyWith({
     int? days,
     int? hours,
