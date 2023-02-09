@@ -1,6 +1,16 @@
 part of '../dart_extensionz.dart';
 
 extension ListExtension<T> on List<T> {
+  /// A clone of this List<T>
+  List<T> get clone => List<T>.from(this);
+
+  /// Clone this list, then add [other] to it
+  List<T> cloneAdd(List<T> other) {
+    final List<T> result = clone;
+    result.addAll(other);
+    return result;
+  }
+
   /// Returns the last index integer
   int get lastIndex => length - 1;
 

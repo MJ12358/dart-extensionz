@@ -16,5 +16,6 @@ part 'src/map_extension.dart';
 part 'src/number_extension.dart';
 part 'src/object_extension.dart';
 part 'src/platform_extension.dart';
+part 'src/set_extension.dart';
 part 'src/stream_extension.dart';
 part 'src/string_extension.dart';

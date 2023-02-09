@@ -1,8 +1,18 @@
 part of '../dart_extensionz.dart';
 
+enum Season {
+  spring,
+  summer,
+  autumn,
+  winter,
+}
+
 extension DateTimeExtension on DateTime {
   DateTime get clone =>
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
+
+  /// Returns only year, month and day
+  DateTime get date => DateTime(year, month, day);
 
   int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
 
@@ -173,6 +183,8 @@ extension DateTimeExtension on DateTime {
   bool get isWeekend =>
       weekday == DateTime.saturday || weekday == DateTime.sunday;
 
+  bool get isWeekday => !isWeekend;
+
   bool get isToday {
     final DateTime nowDate = DateTime.now();
     return year == nowDate.year && month == nowDate.month && day == nowDate.day;
@@ -192,6 +204,70 @@ extension DateTimeExtension on DateTime {
         day == nowDate.day + 1;
   }
 
+  bool get isLeapYear {
+    if (year % 4 != 0) {
+      return false;
+    }
+    if (year % 100 != 0) {
+      return true;
+    }
+    if (year % 400 != 0) {
+      return false;
+    }
+    return true;
+  }
+
+  int get daysUntilWeekend {
+    if (isWeekend) {
+      return 0;
+    }
+    return DateTime.saturday - weekday;
+  }
+
+  /// Return `Season` of this date.
+  /// Seasons are defined as:
+  /// - Spring: March 20 - June 20
+  /// - Summer: June 21 - September 22
+  /// - Autumn: September 23 - December 20
+  /// - Winter: December 21 - March 19
+  Season get season {
+    Season result;
+
+    switch (month) {
+      case DateTime.january:
+      case DateTime.february:
+      case DateTime.march:
+        result = Season.winter;
+        break;
+      case DateTime.april:
+      case DateTime.may:
+      case DateTime.june:
+        result = Season.spring;
+        break;
+      case DateTime.july:
+      case DateTime.august:
+      case DateTime.september:
+        result = Season.summer;
+        break;
+      default:
+        result = Season.autumn;
+    }
+
+    if (month == DateTime.march && day >= 20) {
+      result = Season.spring;
+    } else if (month == DateTime.june && day >= 21) {
+      result = Season.summer;
+    } else if (month == DateTime.september && day >= 23) {
+      result = Season.autumn;
+    } else if (month == DateTime.december && day >= 21) {
+      result = Season.winter;
+    }
+
+    return result;
+  }
+
+  bool isInSeason(Season season) => this.season == season;
+
   DateTime operator +(Duration duration) => add(duration);
 
   DateTime operator -(Duration duration) => subtract(duration);
@@ -203,6 +279,20 @@ extension DateTimeExtension on DateTime {
   bool operator >(DateTime other) => isAfter(other);
 
   bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
+
+  /// Returns the earliest date
+  DateTime min(DateTime other) {
+    return (millisecondsSinceEpoch < other.millisecondsSinceEpoch)
+        ? this
+        : other;
+  }
+
+  /// Returns the later date
+  DateTime max(DateTime other) {
+    return (millisecondsSinceEpoch > other.millisecondsSinceEpoch)
+        ? this
+        : other;
+  }
 
   /// Creates a copy of this `DateTime` but with the given fields
   /// replaced with the new values.

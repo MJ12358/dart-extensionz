@@ -2,14 +2,6 @@
 
 A set of [Dart](https://dart.dev) extensions I use in various projects.
 
-## Getting started
-
-Add this to your `pubspec.yaml` under `dependencies`
-
-```yaml
-dart_extensionz: ^2.0.0
-```
-
 ## Usage
 
 ```dart
@@ -18,4 +10,9 @@ import 'package:dart_extensionz/dart_extensionz.dart';
 int value = 12;
 String result = value.ordinal;
 expect(result, '12th');
+
+
+String value = '   Jon        Snow     ';
+String result = jonSnow.normalizeSpace();
+expect(result, 'Jon Snow');
 ```

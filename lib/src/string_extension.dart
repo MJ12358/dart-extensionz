@@ -78,9 +78,9 @@ extension StringExtension on String {
     return split.map((String str) => str.capitalize).join(' ');
   }
 
-  bool get isBlank {
-    return trim().isEmpty;
-  }
+  bool get isBlank => trim().isEmpty;
+
+  bool get isNotBlank => !isBlank;
 
   List<String> splitByLength(int length) {
     return <String>[substring(0, length), substring(length)];

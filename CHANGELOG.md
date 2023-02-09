@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 2.0.1
+
+- Add some more conveniences.
+
 ## 2.0.0
 
 - **BREAKING**: Use `part` and `part of` instead of imports.

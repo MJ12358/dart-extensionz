@@ -51,9 +51,7 @@ extension FileExtension on File {
   /// Get the file size as a string eg. 5 KB
   ///
   /// Use [decimals] to specify the number of decimal places
-  String size([
-    int decimals = 0,
-  ]) {
+  String size([int decimals = 0]) {
     int bytes = 0;
 
     try {
