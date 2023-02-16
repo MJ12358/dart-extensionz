@@ -1,6 +1,10 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
-enum RoundingMode { ceiling, floor, half }
+enum RoundingMode {
+  ceiling,
+  floor,
+  half,
+}
 
 extension DoubleExtension on double {
   /// Round a double

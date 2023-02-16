@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension MapExtension<K, V> on Map<K, V> {
   /// Remove null values from a map

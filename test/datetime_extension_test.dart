@@ -3,34 +3,36 @@ import 'package:test/test.dart';
 
 void main() {
   test('main', () {
-    final DateTime result = DateTime(2020);
-    final DateTime result2 = DateTime(2020, 1, 1, 5, 30, 30);
+    final DateTime test1 = DateTime(2020);
+    final DateTime test2 = DateTime(2020, 1, 1, 5, 30, 30);
 
-    expect(result.clone, result);
-    expect(result2.date, DateTime(2020));
-    // expect(result.tomorrow, DateTime(2020, 1, 2));
-    // expect(result.yesterday, DateTime(2020, 12, 31));
-    expect(result.copyWith(day: 2), result.nextDay);
-    expect(result.copyWith(year: 2019, month: 12, day: 31), result.previousDay);
-    expect(result.addYears(1).year, result.year + 1);
+    expect(test1.clone, test1);
+    expect(test2.date, DateTime(2020));
+    expect(test1.copyWith(day: 2), test1.nextDay);
+    expect(test1.copyWith(year: 2019, month: 12, day: 31), test1.previousDay);
+    expect(test1.addYears(1).year, test1.year + 1);
+    expect(test2.daysUntilWeekend, 3);
   });
 
   test('equivalence', () {
-    final DateTime result1 = DateTime(2020);
-    final DateTime result2 = DateTime(2020, 1, 1, 12, 30);
+    final DateTime test1 = DateTime(2020);
+    final DateTime test2 = DateTime(2020, 1, 1, 12, 30);
 
-    expect(result1.isSameMoment(result2), false);
-    expect(result1.isSameYear(result2), true);
-    expect(result1.isSameMonth(result2), true);
-    expect(result1.isSameWeek(result2), true);
-    expect(result1.isSameDay(result2), true);
-    expect(result1.isSameHour(result2), false);
-    expect(result1.isSameMinute(result2), false);
-    expect(result1.isSameSecond(result2), false);
-    expect(result1.isWeekend, false);
+    expect(test1.isSameMoment(test2), false);
+    expect(test1.isSameYear(test2), true);
+    expect(test1.isSameMonth(test2), true);
+    expect(test1.isSameWeek(test2), true);
+    expect(test1.isSameDay(test2), true);
+    expect(test1.isSameHour(test2), false);
+    expect(test1.isSameMinute(test2), false);
+    expect(test1.isSameSecond(test2), false);
+    expect(test1.isWeekend, false);
+    expect(test1.isWeekday, true);
     expect(DateTime(2023, 1, 29).isWeekend, true);
-    expect(result1.isToday, false);
-    expect(result1.isYesterday, false);
+    expect(test1.isToday, false);
+    expect(test1.isYesterday, false);
+    expect(test1.isTomorrow, false);
+    expect(test1.isLeapYear, true); // 2020 was a leap year
   });
 
   test('season', () {

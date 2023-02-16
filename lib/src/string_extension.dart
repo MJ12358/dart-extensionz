@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension StringExtension on String {
   /// Get the bool equivalent of this string
@@ -228,6 +228,7 @@ extension StringExtension on String {
     return a + 1;
   }
 
+  /// Repeat a string a number of [times] with a [separator]
   String repeat(int times, [String separator = '']) {
     if (times <= 0) {
       return this;

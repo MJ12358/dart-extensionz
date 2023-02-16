@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension IntegerExtension on int {
   /// Get the ordinal of this integer

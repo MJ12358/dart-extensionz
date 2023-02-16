@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension ListExtension<T> on List<T> {
   /// A clone of this List<T>

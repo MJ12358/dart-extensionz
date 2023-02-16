@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension IterableExtension<T> on Iterable<T> {
   /// Split one large list into limited sub lists

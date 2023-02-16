@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension DurationExtension on Duration {
   static const int daysPerYear = 365;
@@ -87,26 +87,26 @@ extension DurationExtension on Duration {
     final StringBuffer strBuffer = StringBuffer('${strNegative}P');
 
     if (years != 0) {
-      strBuffer.write('${years.abs().deleteTrailingZero()}Y');
+      strBuffer.write('${years.abs().stripTrailingZeros()}Y');
     }
     if (weeks != 0) {
-      strBuffer.write('${weeks.abs().deleteTrailingZero()}W');
+      strBuffer.write('${weeks.abs().stripTrailingZeros()}W');
     }
     if (days != 0) {
-      strBuffer.write('${days.abs().deleteTrailingZero()}D');
+      strBuffer.write('${days.abs().stripTrailingZeros()}D');
     }
 
     if (<num>[hours, minutes, seconds].any((num e) => e != 0)) {
       strBuffer.write('T');
 
       if (hours != 0) {
-        strBuffer.write('${hours.abs().deleteTrailingZero()}H');
+        strBuffer.write('${hours.abs().stripTrailingZeros()}H');
       }
       if (minutes != 0) {
-        strBuffer.write('${minutes.abs().deleteTrailingZero()}M');
+        strBuffer.write('${minutes.abs().stripTrailingZeros()}M');
       }
       if (seconds != 0) {
-        strBuffer.write('${seconds.abs().deleteTrailingZero()}S');
+        strBuffer.write('${seconds.abs().stripTrailingZeros()}S');
       }
     }
 

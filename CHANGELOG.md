@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## 3.0.0
+
+- Fix a typo in a getter name.
+- Remove unit conversion in favor of another library.
+
 ## 2.0.1
 
 - Add some more conveniences.

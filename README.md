@@ -13,6 +13,8 @@ expect(result, '12th');
 
 
 String value = '   Jon        Snow     ';
-String result = jonSnow.normalizeSpace();
+String result = value.normalizeSpace();
 expect(result, 'Jon Snow');
 ```
+
+- The [generated documentation](https://pub.dev/documentation/dart_extensionz/latest/dart_extensionz/dart_extensionz-library.html) will give you a great overview of all that is available.

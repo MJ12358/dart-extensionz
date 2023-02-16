@@ -1,13 +1,9 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension NumberExtension on num {
   bool toBool() {
     return this == 1;
   }
-
-  num toRadians() => this * (math.pi / 180.0);
-
-  num toDegrees() => this * (180.0 / math.pi);
 
   Future<dynamic> delay([FutureOr<dynamic> Function()? callback]) async {
     Future<dynamic>.delayed(
@@ -36,12 +32,12 @@ extension NumberExtension on num {
     return Duration(hours: (this * Duration.hoursPerDay).round());
   }
 
-  String deleteTrailingZero() {
+  num stripTrailingZeros() {
     final bool hasTrailingZero = truncateToDouble() == this;
     if (hasTrailingZero) {
-      return toStringAsFixed(0);
+      return num.parse(toStringAsFixed(0));
     }
-    return toString();
+    return this;
   }
 
   /// Transforms `this` into a `String` and pads it on the left if it's shorter

@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 enum Season {
   spring,
@@ -16,7 +16,7 @@ extension DateTimeExtension on DateTime {
 
   int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
 
-  DateTime get tommorrow => DateTime.now().nextDay;
+  DateTime get tomorrow => DateTime.now().nextDay;
 
   DateTime get yesterday => DateTime.now().previousDay;
 
@@ -197,7 +197,7 @@ extension DateTimeExtension on DateTime {
         day == nowDate.day - 1;
   }
 
-  bool get isTommorrow {
+  bool get isTomorrow {
     final DateTime nowDate = DateTime.now();
     return year == nowDate.year &&
         month == nowDate.month &&
@@ -222,6 +222,17 @@ extension DateTimeExtension on DateTime {
       return 0;
     }
     return DateTime.saturday - weekday;
+  }
+
+  DateTime get skipWeekend {
+    switch (day) {
+      case DateTime.saturday:
+        return addDays(2);
+      case DateTime.sunday:
+        return addDays(1);
+      default:
+        return this;
+    }
   }
 
   /// Return `Season` of this date.
@@ -268,18 +279,6 @@ extension DateTimeExtension on DateTime {
 
   bool isInSeason(Season season) => this.season == season;
 
-  DateTime operator +(Duration duration) => add(duration);
-
-  DateTime operator -(Duration duration) => subtract(duration);
-
-  bool operator <(DateTime other) => isBefore(other);
-
-  bool operator <=(DateTime other) => isBefore(other) || isSameMoment(other);
-
-  bool operator >(DateTime other) => isAfter(other);
-
-  bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
-
   /// Returns the earliest date
   DateTime min(DateTime other) {
     return (millisecondsSinceEpoch < other.millisecondsSinceEpoch)
@@ -293,6 +292,18 @@ extension DateTimeExtension on DateTime {
         ? this
         : other;
   }
+
+  DateTime operator +(Duration duration) => add(duration);
+
+  DateTime operator -(Duration duration) => subtract(duration);
+
+  bool operator <(DateTime other) => isBefore(other);
+
+  bool operator <=(DateTime other) => isBefore(other) || isSameMoment(other);
+
+  bool operator >(DateTime other) => isAfter(other);
+
+  bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
 
   /// Creates a copy of this `DateTime` but with the given fields
   /// replaced with the new values.

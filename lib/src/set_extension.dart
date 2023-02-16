@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension SetExtension<T> on Set<T> {
   /// A clone of this Set<T>

@@ -2,6 +2,23 @@ import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('toBool', () {
+    expect('y'.toBool(), true);
+    expect('yes'.toBool(), true);
+    expect('on'.toBool(), true);
+    expect('ok'.toBool(), true);
+    expect('true'.toBool(), true);
+    expect('t'.toBool(), true);
+    expect('1'.toBool(), true);
+
+    expect('n'.toBool(), false);
+    expect('no'.toBool(), false);
+    expect('off'.toBool(), false);
+    expect('false'.toBool(), false);
+    expect('f'.toBool(), false);
+    expect('0'.toBool(), false);
+  });
+
   test('getters', () {
     expect('C'.initials, 'C');
     expect('C '.initials, 'C');

@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension ObjectExtension on Object {
   bool get isEmpty {

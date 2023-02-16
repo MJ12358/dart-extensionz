@@ -1,4 +1,4 @@
-part of '../dart_extensionz.dart';
+part of dart_extensionz;
 
 extension FutureExtension<T> on Future<T> {
   Future<T> delayed({
