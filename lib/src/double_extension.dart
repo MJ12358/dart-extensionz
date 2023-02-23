@@ -7,6 +7,18 @@ enum RoundingMode {
 }
 
 extension DoubleExtension on double {
+  /// Returns the real part of this double
+  int get real => truncate();
+
+  /// Returns the fractional part of this double
+  double get fractional {
+    final List<String> parts = toString().split('.');
+    if (parts.length != 2) {
+      return 0;
+    }
+    return double.parse('${isNegative ? '-' : ''}0.${parts[1]}');
+  }
+
   /// Round a double
   ///
   /// Use [mode] to specify ceil, floor or half (default)

@@ -1,5 +1,13 @@
 # Dart Extensionz
 
+## 3.1.0
+
+- Add `fractional` to DoubleExtension
+- Add NullableEnum extensions
+- Add `name` to FileExtension
+- Add `random` to ListExtension
+- Add `length` to NumberExtension
+
 ## 3.0.0
 
 - Fix a typo in a getter name.

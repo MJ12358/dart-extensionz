@@ -9,6 +9,16 @@ enum FileType {
 }
 
 extension FileExtension on File {
+  // Gets the file name
+  String get name {
+    final String separator = Platform.pathSeparator;
+    final List<String> split = path.split(separator);
+    if (split.isEmpty) {
+      return '';
+    }
+    return split.last;
+  }
+
   // Gets the file extension
   String get extension {
     final int index = path.lastIndexOf('.');

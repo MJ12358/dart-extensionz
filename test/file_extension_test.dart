@@ -5,6 +5,15 @@ import 'package:file/memory.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('name', () {
+    final String s = Platform.pathSeparator;
+    expect(File('test.txt').name, 'test.txt');
+    expect(File('${s}documents${s}test.png').name, 'test.png');
+    expect(File('C:${s}Users${s}test.mp4').name, 'test.mp4');
+    expect(File('~${s}root${s}test.mp3').name, 'test.mp3');
+    expect(File('test${s}noextension').name, 'noextension');
+  });
+
   test('extension', () {
     expect(File('test.txt').extension, 'txt');
     expect(File('/documents/test.png').extension, 'png');

@@ -1,12 +1,38 @@
 part of dart_extensionz;
 
 extension StringExtension on String {
-  /// Get the bool equivalent of this string
+  /// Whether this [String] is empty or consists solely
+  /// of whitespace characters.
+  bool get isBlank => trim().isEmpty;
+
+  bool get isNotBlank => !isBlank;
+
+  bool get isInt => int.tryParse(this) != null;
+
+  bool get isDouble => double.tryParse(this) != null;
+
+  bool get isNum => num.tryParse(this) != null;
+
+  bool get isDateTime => DateTime.tryParse(this) != null;
+
+  bool get isNumeric => hasMatch(r'^\d+$');
+
+  bool get isAlpha => hasMatch(r'^[a-zA-Z]+$');
+
+  bool get isAlphanumeric => isNumeric || isAlpha;
+
+  int get lineLength => '\n'.allMatches(this).length + 1;
+
+  String ifEmpty(String value) => isEmpty ? value : this;
+
+  String ifBlank(String value) => isBlank ? value : this;
+
+  /// Get the bool equivalent of this [String]
   ///
   /// Possible true values are:
-  ///   "y", "yes", "on", "ok", "true", "t", "1"
+  ///   "y", "yes", "on", "ok", "true", "t", "1", "online"
   bool toBool() {
-    return <String>['y', 'yes', 'on', 'ok', 'true', 't', '1']
+    return <String>['y', 'yes', 'on', 'ok', 'true', 't', '1', 'online']
         .contains(trim().toLowerCase());
   }
 
@@ -34,15 +60,7 @@ extension StringExtension on String {
     return replaceAll(RegExp(' +'), ' ').trim();
   }
 
-  bool get isNumeric => hasMatch(r'^\d+$');
-
-  bool get isAlpha => hasMatch(r'^[a-zA-Z]+$');
-
-  bool get isAlphanumeric => isNumeric || isAlpha;
-
-  int get lineLength => '\n'.allMatches(this).length + 1;
-
-  /// Get this initials of this string
+  /// Get this initials of this [String]
   ///
   /// When the string is empty returns "NA"
   String get initials {
@@ -67,7 +85,7 @@ extension StringExtension on String {
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
-  /// Title case the string
+  /// Title case this [String]
   ///
   /// The first letter of each word is capitalized
   String get titleCase {
@@ -78,15 +96,11 @@ extension StringExtension on String {
     return split.map((String str) => str.capitalize).join(' ');
   }
 
-  bool get isBlank => trim().isEmpty;
-
-  bool get isNotBlank => !isBlank;
-
   List<String> splitByLength(int length) {
     return <String>[substring(0, length), substring(length)];
   }
 
-  /// Convert this string to a Duration
+  /// Convert this string to a [Duration]
   ///
   /// Can be used with an ISO formatted string
   ///   or a Duration object that has been stringified
@@ -105,7 +119,7 @@ extension StringExtension on String {
     }
   }
 
-  /// Convert ISO duration string to a Dart Duration
+  /// Convert ISO duration string to a Dart [Duration]
   ///
   /// https://dart-review.googlesource.com/c/sdk/+/118566/1/sdk/lib/core/duration.dart#116
   Duration _parseISODuration() {
@@ -133,7 +147,7 @@ extension StringExtension on String {
     return int.parse(timeMatch.group(1) ?? '0');
   }
 
-  /// Convert a Dart duration string to a Dart Duration
+  /// Convert a Dart duration string to a Dart [Duration]
   ///
   /// https://github.com/desktop-dart/duration/blob/master/lib/src/parse/parse.dart
   Duration _parseDartDuration() {

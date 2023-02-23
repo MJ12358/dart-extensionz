@@ -14,6 +14,9 @@ extension ListExtension<T> on List<T> {
   /// Returns the last index integer
   int get lastIndex => length - 1;
 
+  /// Returns a random element from this list
+  T get random => this[math.Random().nextInt(length)];
+
   /// Split one large list into limited sub lists
   /// ```dart
   /// [1, 2, 3, 4, 5, 6, 7, 8, 9].chunks(2)

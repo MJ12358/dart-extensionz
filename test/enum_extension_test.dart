@@ -41,4 +41,26 @@ void main() {
     expect(TestEnum.values.names, result);
     expect(Set<TestEnum>.from(TestEnum.values).names, result);
   });
+
+  test('nullableLabel', () {
+    final Enum? result = TestEnum.values.asNameMap()['not present'];
+
+    expect(result.label, '');
+  });
+
+  test('nullableLabels', () {
+    final List<Enum?> result = TestEnum.values
+        .map((TestEnum e) => e.name == 'not present' ? e : null)
+        .toList();
+
+    expect(result.labels, <String>[]);
+  });
+
+  test('nullableNames', () {
+    final List<Enum?> result = TestEnum.values
+        .map((TestEnum e) => e.name == 'not present' ? e : null)
+        .toList();
+
+    expect(result.names, <String>[]);
+  });
 }

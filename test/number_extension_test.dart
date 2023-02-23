@@ -2,6 +2,12 @@ import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('length', () {
+    expect(0.length, 1);
+    expect(1.0.length, 3);
+    expect(1.234.length, 5);
+  });
+
   test('toBool', () {
     expect(0.toBool(), false);
     expect(1.toBool(), true);

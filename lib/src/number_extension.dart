@@ -1,6 +1,9 @@
 part of dart_extensionz;
 
 extension NumberExtension on num {
+  /// Returns the length of this num
+  int get length => '$this'.length;
+
   bool toBool() {
     return this == 1;
   }
