@@ -70,20 +70,33 @@ extension FileExtension on File {
       return '';
     }
 
+    return _size(decimals, bytes);
+  }
+
+  /// Get the file size as a string asynchronous eg. 5 KB
+  ///
+  /// Use [decimals] to specify the number of decimal places
+  Future<String> sizeAsync([int decimals = 0]) {
+    return length().then((int value) {
+      return _size(decimals, value);
+    });
+  }
+
+  String _size(int decimals, int bytes) {
     if (bytes <= 0) {
       return '0 B';
     }
 
     const List<String> suffixes = <String>[
-      'B',
-      'KB',
-      'MB',
-      'GB',
-      'TB',
-      'PB',
-      'EB',
-      'ZB',
-      'YB'
+      'B', // byte
+      'KB', // kilobyte
+      'MB', // megabyte
+      'GB', // gigabyte
+      'TB', // terabyte
+      'PB', // petabyte
+      'EB', // exabyte
+      'ZB', // zettabyte
+      'YB', // yottabyte
     ];
 
     final int i = (math.log(bytes) / math.log(1024)).floor();

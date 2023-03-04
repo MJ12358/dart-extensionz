@@ -45,4 +45,25 @@ void main() {
     expect(5.25.toPrecision(), 5);
     expect(5.550.toPrecision(1), 5.6);
   });
+
+  test('humanize', () {
+    expect(1.humanize(), '1');
+    expect(10.humanize(), '10');
+    expect(1e3.humanize(), '1K');
+    expect(1e6.humanize(), '1M');
+    expect(1e9.humanize(), '1G');
+    expect(1e12.humanize(), '1T');
+    expect(1e15.humanize(), '1P');
+    expect(1e18.humanize(), '1E');
+    expect(1e19.humanize(), '10E');
+    expect(1e20.humanize(), '100E'); // 20 digits is the max dart can represent
+    // expect(1e21.humanize(), '1Z');
+    // expect(1e24.humanize(), '1Y');
+    // expect(1e27.humanize(), '1R');
+    // expect(1e30.humanize(), '1Q');
+    expect(1234.humanize(), '1K');
+    expect(1753.humanize(), '2K');
+    expect(1234.humanize(decimals: 2), '1.23K');
+    expect(1753.humanize(decimals: 2), '1.75K');
+  });
 }

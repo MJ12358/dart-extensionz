@@ -82,4 +82,38 @@ extension NumberExtension on num {
     final double mod = math.pow(10, fractionDigits.toDouble()).toDouble();
     return (this * mod).round().toDouble() / mod;
   }
+
+  /// Receive a string with this number suffixed
+  ///
+  /// ie. 1, 10, 1K, 1M, 1G etc.
+  String humanize({
+    int decimals = 0,
+    String delimeter = '',
+  }) {
+    final List<String> suffixes = <String>[
+      '', // no suffix
+      'K', // kilo
+      'M', // mega
+      'G', // giga
+      'T', // tera
+      'P', // peta
+      'E', // exa
+      'Z', // zeta
+      'Y', // yotta
+      'R', // ronna
+      'Q', // quetta
+    ];
+
+    if (isNaN) {
+      return '';
+    }
+
+    if (this < 1000) {
+      return toString();
+    }
+
+    final int exp = (math.log(this) / math.log(1000)).floor();
+    final String size = (this / math.pow(1000, exp)).toStringAsFixed(decimals);
+    return '$size$delimeter${suffixes[exp]}';
+  }
 }

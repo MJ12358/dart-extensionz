@@ -10,6 +10,7 @@ part 'src/double_extension.dart';
 part 'src/duration_extension.dart';
 part 'src/enum_extension.dart';
 part 'src/file_extension.dart';
+part 'src/file_system_entity_extension.dart';
 part 'src/future_extension.dart';
 part 'src/integer_extension.dart';
 part 'src/iterable_extension.dart';

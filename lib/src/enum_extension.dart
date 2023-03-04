@@ -7,7 +7,7 @@ extension EnumExtension on Enum {
   ///
   /// https://dart-lang.github.io/linter/lints/constant_identifier_names.html
   String get label {
-    final RegExp pattern = RegExp('(?<=[a-z])(?=[A-Z_])');
+    final RegExp pattern = RegExp(r'(?<=[a-z])(?=[A-Z_\d])');
     final List<String> parts = name.split(pattern);
     return parts.map((String e) => e.replaceAll('_', '').capitalize).join(' ');
   }

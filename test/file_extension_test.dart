@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:file/memory.dart';
@@ -51,12 +52,17 @@ void main() {
     file1.createSync();
 
     final File file2 = fileSystem.file('testfile2.dart');
-    file2.writeAsBytes(List<int>.generate(1024, (int i) => i));
+    file2.writeAsBytes(List<int>.generate(pow(1024, 1).toInt(), (int i) => i));
     file2.createSync();
+
+    final File file3 = fileSystem.file('testfile3.dart');
+    file3.writeAsBytes(List<int>.generate(pow(1024, 2).toInt(), (int i) => i));
+    file3.createSync();
 
     expect(filex.size(), '');
     expect(file0.size(), '0 B');
     expect(file1.size(), '3 B');
     expect(file2.size(), '1 KB');
+    expect(file3.size(), '1 MB');
   });
 }

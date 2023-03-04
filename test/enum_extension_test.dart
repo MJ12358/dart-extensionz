@@ -8,6 +8,7 @@ enum TestEnum {
   helloWorld,
   XmlHttpRequest,
   separate_words,
+  test3,
 }
 
 void main() {
@@ -16,6 +17,7 @@ void main() {
     expect(TestEnum.helloWorld.label, 'Hello World');
     expect(TestEnum.XmlHttpRequest.label, 'Xml Http Request');
     expect(TestEnum.separate_words.label, 'Separate Words');
+    expect(TestEnum.test3.label, 'Test 3');
   });
 
   test('labels', () {
@@ -23,7 +25,8 @@ void main() {
       'One',
       'Hello World',
       'Xml Http Request',
-      'Separate Words'
+      'Separate Words',
+      'Test 3',
     ];
 
     expect(TestEnum.values.labels, result);
@@ -35,7 +38,8 @@ void main() {
       'one',
       'helloWorld',
       'XmlHttpRequest',
-      'separate_words'
+      'separate_words',
+      'test3',
     ];
 
     expect(TestEnum.values.names, result);

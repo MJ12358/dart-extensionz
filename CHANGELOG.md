@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## 3.2.0
+
+- Add `FileSystemEntity` extension.
+- Add `humanize` to numbers.
+- Allow digits in enum labels.
+
 ## 3.1.0
 
 - Add `fractional` to DoubleExtension
