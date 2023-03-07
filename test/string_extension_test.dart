@@ -19,7 +19,7 @@ void main() {
     expect('0'.toBool(), false);
   });
 
-  test('getters', () {
+  test('initials', () {
     expect('C'.initials, 'C');
     expect('C '.initials, 'C');
     expect('Jon'.initials, 'J o');
@@ -28,6 +28,20 @@ void main() {
     expect('Jon  Snow'.initials, 'J S');
     expect('Ramsey Bolton Snow'.initials, 'R B');
     expect('Ramsey  Bolton  Snow'.initials, 'R B');
+  });
+
+  test('toTitleCase', () {
+    expect(''.toTitleCase(), '');
+    expect('a'.toTitleCase(), 'A');
+    expect('A'.toTitleCase(), 'A');
+    expect('a fox'.toTitleCase(), 'A Fox');
+    expect('a Fox'.toTitleCase(), 'A Fox');
+    expect('a fox jumped'.toTitleCase(), 'A Fox Jumped');
+    expect('A fox Jumped'.toTitleCase(), 'A Fox Jumped');
+    expect(
+      'a fox jumped over the lazy dog'.toTitleCase(),
+      'A Fox Jumped Over The Lazy Dog',
+    );
   });
 
   test('normalizeSpace', () {
@@ -124,6 +138,7 @@ void main() {
   test('repeat', () {
     expect('test'.repeat(-1), 'test');
     expect('test'.repeat(0), 'test');
+    expect('test'.repeat(1), 'test');
     expect('test'.repeat(2), 'testtest');
     expect('test'.repeat(2, '-'), 'test-test');
     expect('test'.repeat(4, '-'), 'test-test-test-test');

@@ -17,7 +17,7 @@ extension DurationExtension on Duration {
 
   num operator /(Duration other) => inMicroseconds / other.inMicroseconds;
 
-  /// Format a Duration
+  /// Format a Duration.
   ///
   /// https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
   ///
@@ -75,7 +75,7 @@ extension DurationExtension on Duration {
     return result.join(partSeparator);
   }
 
-  /// Convert a Duration to an ISO string
+  /// Convert a Duration to an ISO string.
   ///
   /// https://github.com/mzdm/iso_duration_parser/blob/master/lib/src/parser.dart
   String toISO() {

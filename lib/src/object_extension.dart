@@ -1,6 +1,7 @@
 part of dart_extensionz;
 
 extension ObjectExtension on Object {
+  /// Determines if this [Object] is empty.
   bool get isEmpty {
     if (this is String) {
       return toString().trim().isEmpty;

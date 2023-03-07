@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 extension NumberExtension on num {
-  /// Returns the length of this num
+  /// Returns the length of this num.
   int get length => '$this'.length;
 
   bool toBool() {
@@ -15,23 +15,23 @@ extension NumberExtension on num {
     );
   }
 
-  Duration get milliseconds {
+  Duration toMilliseconds() {
     return Duration(microseconds: (this * 1000).round());
   }
 
-  Duration get seconds {
+  Duration toSeconds() {
     return Duration(milliseconds: (this * 1000).round());
   }
 
-  Duration get minutes {
+  Duration toMinutes() {
     return Duration(seconds: (this * Duration.secondsPerMinute).round());
   }
 
-  Duration get hours {
+  Duration toHours() {
     return Duration(minutes: (this * Duration.minutesPerHour).round());
   }
 
-  Duration get days {
+  Duration toDays() {
     return Duration(hours: (this * Duration.hoursPerDay).round());
   }
 
@@ -75,17 +75,17 @@ extension NumberExtension on num {
     return this < min || this > max;
   }
 
-  /// Works similar to `num.toStringAsFixed(fractionDigits)`
+  /// Works similar to `num.toStringAsFixed(fractionDigits)`.
   ///
-  /// But without the need to convert back yourself
+  /// But without the need to convert back yourself.
   num toPrecision([int fractionDigits = 0]) {
     final double mod = math.pow(10, fractionDigits.toDouble()).toDouble();
     return (this * mod).round().toDouble() / mod;
   }
 
-  /// Receive a string with this number suffixed
+  /// Receive a string with this number suffixed.
   ///
-  /// ie. 1, 10, 1K, 1M, 1G etc.
+  /// Example: 1, 10, 1K, 1M, 1G
   String humanize({
     int decimals = 0,
     String delimeter = '',

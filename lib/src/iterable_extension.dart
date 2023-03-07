@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 extension IterableExtension<T> on Iterable<T> {
-  /// Split one large list into limited sub lists
+  /// Split one large list into limited sub lists.
   /// ```dart
   /// [1, 2, 3, 4, 5, 6, 7, 8, 9].chunks(2)
   /// // => [[1, 2], [3, 4], [5, 6], [7, 8], [9]]
@@ -28,7 +28,7 @@ extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
 
 extension IterableNullableNumberExtension on Iterable<num?> {
   /// Works like `sum` but will return null
-  /// if iterable is empty after type checking
+  /// if iterable is empty after type checking.
   num? get nullableSum {
     final Iterable<num> iterable = whereType<num>();
     if (iterable.isEmpty) {
@@ -42,7 +42,7 @@ extension IterableNullableNumberExtension on Iterable<num?> {
   }
 
   /// Works like `average` but will return null
-  /// if iterable is empty after type checking
+  /// if iterable is empty after type checking.
   num? get nullableAverage {
     final Iterable<num> iterable = whereType<num>();
     if (iterable.isEmpty) {

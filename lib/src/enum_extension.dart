@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 extension EnumExtension on Enum {
-  /// Get a human readable display label for this enum
+  /// Get a human readable display label for this enum.
   ///
   /// Splits by capital letters, prefered enum names are defined here:
   ///
@@ -14,9 +14,9 @@ extension EnumExtension on Enum {
 }
 
 extension EnumsExtension on Iterable<Enum> {
-  /// Get all enum labels as a list
+  /// Get all enum labels as a list.
   ///
-  /// See `label` getter for details on what defines a label
+  /// See `label` getter for details on what defines a label.
   List<String> get labels => map((Enum e) => e.label).toList();
 
   /// Get all enum names as a list
@@ -24,7 +24,7 @@ extension EnumsExtension on Iterable<Enum> {
 }
 
 extension NullableEnumExtension on Enum? {
-  /// Get a human readable display label for this enum
+  /// Get a human readable display label for this enum.
   ///
   /// Splits by capital letters, prefered enum names are defined here:
   ///
@@ -39,12 +39,12 @@ extension NullableEnumExtension on Enum? {
 }
 
 extension NullableEnumsExtension on Iterable<Enum?>? {
-  /// Get all enum labels as a list
+  /// Get all enum labels as a list.
   ///
-  /// See `label` getter for details on what defines a label
+  /// See `label` getter for details on what defines a label.
   ///
   /// When a null iterable is passed or all entries are null
-  /// this returns an empty list
+  /// this returns an empty list.
   List<String> get labels {
     if (this == null) {
       return <String>[];

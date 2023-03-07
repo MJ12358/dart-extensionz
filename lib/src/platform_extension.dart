@@ -16,7 +16,7 @@ extension PlatformExtension on Platform {
   bool get isDesktop =>
       Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 
-  /// Get the target plaform as an enum
+  /// Get the target plaform as an enum.
   ///
   /// This requires the caller to instance
   /// the `Plaform` class as `Platform()`.

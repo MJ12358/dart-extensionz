@@ -9,7 +9,7 @@ enum FileType {
 }
 
 extension FileExtension on File {
-  // Gets the file name
+  /// Gets the file name.
   String get name {
     final String separator = Platform.pathSeparator;
     final List<String> split = path.split(separator);
@@ -19,22 +19,33 @@ extension FileExtension on File {
     return split.last;
   }
 
-  // Gets the file extension
-  String get extension {
-    final int index = path.lastIndexOf('.');
-    if (index < 0 || index + 1 >= path.length) {
-      return path;
+  /// Gets the file name without the extension.
+  String get displayName {
+    final String name = this.name;
+    final int dot = name.lastIndexOf('.');
+    if (dot < 0 || dot + 1 >= name.length) {
+      return name;
     }
-    return path.substring(index + 1).toLowerCase();
+    return name.substring(0, dot);
   }
 
-  // Gets the file mimeType
+  /// Gets the file extension.
+  String get extension {
+    final int dot = path.lastIndexOf('.');
+    if (dot < 0 || dot + 1 >= path.length) {
+      return '';
+    }
+    return path.substring(dot + 1).toLowerCase();
+  }
+
+  /// Gets the file mimeType.
   String get mimeType {
     return _mimeTypeMap[extension] ?? '';
   }
 
-  // Get the file type as an enum
+  /// Get the file type as an enum.
   FileType get type {
+    final String mimeType = this.mimeType;
     if (mimeType.startsWith('image/')) {
       return FileType.image;
     }
@@ -58,9 +69,9 @@ extension FileExtension on File {
 
   bool get isText => type == FileType.text;
 
-  /// Get the file size as a string eg. 5 KB
+  /// Get the file size as a string. eg. 5 KB
   ///
-  /// Use [decimals] to specify the number of decimal places
+  /// Use [decimals] to specify the number of decimal places.
   String size([int decimals = 0]) {
     int bytes = 0;
 
@@ -73,9 +84,9 @@ extension FileExtension on File {
     return _size(decimals, bytes);
   }
 
-  /// Get the file size as a string asynchronous eg. 5 KB
+  /// Get the file size as a string asynchronous. eg. 5 KB
   ///
-  /// Use [decimals] to specify the number of decimal places
+  /// Use [decimals] to specify the number of decimal places.
   Future<String> sizeAsync([int decimals = 0]) {
     return length().then((int value) {
       return _size(decimals, value);

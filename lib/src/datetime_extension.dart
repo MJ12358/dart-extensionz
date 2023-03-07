@@ -11,21 +11,27 @@ extension DateTimeExtension on DateTime {
   DateTime get clone =>
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
 
-  /// Returns only year, month and day
+  /// Returns only year, month and day.
   DateTime get date => DateTime(year, month, day);
 
   int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
 
+  /// Equivalent to `DateTime.now().add(Duration(days: 1))`.
   DateTime get tomorrow => DateTime.now().nextDay;
 
+  /// Equivalent to `DateTime.now().add(Duration(days: -1))`.
   DateTime get yesterday => DateTime.now().previousDay;
 
+  /// Equivalent to `this.add(Duration(days: 1))`.
   DateTime get nextDay => addDays(1);
 
+  /// Equivalent to `this.add(Duration(days: -1))`.
   DateTime get previousDay => addDays(-1);
 
+  /// Equivalent to `this.add(Duration(days: 7))`.
   DateTime get nextWeek => addWeeks(1);
 
+  /// Equivalent to `this.add(Duration(days: -7))`.
   DateTime get previousWeek => addWeeks(-1);
 
   DateTime get nextMonth => clone.copyWith(month: month + 1);

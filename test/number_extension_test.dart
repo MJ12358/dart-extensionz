@@ -30,9 +30,12 @@ void main() {
     expect(12.34.padRight(8, '!'), '12.34!!!');
   });
 
-  test('inBetween', () {
+  test('isBetween', () {
     expect(12.isBetween(11, 13), true);
     expect(12.isBetween(23, 25), false);
+  });
+
+  test('isOutside', () {
     expect(12.isOutside(11, 13), false);
     expect(12.isOutside(23, 25), true);
   });

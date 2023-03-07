@@ -9,17 +9,31 @@ extension StringExtension on String {
 
   bool get isInt => int.tryParse(this) != null;
 
+  bool get isNotInt => !isInt;
+
   bool get isDouble => double.tryParse(this) != null;
+
+  bool get isNotDouble => !isDouble;
 
   bool get isNum => num.tryParse(this) != null;
 
+  bool get isNotNum => !isNum;
+
   bool get isDateTime => DateTime.tryParse(this) != null;
+
+  bool get isNotDateTime => !isDateTime;
 
   bool get isNumeric => hasMatch(r'^\d+$');
 
+  bool get isNotNumeric => !isNumeric;
+
   bool get isAlpha => hasMatch(r'^[a-zA-Z]+$');
 
+  bool get isNotAlpha => !isAlpha;
+
   bool get isAlphanumeric => isNumeric || isAlpha;
+
+  bool get isNotAlphanumeric => !isAlphanumeric;
 
   int get lineLength => '\n'.allMatches(this).length + 1;
 
@@ -27,7 +41,7 @@ extension StringExtension on String {
 
   String ifBlank(String value) => isBlank ? value : this;
 
-  /// Get the bool equivalent of this [String]
+  /// Get the bool equivalent of this [String].
   ///
   /// Possible true values are:
   ///   "y", "yes", "on", "ok", "true", "t", "1", "online"
@@ -36,18 +50,22 @@ extension StringExtension on String {
         .contains(trim().toLowerCase());
   }
 
+  /// Equivalent to `DateTime.tryParse(this)`.
   DateTime? toDateTime() {
     return DateTime.tryParse(this);
   }
 
+  /// Equivalent to `int.tryParse(this)`.
   int? toInt() {
     return int.tryParse(this) ?? toDouble()?.round();
   }
 
+  /// Equivalent to `num.tryParse(this)`.
   num? toNum() {
     return num.tryParse(this);
   }
 
+  /// Equivalent to `double.tryParse(this)`.
   double? toDouble() {
     return double.tryParse(this);
   }
@@ -60,9 +78,9 @@ extension StringExtension on String {
     return replaceAll(RegExp(' +'), ' ').trim();
   }
 
-  /// Get this initials of this [String]
+  /// Get this initials of this [String].
   ///
-  /// When the string is empty returns "NA"
+  /// When the string is empty returns "NA".
   String get initials {
     if (isBlank) {
       return 'NA';
@@ -77,7 +95,7 @@ extension StringExtension on String {
     return split[0].substring(0, 1);
   }
 
-  /// Capitalize the first letter
+  /// Capitalize the first letter.
   String get capitalize {
     if (isBlank) {
       return this;
@@ -85,10 +103,10 @@ extension StringExtension on String {
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
-  /// Title case this [String]
+  /// Title case this [String].
   ///
-  /// The first letter of each word is capitalized
-  String get titleCase {
+  /// The first letter of each word is capitalized.
+  String toTitleCase() {
     if (isBlank) {
       return this;
     }
@@ -96,14 +114,15 @@ extension StringExtension on String {
     return split.map((String str) => str.capitalize).join(' ');
   }
 
+  /// Split this [String] by a [length].
   List<String> splitByLength(int length) {
     return <String>[substring(0, length), substring(length)];
   }
 
-  /// Convert this string to a [Duration]
+  /// Convert this string to a [Duration].
   ///
   /// Can be used with an ISO formatted string
-  ///   or a Duration object that has been stringified
+  ///   or a [Duration] object that has been stringified.
   Duration toDuration() {
     const String isoRegex =
         r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
@@ -119,7 +138,7 @@ extension StringExtension on String {
     }
   }
 
-  /// Convert ISO duration string to a Dart [Duration]
+  /// Convert ISO duration string to a Dart [Duration].
   ///
   /// https://dart-review.googlesource.com/c/sdk/+/118566/1/sdk/lib/core/duration.dart#116
   Duration _parseISODuration() {
@@ -147,7 +166,7 @@ extension StringExtension on String {
     return int.parse(timeMatch.group(1) ?? '0');
   }
 
-  /// Convert a Dart duration string to a Dart [Duration]
+  /// Convert a Dart duration string to a Dart [Duration].
   ///
   /// https://github.com/desktop-dart/duration/blob/master/lib/src/parse/parse.dart
   Duration _parseDartDuration() {
@@ -200,14 +219,13 @@ extension StringExtension on String {
     );
   }
 
-  /// Get the Levenshtein distance between two strings
+  /// Get the Levenshtein distance between two strings.
   ///
   /// The Levenshtein distance between two strings is defined as
-  /// the minimum number of edits needed to transform one string into the other
+  /// the minimum number of edits needed to transform one string into the other.
   int levenshtein(String other) {
-    /* if either string is empty, difference is inserting all chars 
-     * from the other
-     */
+    // if either string is empty,
+    // difference is inserting all chars from the other
     if (isEmpty) {
       return other.length;
     }
@@ -215,18 +233,16 @@ extension StringExtension on String {
       return length;
     }
 
-    /* if first letters are the same, the difference is whatever is
-     *  required to edit the rest of the strings
-     */
+    // if first letters are the same, the difference is whatever is
+    // required to edit the rest of the strings
     if (this[0] == other[0]) {
       return substring(1).levenshtein(other.substring(1));
     }
 
-    /* else try:
-     *      changing first letter of [this] to that of [other],
-     *      remove first letter of [this], or
-     *      remove first letter of [other]
-     */
+    // else try:
+    //      changing first letter of [this] to that of [other],
+    //      remove first letter of [this], or
+    //      remove first letter of [other]
     int a = substring(1).levenshtein(other.substring(1));
     final int b = levenshtein(other.substring(1));
     final int c = substring(1).levenshtein(other);
@@ -242,7 +258,7 @@ extension StringExtension on String {
     return a + 1;
   }
 
-  /// Repeat a string a number of [times] with a [separator]
+  /// Repeat a string a number of [times] with a [separator].
   String repeat(int times, [String separator = '']) {
     if (times <= 0) {
       return this;

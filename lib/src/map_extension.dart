@@ -1,9 +1,9 @@
 part of dart_extensionz;
 
 extension MapExtension<K, V> on Map<K, V> {
-  /// Remove null values from a map
+  /// Remove null values from a map.
   ///
-  /// The values can themselves be maps or lists
+  /// The values can themselves be maps or lists.
   Map<K, V> removeNull() {
     return this
       ..removeWhere((K key, V value) => value == null)

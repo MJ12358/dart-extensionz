@@ -1,5 +1,12 @@
 # Dart Extensionz
 
+## 4.0.0
+
+- Add `FileExtension.displayName` to output name without the extension.
+- Add negations to `StringExtension`.
+- Change `NumberExtension` durations into methods for consistency.
+- Change `StringExtension` titleCase into a method for consistency.
+
 ## 3.2.0
 
 - Add `FileSystemEntity` extension.

@@ -8,22 +8,46 @@ import 'package:test/test.dart';
 void main() {
   test('name', () {
     final String s = Platform.pathSeparator;
+
+    expect(File('').name, '');
+    expect(File(s).name, '');
+    expect(File('test').name, 'test');
+    expect(File('${s}test').name, 'test');
     expect(File('test.txt').name, 'test.txt');
+    expect(File('${s}test.txt').name, 'test.txt');
     expect(File('${s}documents${s}test.png').name, 'test.png');
     expect(File('C:${s}Users${s}test.mp4').name, 'test.mp4');
     expect(File('~${s}root${s}test.mp3').name, 'test.mp3');
     expect(File('test${s}noextension').name, 'noextension');
   });
 
+  test('displayName', () {
+    final String s = Platform.pathSeparator;
+
+    expect(File('').displayName, '');
+    expect(File(s).displayName, '');
+    expect(File('test').displayName, 'test');
+    expect(File('${s}test').displayName, 'test');
+    expect(File('test.txt').displayName, 'test');
+    expect(File('${s}test.txt').displayName, 'test');
+    expect(File('${s}documents${s}test.png').displayName, 'test');
+    expect(File('C:${s}Users${s}test.mp4').displayName, 'test');
+    expect(File('~${s}root${s}Test.mp3').displayName, 'Test');
+    expect(File('test${s}noextension').displayName, 'noextension');
+  });
+
   test('extension', () {
+    expect(File('').extension, '');
+    expect(File('test').extension, '');
     expect(File('test.txt').extension, 'txt');
     expect(File('/documents/test.png').extension, 'png');
     expect(File(r'C:\Users\test.mp4').extension, 'mp4');
     expect(File('~/root/test.mp3').extension, 'mp3');
-    expect(File('test/noextension').extension, 'test/noextension');
+    expect(File('test/noextension').extension, '');
   });
 
   test('mimeType', () {
+    expect(File('').mimeType, '');
     expect(File('test.txt').mimeType, 'text/plain');
     expect(File('/documents/test.png').mimeType, 'image/png');
     expect(File(r'C:\Users\test.mp4').mimeType, 'video/mp4');
@@ -32,6 +56,8 @@ void main() {
   });
 
   test('type', () {
+    expect(File('').type, FileType.unknown);
+    expect(File('test').type, FileType.unknown);
     expect(File('test.txt').type, FileType.text);
     expect(File('/documents/test.png').type, FileType.image);
     expect(File(r'C:\Users\test.mp4').type, FileType.video);
