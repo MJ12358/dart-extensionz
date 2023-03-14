@@ -66,6 +66,26 @@ void main() {
     expect(File('test/noextension').type, FileType.unknown);
   });
 
+  test('changeFileName', () {
+    final MemoryFileSystem fileSystem = MemoryFileSystem();
+
+    final File file = fileSystem.file('testfile.txt');
+    file.writeAsBytes(<int>[1, 2, 3]);
+    file.createSync();
+
+    expect(file.changeName('newName.png').name, 'newName.png');
+  });
+
+  test('changeDisplayName', () {
+    final MemoryFileSystem fileSystem = MemoryFileSystem();
+
+    final File file = fileSystem.file('testfile.txt');
+    file.writeAsBytes(<int>[1, 2, 3]);
+    file.createSync();
+
+    expect(file.changeDisplayName('newName').name, 'newName.txt');
+  });
+
   test('write', () {
     final MemoryFileSystem fileSystem = MemoryFileSystem();
 

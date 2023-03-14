@@ -69,6 +69,27 @@ extension FileExtension on File {
     return FileType.unknown;
   }
 
+  /// Change the name of a file.
+  ///
+  /// This requires a file extension.
+  File changeName(String name) {
+    final int lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+    final String newPath = '${path.substring(0, lastSeparator + 1)}$name';
+
+    return renameSync(newPath);
+  }
+
+  /// Change the display name of a file.
+  ///
+  /// This uses the current file extension.
+  File changeDisplayName(String name) {
+    final int lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+    final String newPath =
+        '${path.substring(0, lastSeparator + 1)}$name.$extension';
+
+    return renameSync(newPath);
+  }
+
   /// Writes the [contents] to a file.
   void write(Object contents) {
     if (contents is List<int>) {

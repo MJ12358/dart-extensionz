@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.2.0
+
+- Add `changeName` and `changeDisplayName` to FileExtension.
+
 ## 4.1.0
 
 - Add `write` to FileExtension.
