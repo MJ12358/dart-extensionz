@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.1.0
+
+- Add `write` to FileExtension.
+
 ## 4.0.0
 
 - Add `FileExtension.displayName` to output name without the extension.

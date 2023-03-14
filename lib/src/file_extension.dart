@@ -9,6 +9,14 @@ enum FileType {
 }
 
 extension FileExtension on File {
+  bool get isImage => type == FileType.image;
+
+  bool get isVideo => type == FileType.video;
+
+  bool get isAudio => type == FileType.audio;
+
+  bool get isText => type == FileType.text;
+
   /// Gets the file name.
   String get name {
     final String separator = Platform.pathSeparator;
@@ -61,13 +69,31 @@ extension FileExtension on File {
     return FileType.unknown;
   }
 
-  bool get isImage => type == FileType.image;
+  /// Writes the [contents] to a file.
+  void write(Object contents) {
+    if (contents is List<int>) {
+      writeAsBytesSync(contents);
+    } else if (contents is String) {
+      writeAsStringSync(contents);
+    } else {
+      throw const FormatException(
+        'Data format must be one of `Uint8List`, `List<int>` or `String`',
+      );
+    }
+  }
 
-  bool get isVideo => type == FileType.video;
-
-  bool get isAudio => type == FileType.audio;
-
-  bool get isText => type == FileType.text;
+  /// Writes the [contents] to a file asynchronous.
+  Future<void> writeAsync(Object contents) async {
+    if (contents is List<int>) {
+      await writeAsBytes(contents);
+    } else if (contents is String) {
+      await writeAsString(contents);
+    } else {
+      throw const FormatException(
+        'Data format must be one of `Uint8List`, `List<int>` or `String`',
+      );
+    }
+  }
 
   /// Get the file size as a string. eg. 5 KB
   ///

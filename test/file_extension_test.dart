@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:file/memory.dart';
@@ -63,6 +64,22 @@ void main() {
     expect(File(r'C:\Users\test.mp4').type, FileType.video);
     expect(File('~/root/test.mp3').type, FileType.audio);
     expect(File('test/noextension').type, FileType.unknown);
+  });
+
+  test('write', () {
+    final MemoryFileSystem fileSystem = MemoryFileSystem();
+
+    final File file1 = fileSystem.file('testfile1.txt');
+    file1.write('contents');
+
+    final File file2 = fileSystem.file('testfile2.txt');
+    file2.write(Uint8List(8));
+
+    final File file3 = fileSystem.file('testfile3.txt');
+    file3.write(List<int>.filled(8, 1));
+
+    final File file4 = fileSystem.file('testfile4.txt');
+    expect(() => file4.write(bool), throwsA(isA<FormatException>()));
   });
 
   test('size', () {
