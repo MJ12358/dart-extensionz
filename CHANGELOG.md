@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.3.0
+
+- Add `truncate` to StringExtension.
+
 ## 4.2.0
 
 - Add `changeName` and `changeDisplayName` to FileExtension.

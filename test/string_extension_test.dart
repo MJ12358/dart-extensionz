@@ -143,4 +143,10 @@ void main() {
     expect('test'.repeat(2, '-'), 'test-test');
     expect('test'.repeat(4, '-'), 'test-test-test-test');
   });
+
+  test('truncate', () {
+    expect('test'.truncate(4), 'test');
+    expect('testtest'.truncate(4), 't...');
+    expect('testtest'.truncate(7), 'test...');
+  });
 }

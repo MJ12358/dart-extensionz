@@ -276,4 +276,15 @@ extension StringExtension on String {
 
     return result;
   }
+
+  /// Truncate a string to a [limit] with an [ending].
+  String truncate(int limit, [String ending = '...']) {
+    if (length <= limit) {
+      return this;
+    }
+
+    final int end = limit - ending.length;
+
+    return substring(0, end) + ending;
+  }
 }
