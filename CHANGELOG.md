@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.3.1
+
+- Add/modify some comments.
+
 ## 4.3.0
 
 - Add `truncate` to StringExtension.

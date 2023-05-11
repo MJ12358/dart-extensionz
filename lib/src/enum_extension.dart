@@ -59,10 +59,10 @@ extension NullableEnumsExtension on Iterable<Enum?>? {
     return result.labels;
   }
 
-  /// Get all enum names as a list
+  /// Get all enum names as a list.
   ///
   /// When a null iterable is passed or all entries are null
-  /// this returns an empty list
+  /// this returns an empty list.
   List<String> get names {
     if (this == null) {
       return <String>[];

@@ -138,7 +138,7 @@ extension StringExtension on String {
     }
   }
 
-  /// Convert ISO duration string to a Dart [Duration].
+  /// Convert an ISO duration string to a Dart [Duration].
   ///
   /// https://dart-review.googlesource.com/c/sdk/+/118566/1/sdk/lib/core/duration.dart#116
   Duration _parseISODuration() {

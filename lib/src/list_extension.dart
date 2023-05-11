@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 extension ListExtension<T> on List<T> {
-  /// A clone of this List<T>.
+  /// A clone of this [List<T>].
   List<T> get clone => List<T>.from(this);
 
   /// Clone this list, then add [other] to it.

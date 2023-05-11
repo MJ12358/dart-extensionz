@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 extension NumberExtension on num {
-  /// Returns the length of this num.
+  /// Returns the length of this [num].
   int get length => '$this'.length;
 
   bool toBool() {
@@ -43,14 +43,14 @@ extension NumberExtension on num {
     return this;
   }
 
-  /// Transforms `this` into a `String` and pads it on the left if it's shorter
-  /// than the given [width].
+  /// Transforms this [num] into a [String] and pads it
+  /// on the left if it's shorter than the given [width].
   String padLeft(int width, [String padding = '0']) {
     return toString().padLeft(width, padding);
   }
 
-  /// Transforms `this` into a `String` and pads it on the right if it's shorter
-  /// than the given [width].
+  /// Transforms this [num] into a [String] and pads it
+  /// on the right if it's shorter than the given [width].
   String padRight(int width, [String padding = '0']) {
     return toString().padRight(width, padding);
   }
