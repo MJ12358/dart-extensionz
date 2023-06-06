@@ -69,4 +69,24 @@ void main() {
     expect(1234.humanize(decimals: 2), '1.23K');
     expect(1753.humanize(decimals: 2), '1.75K');
   });
+
+  test('toCompassPoint', () {
+    expect(0.toCompassPoint(), CompassPoint.north);
+    expect(22.5.toCompassPoint(), CompassPoint.northNorthEast);
+    expect(45.toCompassPoint(), CompassPoint.northEast);
+    expect(67.5.toCompassPoint(), CompassPoint.eastNorthEast);
+    expect(90.toCompassPoint(), CompassPoint.east);
+    expect(112.5.toCompassPoint(), CompassPoint.eastSouthEast);
+    expect(135.toCompassPoint(), CompassPoint.southEast);
+    expect(157.5.toCompassPoint(), CompassPoint.southSouthEast);
+    expect(180.toCompassPoint(), CompassPoint.south);
+    expect(202.5.toCompassPoint(), CompassPoint.southSouthWest);
+    expect(225.toCompassPoint(), CompassPoint.southWest);
+    expect(247.5.toCompassPoint(), CompassPoint.westSouthWest);
+    expect(270.toCompassPoint(), CompassPoint.west);
+    expect(292.5.toCompassPoint(), CompassPoint.westNorthWest);
+    expect(315.toCompassPoint(), CompassPoint.northWest);
+    expect(337.5.toCompassPoint(), CompassPoint.northNorthWest);
+    expect(360.toCompassPoint(), CompassPoint.north);
+  });
 }

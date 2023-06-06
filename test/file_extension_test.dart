@@ -86,6 +86,49 @@ void main() {
     expect(file.changeDisplayName('newName').name, 'newName.txt');
   });
 
+  test('increment', () {
+    final String separator = Platform.pathSeparator;
+    final String dirPath = 'test${separator}files';
+    final String filePath = '$dirPath${separator}test.txt';
+    final Directory dir = Directory(dirPath);
+
+    // this creates files in a real directory
+    // need to figure out how to do this with a memoryfilesystem
+    dir.deleteSync(recursive: true);
+    dir.createSync(recursive: true);
+
+    final File file0 = File(filePath);
+    file0.write('contents');
+    file0.createSync();
+
+    File file1 = File(filePath);
+    expect(file1.existsSync(), true);
+
+    if (file1.existsSync()) {
+      file1 = file1.increment();
+      file1.createSync();
+      expect(file1.displayName, 'test (1)');
+    }
+
+    File file2 = File(filePath);
+    expect(file2.existsSync(), true);
+
+    if (file2.existsSync()) {
+      file2 = file2.increment();
+      file2.createSync();
+      expect(file2.displayName, 'test (2)');
+    }
+
+    File file3 = File(filePath);
+    expect(file3.existsSync(), true);
+
+    if (file3.existsSync()) {
+      file3 = file3.increment();
+      file3.createSync();
+      expect(file3.displayName, 'test (3)');
+    }
+  });
+
   test('write', () {
     final MemoryFileSystem fileSystem = MemoryFileSystem();
 

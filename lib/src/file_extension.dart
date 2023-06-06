@@ -90,6 +90,35 @@ extension FileExtension on File {
     return renameSync(newPath);
   }
 
+  /// Returns a file with an incremented [displayName].
+  File increment() {
+    // get the parent directory
+    final String dirPath = Directory(path).parent.path;
+
+    // list the files in the directory
+    final List<FileSystemEntity> dirList = Directory(dirPath).listSync();
+
+    // list the files that match the incoming [displayName]
+    final List<File> fileList = dirList.files
+        .where((File e) => e.displayName.contains(displayName))
+        .toList();
+
+    final int count = fileList.length;
+
+    // create the new display name with the count appended
+    String newName = displayName;
+    newName += ' ($count)';
+
+    final int lastSeparator = path.lastIndexOf(Platform.pathSeparator);
+    final String newPath =
+        '${path.substring(0, lastSeparator + 1)}$newName.$extension';
+
+    // copy the incoming file to the new path
+    final File newFile = copySync(newPath);
+
+    return newFile;
+  }
+
   /// Writes the [contents] to a file.
   void write(Object contents) {
     if (contents is List<int>) {

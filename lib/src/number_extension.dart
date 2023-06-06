@@ -1,5 +1,24 @@
 part of dart_extensionz;
 
+enum CompassPoint {
+  north,
+  northNorthEast,
+  northEast,
+  eastNorthEast,
+  east,
+  eastSouthEast,
+  southEast,
+  southSouthEast,
+  south,
+  southSouthWest,
+  southWest,
+  westSouthWest,
+  west,
+  westNorthWest,
+  northWest,
+  northNorthWest,
+}
+
 extension NumberExtension on num {
   /// Returns the length of this [num].
   int get length => '$this'.length;
@@ -115,5 +134,12 @@ extension NumberExtension on num {
     final int exp = (math.log(this) / math.log(1000)).floor();
     final String size = (this / math.pow(1000, exp)).toStringAsFixed(decimals);
     return '$size$delimeter${suffixes[exp]}';
+  }
+
+  CompassPoint toCompassPoint() {
+    const List<CompassPoint> array = CompassPoint.values;
+    final num value = ((this / 22.5) + 0.5).floor();
+    final num mod = value % 16;
+    return array[mod.toInt()];
   }
 }
