@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## 4.4.0
+
+- Add `increment` to FileExtension.
+- Add `toCompassPoint` to NumberExtension.
+
 ## 4.3.1
 
 - Add/modify some comments.
