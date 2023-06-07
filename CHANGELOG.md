@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.5.0
+
+- Add `first` and `last` to StringExtension.
+
 ## 4.4.0
 
 - Add `increment` to FileExtension.

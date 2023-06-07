@@ -41,6 +41,20 @@ extension StringExtension on String {
 
   String ifBlank(String value) => isBlank ? value : this;
 
+  String get first {
+    if (isBlank) {
+      return '';
+    }
+    return substring(0, 1);
+  }
+
+  String get last {
+    if (isBlank) {
+      return '';
+    }
+    return substring(length - 1, length);
+  }
+
   /// Get the bool equivalent of this [String].
   ///
   /// Possible true values are:
@@ -85,13 +99,18 @@ extension StringExtension on String {
     if (isBlank) {
       return 'NA';
     }
-    final List<String> split = trim().split(RegExp(' +'));
+
+    final String s = replaceAll(RegExp(r'[^\w\s]+'), '');
+    final List<String> split = s.trim().split(RegExp(' +'));
+
     if (split.length >= 2) {
       return '${split[0].substring(0, 1)} ${split[1].substring(0, 1)}';
     }
+
     if (split[0].length >= 2) {
       return '${split[0].substring(0, 1)} ${split[0].substring(1, 2)}';
     }
+
     return split[0].substring(0, 1);
   }
 

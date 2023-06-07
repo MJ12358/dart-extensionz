@@ -2,6 +2,19 @@ import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
 void main() {
+  test('first/last', () {
+    const String test1 = '';
+    const String test2 = 'First';
+    const String test3 = 'This is a test!';
+
+    expect(test1.first, '');
+    expect(test2.first, 'F');
+    expect(test3.first, 'T');
+
+    expect(test1.last, '');
+    expect(test2.last, 't');
+    expect(test3.last, '!');
+  });
   test('toBool', () {
     expect('y'.toBool(), true);
     expect('yes'.toBool(), true);
@@ -28,6 +41,8 @@ void main() {
     expect('Jon  Snow'.initials, 'J S');
     expect('Ramsey Bolton Snow'.initials, 'R B');
     expect('Ramsey  Bolton  Snow'.initials, 'R B');
+    expect('4x4'.initials, '4 x');
+    expect('N/A'.initials, 'N A');
   });
 
   test('toTitleCase', () {

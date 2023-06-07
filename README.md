@@ -1,5 +1,7 @@
 # Dart Extensionz
 
+![pub package](https://img.shields.io/pub/v/dart_extensionz)
+
 A set of [Dart](https://dart.dev) extensions I use in various projects.
 
 ## Usage
