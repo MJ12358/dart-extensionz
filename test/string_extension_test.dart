@@ -164,4 +164,39 @@ void main() {
     expect('testtest'.truncate(4), 't...');
     expect('testtest'.truncate(7), 'test...');
   });
+
+  test('readTime', () {
+    expect('Test'.readTime(), 0);
+    expect('Hello my name is Slim Shady.'.readTime(), 3);
+  });
+
+  test('wordCount', () {
+    expect(''.wordCount(), 0);
+    expect('Test'.wordCount(), 1);
+    expect('Test Me'.wordCount(), 2);
+    expect('This is a test'.wordCount(), 4);
+    expect('This !5 a test'.wordCount(), 3);
+    expect('This !5    a    test'.wordCount(), 3);
+  });
+
+  test('wordOccurrences', () {
+    final Map<String, int> result = <String, int>{
+      'test': 2,
+      'this': 1,
+      'is': 1,
+      'a': 1,
+    };
+    expect(''.wordOccurrences(), <String, int>{});
+    expect('test this is a test'.wordOccurrences(), result);
+    expect('test: this is a test!'.wordOccurrences(), result);
+    expect('test: this is    a    test!'.wordOccurrences(), result);
+  });
+
+  test('mask', () {
+    const String value = 'Testing';
+    expect(''.mask(), '');
+    expect('Test'.mask(), '####');
+    expect(value.mask(), '####ing');
+    expect(value.mask(end: value.length, char: '*'), '*******');
+  });
 }

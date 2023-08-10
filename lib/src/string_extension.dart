@@ -306,4 +306,78 @@ extension StringExtension on String {
 
     return substring(0, end) + ending;
   }
+
+  /// Gets the read time of a string.
+  int readTime({
+    int wordsPerMinute = 200,
+  }) {
+    if (isBlank) {
+      return 0;
+    }
+
+    final List<String> words = trim().split(RegExp(r'(\s+)'));
+    final double magicNumber = words.length / wordsPerMinute;
+    return (magicNumber * 100).toInt();
+  }
+
+  /// Counts the number of words in a string.
+  int wordCount({
+    RegExp? filter,
+  }) {
+    if (isBlank) {
+      return 0;
+    }
+
+    final List<String> words = trim().split(RegExp(r'(\s+)'));
+    final RegExp regex = filter ?? RegExp('([^a-zA-Z]+)');
+    final List<String> filteredWords =
+        words.where((String e) => e.replaceAll(regex, '').isNotEmpty).toList();
+    return filteredWords.length;
+  }
+
+  /// Counts the word occurrences in a string.
+  Map<String, int> wordOccurrences({
+    RegExp? filter,
+  }) {
+    final Map<String, int> result = <String, int>{};
+
+    if (isBlank) {
+      return result;
+    }
+
+    final List<String> words = trim().split(RegExp(r'(\s+)'));
+    final RegExp regex = filter ?? RegExp('([^a-zA-Z]+)');
+
+    for (int i = 0; i < words.length; i++) {
+      final String word = words[i].replaceAll(regex, '');
+      int? j = result[word];
+
+      if (j != null) {
+        j++;
+        result[word] = j;
+      } else {
+        result[word] = 1;
+      }
+    }
+
+    return result;
+  }
+
+  /// Masks a string.
+  String mask({
+    int start = 0,
+    int end = 4,
+    String char = '#',
+  }) {
+    if (isBlank) {
+      return this;
+    }
+
+    if (start > end) {
+      throw const FormatException('Start must not be greater than end.');
+    }
+
+    final int maskLength = end - start;
+    return substring(0, start) + char.repeat(maskLength) + substring(end);
+  }
 }

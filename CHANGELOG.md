@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.6.0
+
+- Add more convenience methods to StringExtension.
+
 ## 4.5.0
 
 - Add `first` and `last` to StringExtension.
