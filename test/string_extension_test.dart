@@ -93,6 +93,16 @@ void main() {
     expect(test3.lineLength, 4);
   });
 
+  test('toDateTime', () {
+    final DateTime result1 = DateTime(0, 0, 0, 6, 30);
+    final DateTime result2 = DateTime(0, 0, 0, 15, 30);
+    expect(''.toDateTime(), null);
+    expect('06:30 AM'.toDateTime(), result1);
+    expect('6:30 AM'.toDateTime(), result1);
+    expect('03:30 PM'.toDateTime(), result2);
+    expect('3:30 PM'.toDateTime(), result2);
+  });
+
   test('toDurationISO', () {
     const Duration result1 = Duration(
       days: 1212,

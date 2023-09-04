@@ -5,42 +5,62 @@ extension StringExtension on String {
   /// of whitespace characters.
   bool get isBlank => trim().isEmpty;
 
+  /// Whether this [String] is not empty and does not consist solely
+  /// of whitespace characters.
   bool get isNotBlank => !isBlank;
 
+  /// Whether this [String] can be parsed as an [int].
   bool get isInt => int.tryParse(this) != null;
 
+  /// Whether this [String] can not be parsed as an [int].
   bool get isNotInt => !isInt;
 
+  /// Whether this [String] can be parsed as a [double].
   bool get isDouble => double.tryParse(this) != null;
 
+  /// Whether this [String] can not be parsed as a [double].
   bool get isNotDouble => !isDouble;
 
+  /// Whether this [String] can be parsed as a [num].
   bool get isNum => num.tryParse(this) != null;
 
+  /// Whether this [String] can not be parsed as a [num].
   bool get isNotNum => !isNum;
 
+  /// Whether this [String] can be parsed as a [DateTime].
   bool get isDateTime => DateTime.tryParse(this) != null;
 
+  /// Whether this [String] can not be parsed as a [DateTime].
   bool get isNotDateTime => !isDateTime;
 
+  /// Whether this [String] is only digits.
   bool get isNumeric => hasMatch(r'^\d+$');
 
+  /// Whether this [String] is not digits.
   bool get isNotNumeric => !isNumeric;
 
+  /// Whether this [String] is only alphabetic.
   bool get isAlpha => hasMatch(r'^[a-zA-Z]+$');
 
+  /// Whether this [String] is not alphabetic.
   bool get isNotAlpha => !isAlpha;
 
+  /// Whether this [String] is either digits or alphabetic.
   bool get isAlphanumeric => isNumeric || isAlpha;
 
+  /// Whether this [String] is not digits or alphabetic.
   bool get isNotAlphanumeric => !isAlphanumeric;
 
+  /// Get the line length of this [String].
   int get lineLength => '\n'.allMatches(this).length + 1;
 
+  /// Returns [value] when this [String] [isEmpty].
   String ifEmpty(String value) => isEmpty ? value : this;
 
+  /// Returns [value] when this [String] [isBlank].
   String ifBlank(String value) => isBlank ? value : this;
 
+  /// Get the first character of this [String].
   String get first {
     if (isBlank) {
       return '';
@@ -48,6 +68,7 @@ extension StringExtension on String {
     return substring(0, 1);
   }
 
+  /// Get the last character of this [String].
   String get last {
     if (isBlank) {
       return '';
@@ -62,11 +83,6 @@ extension StringExtension on String {
   bool toBool() {
     return <String>['y', 'yes', 'on', 'ok', 'true', 't', '1', 'online']
         .contains(trim().toLowerCase());
-  }
-
-  /// Equivalent to `DateTime.tryParse(this)`.
-  DateTime? toDateTime() {
-    return DateTime.tryParse(this);
   }
 
   /// Equivalent to `int.tryParse(this)`.
@@ -84,10 +100,12 @@ extension StringExtension on String {
     return double.tryParse(this);
   }
 
+  /// A convienence method wrapping `RegExp([pattern]).hasMatch`.
   bool hasMatch(String pattern) {
     return RegExp(pattern).hasMatch(this);
   }
 
+  /// Convert all spaces (one or more) to a single space.
   String normalizeSpace() {
     return replaceAll(RegExp(' +'), ' ').trim();
   }
@@ -136,6 +154,35 @@ extension StringExtension on String {
   /// Split this [String] by a [length].
   List<String> splitByLength(int length) {
     return <String>[substring(0, length), substring(length)];
+  }
+
+  /// Converts this string to a [DateTime].
+  ///
+  /// Can be used with hh:mm tt formatted strings
+  /// or anything `DateTime.parse` accepts.
+  DateTime? toDateTime() {
+    const String clockRegex = r'^\d{1,2}:\d{1,2}\s\w{2}$';
+    if (hasMatch(clockRegex)) {
+      return _parseClockTime();
+    }
+    return DateTime.tryParse(this);
+  }
+
+  /// Convert hh:mm tt to DateTime
+  DateTime? _parseClockTime() {
+    final List<String> parts = split(' ');
+    if (parts.length != 2) {
+      return null;
+    }
+    final List<String> timeParts = parts[0].split(':');
+    final String meridiem = parts[1];
+    if (timeParts.length != 2) {
+      return null;
+    }
+    final bool isAm = meridiem == 'AM';
+    final int hour = int.parse(timeParts[0]);
+    final int minute = int.parse(timeParts[1]);
+    return DateTime(0, 0, 0, isAm ? hour : hour + 12, minute);
   }
 
   /// Convert this string to a [Duration].
