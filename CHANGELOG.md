@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## 5.0.0
+
+- **BREAKING**: Fix depreciated `Platform` instancing.
+  - This means `Platform().<>` will become `PlatformExtension.<>`.
+
 ## 4.7.1
 
 - Improve clock parsing in StringExtension.toDateTime.

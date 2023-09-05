@@ -10,20 +10,18 @@ enum TargetPlatform {
   unknown,
 }
 
+/// I'd love to have statics directly on `Platform`,
+/// but unfortunately cannot do so.
+///
+/// https://github.com/dart-lang/language/issues/723
 extension PlatformExtension on Platform {
-  bool get isMobile => Platform.isAndroid || Platform.isIOS;
+  static bool get isMobile => Platform.isAndroid || Platform.isIOS;
 
-  bool get isDesktop =>
+  static bool get isDesktop =>
       Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 
   /// Get the target plaform as an enum.
-  ///
-  /// This requires the caller to instance
-  /// the [Platform] class as `Platform()`.
-  ///
-  /// This is due to this issue:
-  /// https://github.com/dart-lang/language/issues/723
-  TargetPlatform get target {
+  static TargetPlatform get target {
     if (Platform.isAndroid) {
       return TargetPlatform.android;
     }
