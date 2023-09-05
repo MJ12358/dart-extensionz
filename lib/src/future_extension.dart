@@ -40,7 +40,7 @@ extension FuturesExtension<T> on Iterable<Future<T>> {
 
     await Future.wait<T>(
       <Future<T>>[
-        for (final Future<T> future in this) future.whenComplete(complete)
+        for (final Future<T> future in this) future.whenComplete(complete),
       ],
     );
   }

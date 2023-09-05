@@ -158,18 +158,23 @@ extension StringExtension on String {
 
   /// Converts this string to a [DateTime].
   ///
-  /// Can be used with hh:mm tt formatted strings
+  /// Can be used with hh:mm tt or HH:mm formatted strings
   /// or anything `DateTime.parse` accepts.
   DateTime? toDateTime() {
-    const String clockRegex = r'^\d{1,2}:\d{1,2}\s\w{2}$';
-    if (hasMatch(clockRegex)) {
-      return _parseClockTime();
+    const String clock12Regex = r'^\d{1,2}:\d{1,2}\s\w{2}$';
+    const String clock24Regex = r'^\d{1,2}:\d{1,2}$';
+
+    if (hasMatch(clock12Regex)) {
+      return _parseClock12Time();
+    } else if (hasMatch(clock24Regex)) {
+      return _parseClock24Time();
+    } else {
+      return DateTime.tryParse(this);
     }
-    return DateTime.tryParse(this);
   }
 
   /// Convert hh:mm tt to DateTime
-  DateTime? _parseClockTime() {
+  DateTime? _parseClock12Time() {
     final List<String> parts = split(' ');
     if (parts.length != 2) {
       return null;
@@ -183,6 +188,17 @@ extension StringExtension on String {
     final int hour = int.parse(timeParts[0]);
     final int minute = int.parse(timeParts[1]);
     return DateTime(0, 0, 0, isAm ? hour : hour + 12, minute);
+  }
+
+  /// Convert HH:mm to DateTime
+  DateTime? _parseClock24Time() {
+    final List<String> parts = split(':');
+    if (parts.length != 2) {
+      return null;
+    }
+    final int hour = int.parse(parts[0]);
+    final int minute = int.parse(parts[1]);
+    return DateTime(0, 0, 0, hour, minute);
   }
 
   /// Convert this string to a [Duration].

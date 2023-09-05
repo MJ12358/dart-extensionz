@@ -101,6 +101,7 @@ void main() {
     expect('6:30 AM'.toDateTime(), result1);
     expect('03:30 PM'.toDateTime(), result2);
     expect('3:30 PM'.toDateTime(), result2);
+    expect('15:30'.toDateTime(), result2);
   });
 
   test('toDurationISO', () {

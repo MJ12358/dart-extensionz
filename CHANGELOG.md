@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 4.7.1
+
+- Improve clock parsing in StringExtension.toDateTime.
+
 ## 4.7.0
 
 - Add clock parsing to StringExtension.toDateTime.
