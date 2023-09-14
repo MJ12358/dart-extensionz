@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.1.2
+
+- Hotfix some date/duration pattern matching.
+
 ## 5.1.1
 
 - Upload missing DateTime ext.

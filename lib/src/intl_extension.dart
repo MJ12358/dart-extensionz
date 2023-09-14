@@ -51,6 +51,70 @@ extension IntlDurationExtension on Duration? {
     return dateFormat.format(dateTime);
   }
 
+  /// Humanize a Duration.
+  ///
+  /// https://stackoverflow.com/questions/54852585/how-to-convert-a-duration-like-string-to-a-real-duration-in-flutter
+  ///
+  /// https://stackoverflow.com/questions/60016267/in-dart-split-string-into-two-parts-using-length-of-first-string
+  String humanize({
+    String partSeparator = ' ',
+    String valueSeparator = ' ',
+  }) {
+    const String h = 'h';
+    const String m = 'm';
+    const String s = 's';
+    const String ms = 'ms';
+    const String us = 'µs';
+
+    final List<String> result = <String>[];
+
+    final List<String> parts = toString().split(':');
+    final List<String> sParts = parts[parts.length - 1].split('.');
+
+    if (parts.length > 2) {
+      final int hours = int.parse(parts[parts.length - 3]);
+
+      if (hours != 0) {
+        result.add('$hours$valueSeparator$h');
+      }
+    }
+
+    if (parts.length > 1) {
+      final int minutes = int.parse(parts[parts.length - 2]);
+
+      if (minutes != 0) {
+        result.add('$minutes$valueSeparator$m');
+      }
+    }
+
+    if (sParts.length > 1) {
+      final int seconds = int.parse(sParts[sParts.length - 2]);
+
+      if (seconds != 0) {
+        result.add('$seconds$valueSeparator$s');
+      }
+    }
+
+    if (sParts.isNotEmpty) {
+      final String mParts = sParts[sParts.length - 1];
+
+      final int milliseconds =
+          int.parse(mParts.substring(0, mParts.length ~/ 2));
+      final int microseconds =
+          int.parse(mParts.substring(mParts.length ~/ 2, mParts.length));
+
+      if (milliseconds != 0) {
+        result.add('$milliseconds$valueSeparator$ms');
+      }
+
+      if (microseconds != 0) {
+        result.add('$microseconds$valueSeparator$us');
+      }
+    }
+
+    return result.join(partSeparator);
+  }
+
   /// Convert a Duration to an ISO string.
   ///
   /// https://github.com/mzdm/iso_duration_parser/blob/master/lib/src/parser.dart
@@ -238,7 +302,7 @@ extension IntlStringExtension on String? {
   /// The default [pattern] matches the
   /// format produced when stringifying a [DateTime].
   DateTime? toDateTime({
-    String? pattern = "YYYY-MM-DD'T'HH:mm:ss.SSSSSSS",
+    String? pattern,
     String? locale,
     bool isUtc = false,
   }) {
@@ -246,23 +310,24 @@ extension IntlStringExtension on String? {
       return null;
     }
 
-    // back compat these patterns
-    // TODO: remove these at some point in the future
-    // this should be handled by the caller...
-    const String clock12Regex = r'^\d{1,2}:\d{1,2}\s\w{2}$';
-    const String clock24Regex = r'^\d{1,2}:\d{1,2}$';
+    String? _pattern = pattern;
 
-    if (this!.hasMatch(clock12Regex)) {
-      // ignore: parameter_assignments
-      pattern = 'hh:mm a';
-    } else if (this!.hasMatch(clock24Regex)) {
-      // ignore: parameter_assignments
-      pattern = 'hh:mm';
+    if (_pattern == null) {
+      const String clock12Regex = r'^\d{1,2}:\d{1,2}\s\w{2}$';
+      const String clock24Regex = r'^\d{1,2}:\d{1,2}$';
+
+      if (this!.hasMatch(clock12Regex)) {
+        _pattern = 'hh:mm a';
+      } else if (this!.hasMatch(clock24Regex)) {
+        _pattern = 'hh:mm';
+      } else {
+        _pattern = "YYYY-MM-DD'T'HH:mm:ss.SSSSSSS";
+      }
     }
 
     try {
       return DateFormat(
-        pattern,
+        _pattern,
         locale ?? Platform.localeName,
       ).parseLoose(this!, isUtc);
     } on FormatException catch (_) {
@@ -276,23 +341,32 @@ extension IntlStringExtension on String? {
   /// The default [pattern] matches the
   /// format produced when stringifying a [Duration].
   Duration? toDuration({
-    String pattern = 'HH:mm:ss.SSSSSS',
+    String? pattern,
     String? locale,
   }) {
     if (this == null || this!.isEmpty) {
       return null;
     }
 
-    /// ISO durations are not handled well with [Intl].
-    const String isoRegex =
-        r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
+    String? _pattern = pattern;
 
-    if (this!.hasMatch(isoRegex)) {
-      return _parseISODuration();
+    if (_pattern == null) {
+      const String isoRegex =
+          r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
+      const String dartRegex = r'^(\d+:)?(\d+:)?(\d+.)?(\d+)?$';
+      try {
+        if (this!.hasMatch(isoRegex)) {
+          return _parseISODuration();
+        } else if (this!.hasMatch(dartRegex)) {
+          return _parseDartDuration();
+        }
+      } catch (_) {
+        _pattern = 'HH:mm:ss.SSSSSS';
+      }
     }
 
     final DateTime? dateTime = toDateTime(
-      pattern: pattern,
+      pattern: _pattern,
       locale: locale,
       isUtc: true,
     );
@@ -336,5 +410,56 @@ extension IntlStringExtension on String? {
       return 0;
     }
     return int.parse(timeMatch.group(1) ?? '0');
+  }
+
+  /// Convert a Dart duration string to a Dart [Duration].
+  ///
+  /// https://github.com/desktop-dart/duration/blob/master/lib/src/parse/parse.dart
+  Duration _parseDartDuration() {
+    final List<String> parts = this!.split(':');
+
+    if (parts.length != 3) {
+      throw const FormatException();
+    }
+
+    int days;
+    int hours;
+    int minutes;
+    int seconds;
+    int milliseconds;
+    int microseconds;
+
+    {
+      final List<String> p = parts[2].split('.');
+
+      if (p.length != 2) {
+        throw const FormatException();
+      }
+
+      // If fractional seconds is passed, but less than 6 digits
+      // Pad out to the right so we can calculate the ms/us correctly
+      final int p2 = int.parse(p[1].padRight(6, '0'));
+      microseconds = p2 % 1000;
+      milliseconds = p2 ~/ 1000;
+
+      seconds = int.parse(p[0]);
+    }
+
+    minutes = int.parse(parts[1]);
+
+    {
+      final int p = int.parse(parts[0]);
+      hours = p % 24;
+      days = p ~/ 24;
+    }
+
+    return Duration(
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+      milliseconds: milliseconds,
+      microseconds: microseconds,
+    );
   }
 }

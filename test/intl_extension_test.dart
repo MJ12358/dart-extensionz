@@ -72,6 +72,7 @@ void main() {
     const String value1 = '08:30 AM';
     const String value2 = '05:25:30';
     const Duration value3 = Duration(hours: 1, minutes: 15, seconds: 30);
+    const Duration value4 = Duration(seconds: 55, milliseconds: 250);
     test(en_US, () {
       final Duration? result1 = value1.toDuration(
         pattern: 'hh:mm a',
@@ -84,6 +85,7 @@ void main() {
       expect(result1, const Duration(hours: 8, minutes: 30));
       expect(result2, const Duration(hours: 5, minutes: 25, seconds: 30));
       expect(value3.toString().toDuration(), value3);
+      expect(value4.toString().toDuration(), value4);
     });
 
     test(en_GB, () {
@@ -115,7 +117,7 @@ void main() {
     });
   });
 
-  test('formatString', () {
+  test('formatDuration', () {
     const Duration result1 = Duration(
       minutes: 1,
       seconds: 32,
