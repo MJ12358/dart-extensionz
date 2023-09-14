@@ -115,7 +115,7 @@ void main() {
     });
   });
 
-  test('stringFormat', () {
+  test('formatString', () {
     const Duration result1 = Duration(
       minutes: 1,
       seconds: 32,
@@ -202,5 +202,23 @@ void main() {
     const num value = 1200000;
     final String result = value.toScientificPattern();
     expect(result, '1E6');
+  });
+
+  group('formatDateTime', () {
+    final DateTime value = DateTime(2020, 6, 29);
+    test(en_US, () {
+      final String result = value.format(locale: en_US);
+      expect(result, '6/29/2020');
+    });
+
+    test(en_GB, () {
+      final String result = value.format(locale: en_GB);
+      expect(result, '29/06/2020');
+    });
+
+    test(de_DE, () {
+      final String result = value.format(locale: de_DE);
+      expect(result, '29.6.2020');
+    });
   });
 }

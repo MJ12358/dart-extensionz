@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.1.1
+
+- Upload missing DateTime ext.
+
 ## 5.1.0
 
 - Add `Intl` to aid in formatting Dates, Durations and Numbers.

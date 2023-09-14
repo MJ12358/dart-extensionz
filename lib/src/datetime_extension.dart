@@ -337,6 +337,3 @@ extension DateTimeExtension on DateTime {
     );
   }
 }
-
-/// Nullable [DateTime] Extension.
-extension NullableDateTimeExtension on DateTime? {}
