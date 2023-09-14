@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Object] Extension.
 extension ObjectExtension on Object {
   /// Determines if this [Object] is empty.
   bool get isEmpty {
@@ -16,4 +17,10 @@ extension ObjectExtension on Object {
     }
     return false;
   }
+}
+
+/// Nullable [Object] Extension.
+extension NullableObjectExtension on Object? {
+  /// Determines if this [Object] is empty.
+  bool get isEmpty => this != null && this!.isEmpty;
 }

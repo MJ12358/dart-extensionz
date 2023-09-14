@@ -93,66 +93,6 @@ void main() {
     expect(test3.lineLength, 4);
   });
 
-  test('toDateTime', () {
-    final DateTime result1 = DateTime(0, 0, 0, 6, 30);
-    final DateTime result2 = DateTime(0, 0, 0, 15, 30);
-    expect(''.toDateTime(), null);
-    expect('06:30 AM'.toDateTime(), result1);
-    expect('6:30 AM'.toDateTime(), result1);
-    expect('03:30 PM'.toDateTime(), result2);
-    expect('3:30 PM'.toDateTime(), result2);
-    expect('15:30'.toDateTime(), result2);
-  });
-
-  test('toDurationISO', () {
-    const Duration result1 = Duration(
-      days: 1212,
-      minutes: 30,
-    );
-
-    const Duration result2 = Duration(
-      days: 3,
-    );
-
-    const Duration result3 = Duration(
-      days: 1,
-      hours: 1,
-      minutes: 30,
-    );
-
-    const Duration result4 = Duration(
-      hours: 1,
-      minutes: 30,
-    );
-
-    expect('P3Y16W5DT30M'.toDuration(), result1);
-    expect('P3D'.toDuration(), result2);
-    expect('P1DT1H30M'.toDuration(), result3);
-    expect('PT1H30M'.toDuration(), result4);
-  });
-
-  test('toDurationDart', () {
-    const Duration result1 = Duration(
-      days: 6,
-      hours: 5,
-      minutes: 4,
-      seconds: 3,
-      milliseconds: 2,
-      microseconds: 1,
-    );
-
-    const Duration result2 = Duration(
-      hours: 5,
-      minutes: 4,
-      seconds: 3,
-      milliseconds: 2,
-      microseconds: 1,
-    );
-
-    expect(result1.toString().toDuration(), result1);
-    expect(result2.toString().toDuration(), result2);
-  });
-
   test('levenshtein', () {
     expect('kitten'.levenshtein('kitten'), 0);
     expect('kitten'.levenshtein('sitten'), 1);

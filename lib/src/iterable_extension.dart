@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Iterable] Extension.
 extension IterableExtension<T> on Iterable<T> {
   /// Split one large list into limited sub lists.
   /// ```dart
@@ -16,6 +17,7 @@ extension IterableExtension<T> on Iterable<T> {
   }
 }
 
+/// [Iterable] [Comparable] Extension.
 extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
   T get max {
     return reduce((T a, T b) => a.compareTo(b) >= 0 ? a : b);
@@ -26,6 +28,7 @@ extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
   }
 }
 
+/// [Iterable<num?>] Extension.
 extension IterableNullableNumberExtension on Iterable<num?> {
   /// Works like `sum` but will return null
   /// if iterable is empty after type checking.

@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [List] Extension.
 extension ListExtension<T> on List<T> {
   /// A clone of this [List<T>].
   List<T> get clone => List<T>.from(this);
@@ -44,4 +45,9 @@ extension ListExtension<T> on List<T> {
             : (value is Map ? value.removeNull() : value),
       ).toList();
   }
+}
+
+/// Nullable [List] Extension.
+extension NullableListExtension<T> on List<T>? {
+  List<T> removeNull() => this != null ? this!.removeNull() : <T>[];
 }

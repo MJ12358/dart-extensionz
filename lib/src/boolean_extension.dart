@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [bool] Extension.
 extension BooleanExtension on bool {
   /// Convert this bool to either 1 or 0.
   int toInt() {

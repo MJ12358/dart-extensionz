@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Stream] Extension.
 extension StreamExtension<T> on Stream<T> {
   /// Dump any errors to the console.
   ///

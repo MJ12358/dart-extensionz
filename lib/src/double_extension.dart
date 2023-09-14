@@ -1,11 +1,14 @@
 part of dart_extensionz;
 
+/// Indicates how the least significant returned digit
+/// of a rounded result is to be calculated.
 enum RoundingMode {
   ceiling,
   floor,
   half,
 }
 
+/// [double] Extension.
 extension DoubleExtension on double {
   /// Returns the real part of this double.
   int get real => truncate();

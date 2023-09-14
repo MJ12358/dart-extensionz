@@ -1,8 +1,13 @@
 # Dart Extensionz
 
+## 5.1.0
+
+- Add `Intl` to aid in formatting Dates, Durations and Numbers.
+
 ## 5.0.0
 
-- **BREAKING**: Fix depreciated `Platform` instancing.
+- **BREAKING**:
+  - Fix depreciated `Platform` instancing.
   - This means `Platform().<>` will become `PlatformExtension.<>`.
 
 ## 4.7.1
@@ -75,9 +80,10 @@
 
 ## 2.0.0
 
-- **BREAKING**: Use `part` and `part of` instead of imports.
+- **BREAKING**:
+  - Use `part` and `part of` instead of imports.
   - This is to ensure only the `dart_extensionz.dart` file can be imported.
-- Move `toPrecision` into `NumberExtension`.
+  - Move `toPrecision` into `NumberExtension`.
 
 ## 1.4.0
 

@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Enum] Extension.
 extension EnumExtension on Enum {
   /// Get a human readable display label for this enum.
   ///
@@ -13,6 +14,7 @@ extension EnumExtension on Enum {
   }
 }
 
+/// [Iterable<Enum>] Extension.
 extension EnumsExtension on Iterable<Enum> {
   /// Get all enum labels as a list.
   ///
@@ -23,6 +25,7 @@ extension EnumsExtension on Iterable<Enum> {
   List<String> get names => asNameMap().keys.toList();
 }
 
+/// Nullable [Enum] Extension.
 extension NullableEnumExtension on Enum? {
   /// Get a human readable display label for this enum.
   ///
@@ -38,6 +41,7 @@ extension NullableEnumExtension on Enum? {
   }
 }
 
+/// Nullable [Iterable<Enum>] Extension.
 extension NullableEnumsExtension on Iterable<Enum?>? {
   /// Get all enum labels as a list.
   ///

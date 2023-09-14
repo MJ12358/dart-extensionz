@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [int] Extension.
 extension IntegerExtension on int {
   /// Get the ordinal of this integer.
   ///
@@ -19,4 +20,12 @@ extension IntegerExtension on int {
     }
     return '${this}th';
   }
+}
+
+/// Nullable [int] Extension.
+extension NullableIntegerExtension on int? {
+  /// Get the ordinal of this integer.
+  ///
+  /// Example: 3 == 3rd, 10 == 10th
+  String get ordinal => this != null ? this!.ordinal : '';
 }

@@ -1,5 +1,7 @@
 part of dart_extensionz;
 
+// TODO: would like to change the name of this to "Cardinal".
+/// Cardinal directions.
 enum CompassPoint {
   north,
   northNorthEast,
@@ -19,6 +21,7 @@ enum CompassPoint {
   northNorthWest,
 }
 
+/// [num] Extension.
 extension NumberExtension on num {
   /// Returns the length of this [num].
   int get length => '$this'.length;
@@ -141,5 +144,15 @@ extension NumberExtension on num {
     final num value = ((this / 22.5) + 0.5).floor();
     final num mod = value % 16;
     return array[mod.toInt()];
+  }
+}
+
+/// Nullable [num] Extension.
+extension NullableNumberExtension on num? {
+  /// Returns the length of this [num].
+  int get length => this != null ? this!.length : 0;
+
+  bool toBool() {
+    return this != null && this!.toBool();
   }
 }

@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// A period of the year that is distinguished by special climate conditions.
 enum Season {
   spring,
   summer,
@@ -7,6 +8,7 @@ enum Season {
   winter,
 }
 
+/// [DateTime] Extension.
 extension DateTimeExtension on DateTime {
   DateTime get clone =>
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
@@ -335,3 +337,6 @@ extension DateTimeExtension on DateTime {
     );
   }
 }
+
+/// Nullable [DateTime] Extension.
+extension NullableDateTimeExtension on DateTime? {}

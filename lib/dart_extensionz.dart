@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;
 
+import 'package:intl/intl.dart';
+
 part 'src/boolean_extension.dart';
 part 'src/datetime_extension.dart';
 part 'src/double_extension.dart';
@@ -13,6 +15,7 @@ part 'src/file_extension.dart';
 part 'src/file_system_entity_extension.dart';
 part 'src/future_extension.dart';
 part 'src/integer_extension.dart';
+part 'src/intl_extension.dart';
 part 'src/iterable_extension.dart';
 part 'src/list_extension.dart';
 part 'src/map_extension.dart';

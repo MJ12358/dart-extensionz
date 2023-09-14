@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Map] Extension.
 extension MapExtension<K, V> on Map<K, V> {
   /// Remove null values from a map.
   ///
@@ -16,4 +17,9 @@ extension MapExtension<K, V> on Map<K, V> {
         ),
       );
   }
+}
+
+/// Nullable [Map] Extension.
+extension NullableMapExtension<K, V> on Map<K, V>? {
+  Map<K, V> removeNull() => this != null ? this!.removeNull() : <K, V>{};
 }

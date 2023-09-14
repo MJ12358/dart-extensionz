@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Future] Extension.
 extension FutureExtension<T> on Future<T> {
   Future<T> delayed({
     Duration duration = const Duration(milliseconds: 350),
@@ -30,6 +31,7 @@ extension FutureExtension<T> on Future<T> {
   }
 }
 
+/// [Iterable<Future>] Extension.
 extension FuturesExtension<T> on Iterable<Future<T>> {
   Future<void> progressWait(Function(num) callback) async {
     int completed = 0;
@@ -46,6 +48,7 @@ extension FuturesExtension<T> on Iterable<Future<T>> {
   }
 }
 
+/// [Future] [Function] Extenision.
 extension FutureFunctionExtension<T> on Future<T> Function() {
   Future<T> delayed({
     Duration duration = const Duration(milliseconds: 350),

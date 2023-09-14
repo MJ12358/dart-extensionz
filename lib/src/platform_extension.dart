@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// The platform that user interaction should adapt to target.
 enum TargetPlatform {
   android,
   iOS,
@@ -10,13 +11,12 @@ enum TargetPlatform {
   unknown,
 }
 
-/// I'd love to have statics directly on `Platform`,
-/// but unfortunately cannot do so.
-///
-/// https://github.com/dart-lang/language/issues/723
+/// [Platform] Extension.
 extension PlatformExtension on Platform {
+  /// Determines if this [Platform] is mobile.
   static bool get isMobile => Platform.isAndroid || Platform.isIOS;
 
+  /// Determines if this [Platform] is desktop.
   static bool get isDesktop =>
       Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 
