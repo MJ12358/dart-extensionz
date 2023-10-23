@@ -1,14 +1,6 @@
 # Dart Extensionz
 
-## 5.2.2
-
-- Hotfix previous type iterator.
-
-## 5.2.1
-
-- Hotfix previous type checking.
-
-## 5.2.0
+## 5.2.3
 
 - Add `containsIgnoreCase`.
 
