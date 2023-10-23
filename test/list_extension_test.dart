@@ -17,6 +17,6 @@ void main() {
     expect(result.containsIgnoreCase('test'), isTrue);
     expect(result.containsIgnoreCase('tEsT'), isTrue);
     expect(result2.containsIgnoreCase(1), isTrue);
-    expect(result2.containsIgnoreCase('1'), isFalse);
+    expect(result2.containsIgnoreCase('1'), isTrue);
   });
 }

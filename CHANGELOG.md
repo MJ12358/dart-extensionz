@@ -1,8 +1,12 @@
 # Dart Extensionz
 
+## 5.2.2
+
+- Hotfix previous type iterator.
+
 ## 5.2.1
 
-- Hotfix some type checking.
+- Hotfix previous type checking.
 
 ## 5.2.0
 
