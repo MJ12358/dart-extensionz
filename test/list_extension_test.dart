@@ -15,7 +15,7 @@ void main() {
     final List<int> result2 = <int>[1, 2, 3];
 
     expect(result.containsIgnoreCase('test'), isTrue);
-    expect(result.containsIgnoreCase('tEsT'), isFalse);
+    expect(result.containsIgnoreCase('tEsT'), isTrue);
     expect(result2.containsIgnoreCase(1), isTrue);
     expect(result2.containsIgnoreCase('1'), isFalse);
   });

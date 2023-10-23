@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.2.1
+
+- Hotfix some type checking.
+
 ## 5.2.0
 
 - Add `containsIgnoreCase`.
