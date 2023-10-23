@@ -15,6 +15,16 @@ extension IterableExtension<T> on Iterable<T> {
       yield skip(start).take(chunkSize).toList();
     }
   }
+
+  /// Same a [contains] but ignores case.
+  bool containsIgnoreCase(Object? element) {
+    if (T is String && element is String) {
+      return every((T e) {
+        return (e as String).toLowerCase() == element.toLowerCase();
+      });
+    }
+    return contains(element);
+  }
 }
 
 /// [Iterable] [Comparable] Extension.

@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.2.0
+
+- Add `containsIgnoreCase`.
+
 ## 5.1.2
 
 - Hotfix some date/duration pattern matching.
