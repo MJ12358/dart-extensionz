@@ -16,7 +16,7 @@ extension IterableExtension<T> on Iterable<T> {
     }
   }
 
-  /// Same a [contains] but ignores case.
+  /// Same as [contains] but ignores case.
   bool containsIgnoreCase(Object? element) {
     if (element is String) {
       return any((T e) {

@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.2.4
+
+- Adjust DateTime equatables.
+
 ## 5.2.3
 
 - Add `containsIgnoreCase`.

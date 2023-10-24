@@ -156,35 +156,59 @@ extension DateTimeExtension on DateTime {
         microsecond: 0,
       );
 
-  bool isSameMoment(DateTime other) {
+  bool isSameMoment(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return isAtSameMomentAs(other);
   }
 
-  bool isSameYear(DateTime other) {
+  bool isSameYear(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return year == other.year;
   }
 
-  bool isSameMonth(DateTime other) {
+  bool isSameMonth(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return isSameYear(other) && month == other.month;
   }
 
-  bool isSameWeek(DateTime other) {
+  bool isSameWeek(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return startOfWeek == other.startOfWeek;
   }
 
-  bool isSameDay(DateTime other) {
+  bool isSameDay(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return isSameMonth(other) && day == other.day;
   }
 
-  bool isSameHour(DateTime other) {
+  bool isSameHour(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return startOfHour == other.startOfHour;
   }
 
-  bool isSameMinute(DateTime other) {
+  bool isSameMinute(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return startOfMinute == other.startOfMinute;
   }
 
-  bool isSameSecond(DateTime other) {
+  bool isSameSecond(DateTime? other) {
+    if (other == null) {
+      return false;
+    }
     return secondsSinceEpoch == other.secondsSinceEpoch;
   }
 
