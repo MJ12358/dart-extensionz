@@ -118,6 +118,8 @@ void main() {
   });
 
   test('formatDuration', () {
+    const Duration? result = null;
+
     const Duration result1 = Duration(
       minutes: 1,
       seconds: 32,
@@ -128,15 +130,21 @@ void main() {
       milliseconds: 860,
     );
 
-    const Duration result3 = Duration(
-      seconds: 48,
-      milliseconds: 860,
-      microseconds: 96,
-    );
-
+    expect(result.format(), '');
+    expect(result1.format(), '00:01:32:000');
     expect(result1.format(pattern: "m 'm' ss 's'"), '1 m 32 s');
     expect(result2.format(pattern: "ss 's' SSS 'ms'"), '48 s 860 ms');
-    expect(result3.format(pattern: "ss 's' SSS 'ms'"), '48 s 860 ms');
+  });
+
+  test('humanize', () {
+    const Duration? result = null;
+    const Duration result1 = Duration(
+      minutes: 1,
+      seconds: 32,
+    );
+
+    expect(result.humanize(), '');
+    expect(result1.humanize(), '1 m 32 s');
   });
 
   test('toISO', () {

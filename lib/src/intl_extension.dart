@@ -60,6 +60,10 @@ extension IntlDurationExtension on Duration? {
     String partSeparator = ' ',
     String valueSeparator = ' ',
   }) {
+    if (this == null) {
+      return '';
+    }
+
     const String h = 'h';
     const String m = 'm';
     const String s = 's';

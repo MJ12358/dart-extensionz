@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.2.5
+
+- Fix nullable DateTime in `humanize`.
+
 ## 5.2.4
 
 - Adjust DateTime equatables.

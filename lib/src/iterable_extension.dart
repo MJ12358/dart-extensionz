@@ -19,9 +19,8 @@ extension IterableExtension<T> on Iterable<T> {
   /// Same as [contains] but ignores case.
   bool containsIgnoreCase(Object? element) {
     if (element is String) {
-      return any((T e) {
-        return e.toString().toLowerCase() == element.toLowerCase();
-      });
+      return map((T e) => e.toString().toLowerCase())
+          .contains(element.toLowerCase());
     }
     return contains(element);
   }
