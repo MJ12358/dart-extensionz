@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.3.0
+
+- Add `alphabetical` to `EnumsExtension`.
+
 ## 5.2.5
 
 - Fix nullable DateTime in `humanize`.

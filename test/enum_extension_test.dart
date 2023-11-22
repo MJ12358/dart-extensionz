@@ -67,4 +67,15 @@ void main() {
 
     expect(result.names, <String>[]);
   });
+
+  test('alphabetical', () {
+    final List<TestEnum> result = <TestEnum>[
+      TestEnum.helloWorld,
+      TestEnum.one,
+      TestEnum.separate_words,
+      TestEnum.test3,
+      TestEnum.XmlHttpRequest,
+    ];
+    expect(TestEnum.values.alphabetical, result);
+  });
 }

@@ -21,8 +21,17 @@ extension EnumsExtension on Iterable<Enum> {
   /// See `label` getter for details on what defines a label.
   List<String> get labels => map((Enum e) => e.label).toList();
 
-  /// Get all enum names as a list
+  /// Get all enum names as a list.
   List<String> get names => asNameMap().keys.toList();
+
+  /// Sort enums alphabetically.
+  List<Enum> get alphabetical {
+    final List<Enum> results = toList();
+    results.sort((Enum a, Enum b) {
+      return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+    });
+    return results;
+  }
 }
 
 /// Nullable [Enum] Extension.
@@ -36,8 +45,7 @@ extension NullableEnumExtension on Enum? {
     if (this == null) {
       return '';
     }
-    final Enum result = this!;
-    return result.label;
+    return this!.label;
   }
 }
 
@@ -56,11 +64,7 @@ extension NullableEnumsExtension on Iterable<Enum?>? {
 
     final Iterable<Enum> result = this!.toList().whereType<Enum>();
 
-    if (result.isEmpty) {
-      return <String>[];
-    }
-
-    return result.labels;
+    return result.isEmpty ? <String>[] : result.labels;
   }
 
   /// Get all enum names as a list.
@@ -74,10 +78,6 @@ extension NullableEnumsExtension on Iterable<Enum?>? {
 
     final Iterable<Enum> result = this!.toList().whereType<Enum>();
 
-    if (result.isEmpty) {
-      return <String>[];
-    }
-
-    return result.names;
+    return result.isEmpty ? <String>[] : result.names;
   }
 }
