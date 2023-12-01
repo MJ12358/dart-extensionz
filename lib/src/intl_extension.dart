@@ -1,5 +1,14 @@
 part of dart_extensionz;
 
+extension IntlExtension on Object? {
+  static String curencySymbol({
+    String? locale,
+  }) {
+    final NumberFormat format = NumberFormat.simpleCurrency(locale: locale);
+    return format.currencySymbol;
+  }
+}
+
 /// [Intl] [DateTime] Extension.
 extension IntlDateTimeExtension on DateTime? {
   /// Get localized date.
@@ -17,7 +26,7 @@ extension IntlDateTimeExtension on DateTime? {
 
     final DateFormat dateFormat = DateFormat(
       pattern,
-      locale ?? Platform.localeName,
+      locale,
     );
 
     return dateFormat.format(this!);
@@ -40,7 +49,7 @@ extension IntlDurationExtension on Duration? {
 
     final DateFormat dateFormat = DateFormat(
       pattern,
-      locale ?? Platform.localeName,
+      locale,
     );
 
     final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
@@ -179,7 +188,7 @@ extension IntlNumberExtension on num? {
     }
 
     final NumberFormat numberFormat = NumberFormat.compactSimpleCurrency(
-      locale: locale ?? Platform.localeName,
+      locale: locale,
       name: name,
       decimalDigits: decimalDigits,
     );
@@ -206,7 +215,7 @@ extension IntlNumberExtension on num? {
     }
 
     final NumberFormat numberFormat = NumberFormat.simpleCurrency(
-      locale: locale ?? Platform.localeName,
+      locale: locale,
       name: name,
       decimalDigits: decimalDigits,
     );
@@ -229,7 +238,7 @@ extension IntlNumberExtension on num? {
     }
 
     final NumberFormat numberFormat = NumberFormat.compact(
-      locale: locale ?? Platform.localeName,
+      locale: locale,
       explicitSign: explicitSign,
     );
 
@@ -250,7 +259,7 @@ extension IntlNumberExtension on num? {
     }
 
     final NumberFormat numberFormat = NumberFormat.decimalPatternDigits(
-      locale: locale ?? Platform.localeName,
+      locale: locale,
       decimalDigits: decimalDigits,
     );
 
@@ -271,7 +280,7 @@ extension IntlNumberExtension on num? {
     }
 
     final NumberFormat numberFormat = NumberFormat.decimalPercentPattern(
-      locale: locale ?? Platform.localeName,
+      locale: locale,
       decimalDigits: decimalDigits,
     );
 
@@ -290,11 +299,11 @@ extension IntlNumberExtension on num? {
       return '';
     }
 
-    final NumberFormat numberFormat = NumberFormat.scientificPattern(
-      locale ?? Platform.localeName,
+    final NumberFormat format = NumberFormat.scientificPattern(
+      locale,
     );
 
-    return numberFormat.format(this);
+    return format.format(this);
   }
 }
 
@@ -332,7 +341,7 @@ extension IntlStringExtension on String? {
     try {
       return DateFormat(
         _pattern,
-        locale ?? Platform.localeName,
+        locale,
       ).parseLoose(this!, isUtc);
     } on FormatException catch (_) {
       return DateTime.tryParse(this!);

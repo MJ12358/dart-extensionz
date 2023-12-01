@@ -10,6 +10,19 @@ const String de_DE = 'de_DE';
 
 void main() {
   initializeDateFormatting();
+
+  test('intlExtension', () {
+    final String result = IntlExtension.curencySymbol();
+    final String result1 = IntlExtension.curencySymbol(locale: en_US);
+    final String result2 = IntlExtension.curencySymbol(locale: en_GB);
+    final String result3 = IntlExtension.curencySymbol(locale: de_DE);
+
+    expect(result, r'$');
+    expect(result1, r'$');
+    expect(result2, '£');
+    expect(result3, '€');
+  });
+
   group('toDateTime', () {
     const String value1 = '01/01/2020';
     const String value2 = '08:30 AM';

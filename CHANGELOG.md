@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.3.1
+
+- Fix possible issues with intl not updating locale.
+
 ## 5.3.0
 
 - Add `alphabetical` to `EnumsExtension`.
