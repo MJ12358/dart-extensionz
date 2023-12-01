@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 extension IntlExtension on Object? {
-  static String curencySymbol({
+  static String currencySymbol({
     String? locale,
   }) {
     final NumberFormat format = NumberFormat.simpleCurrency(locale: locale);

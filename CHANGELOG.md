@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.3.2
+
+- Fix typo.
+
 ## 5.3.1
 
 - Fix possible issues with intl not updating locale.

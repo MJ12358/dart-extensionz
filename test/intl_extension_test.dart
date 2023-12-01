@@ -12,10 +12,10 @@ void main() {
   initializeDateFormatting();
 
   test('intlExtension', () {
-    final String result = IntlExtension.curencySymbol();
-    final String result1 = IntlExtension.curencySymbol(locale: en_US);
-    final String result2 = IntlExtension.curencySymbol(locale: en_GB);
-    final String result3 = IntlExtension.curencySymbol(locale: de_DE);
+    final String result = IntlExtension.currencySymbol();
+    final String result1 = IntlExtension.currencySymbol(locale: en_US);
+    final String result2 = IntlExtension.currencySymbol(locale: en_GB);
+    final String result3 = IntlExtension.currencySymbol(locale: de_DE);
 
     expect(result, r'$');
     expect(result1, r'$');
