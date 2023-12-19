@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.4.0
+
+- Add `timeAgo` to `DateTimeExtension`.
+
 ## 5.3.2
 
 - Fix typo.
@@ -22,7 +26,7 @@
 
 ## 5.2.3
 
-- Add `containsIgnoreCase`.
+- Add `containsIgnoreCase` to `IterableExtension`.
 
 ## 5.1.2
 

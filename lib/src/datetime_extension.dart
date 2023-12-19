@@ -325,6 +325,49 @@ extension DateTimeExtension on DateTime {
         : other;
   }
 
+  /// Provides a fuzzy time like '3 years ago'.
+  String get timeAgo {
+    final Duration diff = DateTime.now().difference(this);
+
+    if (diff.inDays > 365) {
+      final int years = (diff.inDays / 365).floor();
+      final String s = years == 1 ? 'year' : 'years';
+      return '$years $s ago';
+    }
+
+    if (diff.inDays > 30) {
+      final int months = (diff.inDays / 30).floor();
+      final String s = months == 1 ? 'month' : 'months';
+      return '$months $s ago';
+    }
+
+    if (diff.inDays > 7) {
+      final int weeks = (diff.inDays / 7).floor();
+      final String s = weeks == 1 ? 'week' : 'weeks';
+      return '$weeks $s ago';
+    }
+
+    if (diff.inDays > 0) {
+      final int days = diff.inDays;
+      final String s = days == 1 ? 'day' : 'days';
+      return '$days $s ago';
+    }
+
+    if (diff.inHours > 0) {
+      final int hours = diff.inHours;
+      final String s = hours == 1 ? 'hour' : 'hours';
+      return '$hours $s ago';
+    }
+
+    if (diff.inMinutes > 0) {
+      final int minutes = diff.inMinutes;
+      final String s = minutes == 1 ? 'minute' : 'minutes';
+      return '$minutes $s ago';
+    }
+
+    return 'just now';
+  }
+
   DateTime operator +(Duration duration) => add(duration);
 
   DateTime operator -(Duration duration) => subtract(duration);
