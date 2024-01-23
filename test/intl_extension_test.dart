@@ -84,8 +84,11 @@ void main() {
   group('toDuration', () {
     const String value1 = '08:30 AM';
     const String value2 = '05:25:30';
-    const Duration value3 = Duration(hours: 1, minutes: 15, seconds: 30);
-    const Duration value4 = Duration(seconds: 55, milliseconds: 250);
+    const String value3 = 'PT1H';
+    const String value4 = 'P0Y0M0DT0H15M0.000S';
+    const Duration value5 = Duration(hours: 1, minutes: 15, seconds: 30);
+    const Duration value6 = Duration(seconds: 55, milliseconds: 250);
+
     test(en_US, () {
       final Duration? result1 = value1.toDuration(
         pattern: 'hh:mm a',
@@ -95,10 +98,14 @@ void main() {
         pattern: 'hh:mm:ss',
         locale: en_US,
       );
+      final Duration? result3 = value3.toDuration(locale: en_US);
+      final Duration? result4 = value4.toDuration(locale: en_US);
       expect(result1, const Duration(hours: 8, minutes: 30));
       expect(result2, const Duration(hours: 5, minutes: 25, seconds: 30));
-      expect(value3.toString().toDuration(), value3);
-      expect(value4.toString().toDuration(), value4);
+      expect(result3, const Duration(hours: 1));
+      expect(result4, const Duration(minutes: 15));
+      expect(value5.toString().toDuration(), value5);
+      expect(value6.toString().toDuration(), value6);
     });
 
     test(en_GB, () {
@@ -110,9 +117,14 @@ void main() {
         pattern: 'hh:mm:ss',
         locale: en_GB,
       );
+      final Duration? result3 = value3.toDuration(locale: en_GB);
+      final Duration? result4 = value4.toDuration(locale: en_GB);
       expect(result1, const Duration(hours: 8, minutes: 30));
       expect(result2, const Duration(hours: 5, minutes: 25, seconds: 30));
-      expect(value3.toString().toDuration(), value3);
+      expect(result3, const Duration(hours: 1));
+      expect(result4, const Duration(minutes: 15));
+      expect(value5.toString().toDuration(), value5);
+      expect(value6.toString().toDuration(), value6);
     });
 
     test(de_DE, () {
@@ -124,9 +136,14 @@ void main() {
         pattern: 'hh:mm:ss',
         locale: de_DE,
       );
+      final Duration? result3 = value3.toDuration(locale: de_DE);
+      final Duration? result4 = value4.toDuration(locale: de_DE);
       expect(result1, const Duration(hours: 8, minutes: 30));
       expect(result2, const Duration(hours: 5, minutes: 25, seconds: 30));
-      expect(value3.toString().toDuration(), value3);
+      expect(result3, const Duration(hours: 1));
+      expect(result4, const Duration(minutes: 15));
+      expect(value5.toString().toDuration(), value5);
+      expect(value6.toString().toDuration(), value6);
     });
   });
 

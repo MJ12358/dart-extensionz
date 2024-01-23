@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 5.4.1
+
+- Fix `toDuration` for more cases.
+
 ## 5.4.0
 
 - Add `timeAgo` to `DateTimeExtension`.

@@ -20,6 +20,10 @@ extension PlatformExtension on Platform {
   static bool get isDesktop =>
       Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 
+  /// A constant that is true if the application was compiled to run on the web.
+  // ignore: do_not_use_environment
+  static const bool isWeb = bool.fromEnvironment('dart.library.js_util');
+
   /// Get the target plaform as an enum.
   static TargetPlatform get target {
     if (Platform.isAndroid) {

@@ -365,7 +365,7 @@ extension IntlStringExtension on String? {
 
     if (_pattern == null) {
       const String isoRegex =
-          r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(\d+S)?)?$';
+          r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(.+S)?)?$';
       const String dartRegex = r'^(\d+:)?(\d+:)?(\d+.)?(\d+)?$';
       try {
         if (this!.hasMatch(isoRegex)) {
@@ -401,13 +401,16 @@ extension IntlStringExtension on String? {
   ///
   /// https://dart-review.googlesource.com/c/sdk/+/118566/1/sdk/lib/core/duration.dart#116
   Duration _parseISODuration() {
-    final int years = _parseTime('Y');
-    // final int months = _parseTime('M');
-    final int weeks = _parseTime('W');
-    final int days = _parseTime('D');
-    final int hours = _parseTime('H');
-    final int minutes = _parseTime('M');
-    final int seconds = _parseTime('S');
+    final List<String> split = this!.split('T');
+    final String date = split.isNotEmpty ? split[0] : '';
+    final String time = split.length == 2 ? split[1] : '';
+
+    final int years = _parseTime(date, 'Y');
+    final int weeks = _parseTime(date, 'W');
+    final int days = _parseTime(date, 'D');
+    final int hours = _parseTime(time, 'H');
+    final int minutes = _parseTime(time, 'M');
+    final int seconds = _parseTime(time, 'S');
 
     return Duration(
       days: days + (weeks * 7) + (years * 365),
@@ -417,8 +420,8 @@ extension IntlStringExtension on String? {
     );
   }
 
-  int _parseTime(String timeUnit) {
-    final RegExpMatch? timeMatch = RegExp('(\\d+)$timeUnit').firstMatch(this!);
+  int _parseTime(String input, String timeUnit) {
+    final RegExpMatch? timeMatch = RegExp('(\\d+)$timeUnit').firstMatch(input);
     if (timeMatch == null) {
       return 0;
     }
