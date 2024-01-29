@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## 5.4.2
+
+- Add `isBlank` to `ObjectExtension`.
+- Fix null checking within `isEmpty`.
+
 ## 5.4.1
 
 - Fix `toDuration` for more cases.
