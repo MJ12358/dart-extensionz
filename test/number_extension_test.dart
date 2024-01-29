@@ -47,6 +47,8 @@ void main() {
     expect(1234567890.toPrecision(3), 1234567890.000);
     expect(5.25.toPrecision(), 5);
     expect(5.550.toPrecision(1), 5.6);
+    expect(5.000000000001.toPrecision(2), 5.00);
+    expect(7.580000000000000001.toPrecision(2), 7.58);
   });
 
   test('humanize', () {
