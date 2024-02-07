@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.0.1
+
+- Fix return type of enum getter.
+
 ## 6.0.0
 
 - Add `NullableBooleanExtension`.

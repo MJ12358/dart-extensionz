@@ -80,6 +80,8 @@ void main() {
   });
 
   test('get', () {
+    final TestEnum t = TestEnum.values.get('helloworld');
+    expect(t, TestEnum.helloWorld);
     expect(TestEnum.values.get('helloWorld'), TestEnum.helloWorld);
     expect(TestEnum.values.get('helloworld'), TestEnum.helloWorld);
     expect(TestEnum.values.get('hello world'), TestEnum.helloWorld);

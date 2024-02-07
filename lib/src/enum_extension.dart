@@ -1,7 +1,7 @@
 part of dart_extensionz;
 
 /// [Enum] Extension.
-extension EnumExtension on Enum {
+extension EnumExtension<T> on Enum {
   /// Get a human readable display label for this enum.
   ///
   /// Splits by capital letters, prefered enum names are defined here:
@@ -15,7 +15,7 @@ extension EnumExtension on Enum {
 }
 
 /// [Iterable<Enum>] Extension.
-extension EnumsExtension on Iterable<Enum> {
+extension EnumsExtension<T> on Iterable<Enum> {
   /// Get all enum labels as a list.
   ///
   /// See `label` getter for details on what defines a label.
@@ -37,7 +37,7 @@ extension EnumsExtension on Iterable<Enum> {
   ///
   /// Works like [byName] except won't throw if not found
   /// and allows fuzzy string matching.
-  Enum? get(String? element) {
+  T? get(String? element) {
     if (element == null) {
       return null;
     }
@@ -49,12 +49,12 @@ extension EnumsExtension on Iterable<Enum> {
       (String key, Enum value) =>
           MapEntry<String, Enum>(key.toLowerCase(), value),
     );
-    return map[value];
+    return map[value] as T?;
   }
 }
 
 /// Nullable [Enum] Extension.
-extension NullableEnumExtension on Enum? {
+extension NullableEnumExtension<T> on Enum? {
   /// Get a human readable display label for this enum.
   ///
   /// Splits by capital letters, prefered enum names are defined here:
@@ -64,7 +64,7 @@ extension NullableEnumExtension on Enum? {
 }
 
 /// Nullable [Iterable<Enum>] Extension.
-extension NullableEnumsExtension on Iterable<Enum?>? {
+extension NullableEnumsExtension<T> on Iterable<Enum?>? {
   /// Get all enum labels as a list.
   ///
   /// See `label` getter for details on what defines a label.
