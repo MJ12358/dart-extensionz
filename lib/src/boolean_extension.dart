@@ -17,3 +17,18 @@ extension BooleanExtension on bool {
     return this ? 'Y' : 'N';
   }
 }
+
+/// Nullable [bool] Extension.
+extension NullableBooleanExtension on bool? {
+  int toInt() {
+    return this == null ? 0 : this!.toInt();
+  }
+
+  String toYesNo() {
+    return this == null ? 'No' : this!.toYesNo();
+  }
+
+  String toYN() {
+    return this == null ? 'N' : this!.toYN();
+  }
+}

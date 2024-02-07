@@ -31,4 +31,28 @@ void main() {
     expect(value2.containsIgnoreCase(1), isTrue);
     expect(value2.containsIgnoreCase('1'), isTrue);
   });
+
+  test('min', () {
+    final List<num> test = <num>[0, 1, 2, 3];
+    expect(test.min, 0);
+  });
+
+  test('max', () {
+    final List<num> test = <num>[0, 1, 2, 3];
+    expect(test.max, 3);
+  });
+
+  test('sum', () {
+    final List<int> test1 = <int>[0, 1, 2, 3];
+    final List<int?> test2 = <int?>[0, 1, null, 2, 3];
+    expect(test1.sum, 6);
+    expect(test2.sum, 6);
+  });
+
+  test('average', () {
+    final List<int> test1 = <int>[0, 1, 2, 3];
+    final List<int?> test2 = <int?>[0, 1, null, 2, 3];
+    expect(test1.average, 1.5);
+    expect(test2.average, 1.5);
+  });
 }

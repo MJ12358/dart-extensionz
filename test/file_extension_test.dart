@@ -67,9 +67,9 @@ void main() {
   });
 
   test('changeFileName', () {
-    final MemoryFileSystem fileSystem = MemoryFileSystem();
+    final MemoryFileSystem fs = MemoryFileSystem();
 
-    final File file = fileSystem.file('testfile.txt');
+    final File file = fs.file('testfile.txt');
     file.writeAsBytes(<int>[1, 2, 3]);
     file.createSync();
 
@@ -77,9 +77,9 @@ void main() {
   });
 
   test('changeDisplayName', () {
-    final MemoryFileSystem fileSystem = MemoryFileSystem();
+    final MemoryFileSystem fs = MemoryFileSystem();
 
-    final File file = fileSystem.file('testfile.txt');
+    final File file = fs.file('testfile.txt');
     file.writeAsBytes(<int>[1, 2, 3]);
     file.createSync();
 
@@ -130,38 +130,38 @@ void main() {
   });
 
   test('write', () {
-    final MemoryFileSystem fileSystem = MemoryFileSystem();
+    final MemoryFileSystem fs = MemoryFileSystem();
 
-    final File file1 = fileSystem.file('testfile1.txt');
+    final File file1 = fs.file('testfile1.txt');
     file1.write('contents');
 
-    final File file2 = fileSystem.file('testfile2.txt');
+    final File file2 = fs.file('testfile2.txt');
     file2.write(Uint8List(8));
 
-    final File file3 = fileSystem.file('testfile3.txt');
+    final File file3 = fs.file('testfile3.txt');
     file3.write(List<int>.filled(8, 1));
 
-    final File file4 = fileSystem.file('testfile4.txt');
+    final File file4 = fs.file('testfile4.txt');
     expect(() => file4.write(bool), throwsA(isA<FormatException>()));
   });
 
   test('size', () {
-    final MemoryFileSystem fileSystem = MemoryFileSystem();
+    final MemoryFileSystem fs = MemoryFileSystem();
 
     final File filex = File('nonexistant');
 
-    final File file0 = fileSystem.file('testfile0.dart');
+    final File file0 = fs.file('testfile0.dart');
     file0.createSync();
 
-    final File file1 = fileSystem.file('testfile1.dart');
+    final File file1 = fs.file('testfile1.dart');
     file1.writeAsBytes(<int>[1, 2, 3]);
     file1.createSync();
 
-    final File file2 = fileSystem.file('testfile2.dart');
+    final File file2 = fs.file('testfile2.dart');
     file2.writeAsBytes(List<int>.generate(pow(1024, 1).toInt(), (int i) => i));
     file2.createSync();
 
-    final File file3 = fileSystem.file('testfile3.dart');
+    final File file3 = fs.file('testfile3.dart');
     file3.writeAsBytes(List<int>.generate(pow(1024, 2).toInt(), (int i) => i));
     file3.createSync();
 

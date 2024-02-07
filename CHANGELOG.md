@@ -1,5 +1,14 @@
 # Dart Extensionz
 
+## 6.0.0
+
+- Add `NullableBooleanExtension`.
+- Rename sum and average functions.
+- Modify `Cardinal` directions.
+- Add convienent type checkers to `ObjectExtension`.
+- Add a fuzzy getter to `Iterable<Enum>`.
+- Add a few more tests.
+
 ## 5.4.2
 
 - Add `isBlank` to `ObjectExtension`.

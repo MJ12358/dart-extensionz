@@ -32,6 +32,25 @@ extension EnumsExtension on Iterable<Enum> {
     });
     return results;
   }
+
+  /// Get an enum from a [String].
+  ///
+  /// Works like [byName] except won't throw if not found
+  /// and allows fuzzy string matching.
+  Enum? get(String? element) {
+    if (element == null) {
+      return null;
+    }
+    final String value = element
+        .replaceAll(RegExp(' +'), '')
+        .replaceAll(RegExp('_+'), '')
+        .toLowerCase();
+    final Map<String, Enum> map = asNameMap().map(
+      (String key, Enum value) =>
+          MapEntry<String, Enum>(key.toLowerCase(), value),
+    );
+    return map[value];
+  }
 }
 
 /// Nullable [Enum] Extension.
@@ -41,12 +60,7 @@ extension NullableEnumExtension on Enum? {
   /// Splits by capital letters, prefered enum names are defined here:
   ///
   /// https://dart-lang.github.io/linter/lints/constant_identifier_names.html
-  String get label {
-    if (this == null) {
-      return '';
-    }
-    return this!.label;
-  }
+  String get label => this == null ? '' : this!.label;
 }
 
 /// Nullable [Iterable<Enum>] Extension.
@@ -61,9 +75,7 @@ extension NullableEnumsExtension on Iterable<Enum?>? {
     if (this == null) {
       return <String>[];
     }
-
     final Iterable<Enum> result = this!.toList().whereType<Enum>();
-
     return result.isEmpty ? <String>[] : result.labels;
   }
 
@@ -75,9 +87,7 @@ extension NullableEnumsExtension on Iterable<Enum?>? {
     if (this == null) {
       return <String>[];
     }
-
     final Iterable<Enum> result = this!.toList().whereType<Enum>();
-
     return result.isEmpty ? <String>[] : result.names;
   }
 }

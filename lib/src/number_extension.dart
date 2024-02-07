@@ -1,24 +1,29 @@
 part of dart_extensionz;
 
-// TODO: would like to change the name of this to "Cardinal".
 /// Cardinal directions.
-enum CompassPoint {
-  north,
-  northNorthEast,
-  northEast,
-  eastNorthEast,
-  east,
-  eastSouthEast,
-  southEast,
-  southSouthEast,
-  south,
-  southSouthWest,
-  southWest,
-  westSouthWest,
-  west,
-  westNorthWest,
-  northWest,
-  northNorthWest,
+enum Cardinal {
+  north(initials: 'N'),
+  northNorthEast(initials: 'NNE'),
+  northEast(initials: 'NE'),
+  eastNorthEast(initials: 'ENE'),
+  east(initials: 'E'),
+  eastSouthEast(initials: 'ESE'),
+  southEast(initials: 'SE'),
+  southSouthEast(initials: 'SSE'),
+  south(initials: 'S'),
+  southSouthWest(initials: 'SSW'),
+  southWest(initials: 'SW'),
+  westSouthWest(initials: 'WSW'),
+  west(initials: 'W'),
+  westNorthWest(initials: 'WNW'),
+  northWest(initials: 'NW'),
+  northNorthWest(initials: 'NNW');
+
+  const Cardinal({
+    required this.initials,
+  });
+
+  final String initials;
 }
 
 /// [num] Extension.
@@ -31,10 +36,7 @@ extension NumberExtension on num {
   }
 
   Future<dynamic> delay([FutureOr<dynamic> Function()? callback]) async {
-    Future<dynamic>.delayed(
-      Duration(milliseconds: (this * 1000).round()),
-      callback,
-    );
+    return toSeconds().delay(callback);
   }
 
   Duration toMilliseconds() {
@@ -139,8 +141,8 @@ extension NumberExtension on num {
     return '$size$delimeter${suffixes[exp]}';
   }
 
-  CompassPoint toCompassPoint() {
-    const List<CompassPoint> array = CompassPoint.values;
+  Cardinal toCardinal() {
+    const List<Cardinal> array = Cardinal.values;
     final num value = ((this / 22.5) + 0.5).floor();
     final num mod = value % 16;
     return array[mod.toInt()];

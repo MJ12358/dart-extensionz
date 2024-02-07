@@ -39,9 +39,9 @@ extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
 
 /// [Iterable<num?>] Extension.
 extension IterableNullableNumberExtension on Iterable<num?> {
-  /// Works like `sum` but will return null
+  /// Sum a list of numbers but will return null
   /// if iterable is empty after type checking.
-  num? get nullableSum {
+  num? get sum {
     final Iterable<num> iterable = whereType<num>();
     if (iterable.isEmpty) {
       return null;
@@ -53,9 +53,9 @@ extension IterableNullableNumberExtension on Iterable<num?> {
     return result;
   }
 
-  /// Works like `average` but will return null
+  /// Average a list of numbers but will return null
   /// if iterable is empty after type checking.
-  num? get nullableAverage {
+  num? get average {
     final Iterable<num> iterable = whereType<num>();
     if (iterable.isEmpty) {
       return null;

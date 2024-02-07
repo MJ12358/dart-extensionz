@@ -78,4 +78,13 @@ void main() {
     ];
     expect(TestEnum.values.alphabetical, result);
   });
+
+  test('get', () {
+    expect(TestEnum.values.get('helloWorld'), TestEnum.helloWorld);
+    expect(TestEnum.values.get('helloworld'), TestEnum.helloWorld);
+    expect(TestEnum.values.get('hello world'), TestEnum.helloWorld);
+    expect(TestEnum.values.get('hello_world'), TestEnum.helloWorld);
+    expect(TestEnum.values.get('hello      world'), TestEnum.helloWorld);
+    expect(TestEnum.values.get('hello_____world'), TestEnum.helloWorld);
+  });
 }

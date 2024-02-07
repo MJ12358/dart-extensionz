@@ -62,20 +62,10 @@ extension StringExtension on String {
   String ifBlank(String value) => isBlank ? value : this;
 
   /// Get the first character of this [String].
-  String get first {
-    if (isBlank) {
-      return '';
-    }
-    return substring(0, 1);
-  }
+  String get first => isBlank ? '' : substring(0, 1);
 
   /// Get the last character of this [String].
-  String get last {
-    if (isBlank) {
-      return '';
-    }
-    return substring(length - 1, length);
-  }
+  String get last => isBlank ? '' : substring(length - 1, length);
 
   /// Get the bool equivalent of this [String].
   ///
@@ -220,9 +210,7 @@ extension StringExtension on String {
     if (length <= limit) {
       return this;
     }
-
     final int end = limit - ending.length;
-
     return substring(0, end) + ending;
   }
 
@@ -233,7 +221,6 @@ extension StringExtension on String {
     if (isBlank) {
       return 0;
     }
-
     final List<String> words = trim().split(RegExp(r'(\s+)'));
     final double magicNumber = words.length / wordsPerMinute;
     return (magicNumber * 100).toInt();
@@ -246,7 +233,6 @@ extension StringExtension on String {
     if (isBlank) {
       return 0;
     }
-
     final List<String> words = trim().split(RegExp(r'(\s+)'));
     final RegExp regex = filter ?? RegExp('([^a-zA-Z]+)');
     final List<String> filteredWords =
@@ -291,11 +277,9 @@ extension StringExtension on String {
     if (isBlank) {
       return this;
     }
-
     if (start > end) {
       throw const FormatException('Start must not be greater than end.');
     }
-
     final int maskLength = end - start;
     return substring(0, start) + char.repeat(maskLength) + substring(end);
   }

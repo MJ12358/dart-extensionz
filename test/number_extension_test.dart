@@ -9,10 +9,12 @@ void main() {
   });
 
   test('toBool', () {
+    num? nullTest;
     expect(0.toBool(), false);
     expect(1.toBool(), true);
     expect(123.toBool(), false);
     expect(12.34.toBool(), false);
+    expect(nullTest.toBool(), false);
   });
 
   test('stripTrailingZeros', () {
@@ -72,23 +74,23 @@ void main() {
     expect(1753.humanize(decimals: 2), '1.75K');
   });
 
-  test('toCompassPoint', () {
-    expect(0.toCompassPoint(), CompassPoint.north);
-    expect(22.5.toCompassPoint(), CompassPoint.northNorthEast);
-    expect(45.toCompassPoint(), CompassPoint.northEast);
-    expect(67.5.toCompassPoint(), CompassPoint.eastNorthEast);
-    expect(90.toCompassPoint(), CompassPoint.east);
-    expect(112.5.toCompassPoint(), CompassPoint.eastSouthEast);
-    expect(135.toCompassPoint(), CompassPoint.southEast);
-    expect(157.5.toCompassPoint(), CompassPoint.southSouthEast);
-    expect(180.toCompassPoint(), CompassPoint.south);
-    expect(202.5.toCompassPoint(), CompassPoint.southSouthWest);
-    expect(225.toCompassPoint(), CompassPoint.southWest);
-    expect(247.5.toCompassPoint(), CompassPoint.westSouthWest);
-    expect(270.toCompassPoint(), CompassPoint.west);
-    expect(292.5.toCompassPoint(), CompassPoint.westNorthWest);
-    expect(315.toCompassPoint(), CompassPoint.northWest);
-    expect(337.5.toCompassPoint(), CompassPoint.northNorthWest);
-    expect(360.toCompassPoint(), CompassPoint.north);
+  test('toCardinal', () {
+    expect(0.toCardinal(), Cardinal.north);
+    expect(22.5.toCardinal(), Cardinal.northNorthEast);
+    expect(45.toCardinal(), Cardinal.northEast);
+    expect(67.5.toCardinal(), Cardinal.eastNorthEast);
+    expect(90.toCardinal(), Cardinal.east);
+    expect(112.5.toCardinal(), Cardinal.eastSouthEast);
+    expect(135.toCardinal(), Cardinal.southEast);
+    expect(157.5.toCardinal(), Cardinal.southSouthEast);
+    expect(180.toCardinal(), Cardinal.south);
+    expect(202.5.toCardinal(), Cardinal.southSouthWest);
+    expect(225.toCardinal(), Cardinal.southWest);
+    expect(247.5.toCardinal(), Cardinal.westSouthWest);
+    expect(270.toCardinal(), Cardinal.west);
+    expect(292.5.toCardinal(), Cardinal.westNorthWest);
+    expect(315.toCardinal(), Cardinal.northWest);
+    expect(337.5.toCardinal(), Cardinal.northNorthWest);
+    expect(360.toCardinal(), Cardinal.north);
   });
 }
