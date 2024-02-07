@@ -12,7 +12,7 @@ environment:
   sdk: ">=2.19.2 <4.0.0"
 
 dependencies:
-  intl: 0.18.1
+  intl: ^0.18.1
 
 dev_dependencies:
   # dart run coverage:test_with_coverage
