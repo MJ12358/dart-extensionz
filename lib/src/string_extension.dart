@@ -147,6 +147,23 @@ extension StringExtension on String {
     return <String>[substring(0, length), substring(length)];
   }
 
+  /// Camel case this [String].
+  String toCamelCase() {
+    final List<String> split = trim().toLowerCase().split(' ');
+    for (int i = 1; i < split.length; i++) {
+      split[i] = split[i].substring(0, 1).toUpperCase() + split[i].substring(1);
+    }
+    return split.join();
+  }
+
+  /// Convert camelCase to Camel Case
+  String fromCamelCase() {
+    return replaceAllMapped(
+      RegExp('^([a-z])|[A-Z]'),
+      (Match m) => m[1] == null ? ' ${m[0]}' : m[1]!.toUpperCase(),
+    ).trim();
+  }
+
   /// Get the Levenshtein distance between two strings.
   ///
   /// The Levenshtein distance between two strings is defined as

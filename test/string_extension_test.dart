@@ -45,6 +45,23 @@ void main() {
     expect('N/A'.initials, 'N A');
   });
 
+  test('toCamelCase', () {
+    expect(''.toCamelCase(), '');
+    expect('a'.toCamelCase(), 'a');
+    expect('A'.toCamelCase(), 'a');
+    expect('a fox'.toCamelCase(), 'aFox');
+    expect('A Fox'.toCamelCase(), 'aFox');
+    expect('A Fox Jumped'.toCamelCase(), 'aFoxJumped');
+  });
+
+  test('fromCamelCase', () {
+    expect(''.fromCamelCase(), '');
+    expect('a'.fromCamelCase(), 'A');
+    expect('A'.fromCamelCase(), 'A');
+    expect('aFox'.fromCamelCase(), 'A Fox');
+    expect('aFoxJumped'.fromCamelCase(), 'A Fox Jumped');
+  });
+
   test('toTitleCase', () {
     expect(''.toTitleCase(), '');
     expect('a'.toTitleCase(), 'A');

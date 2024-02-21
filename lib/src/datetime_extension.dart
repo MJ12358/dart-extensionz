@@ -218,22 +218,18 @@ extension DateTimeExtension on DateTime {
   bool get isWeekday => !isWeekend;
 
   bool get isToday {
-    final DateTime nowDate = DateTime.now();
-    return year == nowDate.year && month == nowDate.month && day == nowDate.day;
+    final DateTime now = DateTime.now();
+    return year == now.year && month == now.month && day == now.day;
   }
 
   bool get isYesterday {
-    final DateTime nowDate = DateTime.now();
-    return year == nowDate.year &&
-        month == nowDate.month &&
-        day == nowDate.day - 1;
+    final DateTime now = DateTime.now();
+    return year == now.year && month == now.month && day == now.day - 1;
   }
 
   bool get isTomorrow {
-    final DateTime nowDate = DateTime.now();
-    return year == nowDate.year &&
-        month == nowDate.month &&
-        day == nowDate.day + 1;
+    final DateTime now = DateTime.now();
+    return year == now.year && month == now.month && day == now.day + 1;
   }
 
   bool get isLeapYear {

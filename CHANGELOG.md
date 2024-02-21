@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.1.0
+
+- Add `toCamelCase` and `fromCamelCase`.
+
 ## 6.0.1
 
 - Fix return type of enum getter.
