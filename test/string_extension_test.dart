@@ -1,6 +1,8 @@
 import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
+import 'enum_extension_test.dart';
+
 void main() {
   test('first/last', () {
     const String test1 = '';
@@ -30,6 +32,13 @@ void main() {
     expect('false'.toBool(), false);
     expect('f'.toBool(), false);
     expect('0'.toBool(), false);
+  });
+
+  test('toEnum', () {
+    expect(
+      TestEnum.helloWorld.name.toEnum(TestEnum.values),
+      TestEnum.helloWorld,
+    );
   });
 
   test('initials', () {

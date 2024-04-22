@@ -1,6 +1,8 @@
 import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
+import 'enum_extension_test.dart';
+
 void main() {
   test('main', () {
     final List<int> result = <int>[0, 1, 2, 3];
@@ -54,5 +56,12 @@ void main() {
     final List<int?> test2 = <int?>[0, 1, null, 2, 3];
     expect(test1.average, 1.5);
     expect(test2.average, 1.5);
+  });
+
+  test('toEnum', () {
+    expect(
+      TestEnum.values.names.toEnum(TestEnum.values),
+      TestEnum.values,
+    );
   });
 }

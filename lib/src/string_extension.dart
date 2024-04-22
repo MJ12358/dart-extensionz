@@ -91,6 +91,12 @@ extension StringExtension on String {
     return double.tryParse(this);
   }
 
+  /// Convert a string to an enum from [values].
+  T? toEnum<T extends Enum>(List<Enum> values) {
+    final Map<String, Enum> nameMap = values.asNameMap();
+    return nameMap[this] as T?;
+  }
+
   /// A convienence method wrapping `RegExp([pattern]).hasMatch`.
   bool hasMatch(String pattern) {
     return RegExp(pattern).hasMatch(this);

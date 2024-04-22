@@ -36,6 +36,68 @@ extension ObjectExtension on Object {
     return false;
   }
 
+  /// Get a concrete type from a string.
+  ///
+  /// [runtimeType] is only for debugging purposes
+  /// and application code shouldn't depend on it.
+  /// It can be overridden by classes to return fake
+  /// values and probably returns unusable
+  /// values when transpiled to JS.
+  Type toType() {
+    String s = toString().toLowerCase();
+    s = s.replaceAll(RegExp('<.*>'), '');
+    s = s.replaceAll('_', '');
+    if (s == 'bool') {
+      return bool;
+    }
+    if (s == 'double') {
+      return double;
+    }
+    if (s == 'enum') {
+      return Enum;
+    }
+    if (s == 'future') {
+      return Future;
+    }
+    if (s == 'int') {
+      return int;
+    }
+    if (s == 'iterable') {
+      return Iterable;
+    }
+    if (s == 'list') {
+      return List;
+    }
+    if (s == 'map') {
+      return Map;
+    }
+    if (s == 'never') {
+      return Never;
+    }
+    if (s == 'num') {
+      return num;
+    }
+    if (s == 'runes') {
+      return Runes;
+    }
+    if (s == 'set') {
+      return Set;
+    }
+    if (s == 'stream' || s == 'controllerstream') {
+      return Stream;
+    }
+    if (s == 'string') {
+      return String;
+    }
+    if (s == 'symbol') {
+      return Symbol;
+    }
+    if (s == 'null') {
+      return Null;
+    }
+    return Object;
+  }
+
   bool get isBool => this is bool;
   bool get isDouble => this is double;
   bool get isEnum => this is Enum;
@@ -59,6 +121,8 @@ extension NullableObjectExtension on Object? {
 
   /// Determines if this [Object] is blank.
   bool get isBlank => this == null || this!.isBlank;
+
+  Type toType() => this == null ? Null : this!.toType();
 
   bool get isBool => this != null && this!.isBool;
   bool get isDouble => this != null && this!.isDouble;

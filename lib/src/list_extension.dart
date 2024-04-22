@@ -51,3 +51,23 @@ extension ListExtension<T> on List<T> {
 extension NullableListExtension<T> on List<T>? {
   List<T> removeNull() => this != null ? this!.removeNull() : <T>[];
 }
+
+/// Nullable [List] of Objects Extension.
+extension NullableListObjectExtension on List<Object?>? {
+  List<T> cast<T>() {
+    if (this == null) {
+      return <T>[];
+    }
+    return this!.cast<T?>().whereType<T>().toList();
+  }
+
+  /// Convert a list of objects to a list of enums from [values].
+  List<T>? toEnum<T extends Enum>(List<Enum> values) {
+    final List<String> list = cast<String>();
+    if (list.isEmpty) {
+      return null;
+    }
+    final Map<String, Enum> nameMap = values.asNameMap();
+    return list.map((String e) => nameMap[e]).whereType<T>().toList();
+  }
+}

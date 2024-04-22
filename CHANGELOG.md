@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.2.0
+
+- Add `toEnum` on List and String extensions.
+
 ## 6.1.0
 
 - Add `toCamelCase` and `fromCamelCase`.
