@@ -1,5 +1,6 @@
 part of dart_extensionz;
 
+/// [Intl] Extension.
 extension IntlExtension on Object? {
   static String currencySymbol({
     String? locale,

@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.3.0
+
+- Introduce `UriExtension`.
+
 ## 6.2.0
 
 - Add `toEnum` on List and String extensions.

@@ -1,6 +1,6 @@
 part of dart_extensionz;
 
-/// String Extension.
+/// [String] Extension.
 extension StringExtension on String {
   /// Whether this [String] is empty or consists solely
   /// of whitespace characters.

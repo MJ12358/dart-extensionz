@@ -25,3 +25,4 @@ part 'src/platform_extension.dart';
 part 'src/set_extension.dart';
 part 'src/stream_extension.dart';
 part 'src/string_extension.dart';
+part 'src/uri_extension.dart';
