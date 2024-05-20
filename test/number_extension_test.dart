@@ -54,6 +54,8 @@ void main() {
   });
 
   test('humanize', () {
+    expect(double.nan.humanize(), '');
+    expect(0.humanize(), '0');
     expect(1.humanize(), '1');
     expect(10.humanize(), '10');
     expect(1e3.humanize(), '1K');
@@ -72,6 +74,23 @@ void main() {
     expect(1753.humanize(), '2K');
     expect(1234.humanize(decimals: 2), '1.23K');
     expect(1753.humanize(decimals: 2), '1.75K');
+  });
+
+  test('computerize', () {
+    expect(double.nan.computerize(), '');
+    expect(0.computerize(), '0 B');
+    expect(1.computerize(), '1 B');
+    expect(10.computerize(), '10 B');
+    expect(1.024e+3.computerize(), '1 KB');
+    expect(1.048576e+6.computerize(), '1 MB');
+    expect(1.073741824e+9.computerize(), '1 GB');
+    expect(1.099511627776e+12.computerize(), '1 TB');
+    expect(1.125899906842624e+15.computerize(), '1 PB');
+    expect(1.152921504606846976e+18.computerize(), '1 EB');
+    expect(1234.computerize(), '1 KB');
+    expect(1753.computerize(), '2 KB');
+    expect(1234.computerize(decimals: 2), '1.21 KB');
+    expect(1753.computerize(decimals: 2), '1.71 KB');
   });
 
   test('toCardinal', () {

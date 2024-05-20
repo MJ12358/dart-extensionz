@@ -12,7 +12,7 @@ extension FileSystemEntityExtension on FileSystemEntity {
   bool get isLink => this is Link;
 }
 
-/// [Iterable<FileSystemEntity] Extension.
+/// [Iterable<FileSystemEntity>] Extension.
 extension FileSystemEntitiesExtension on Iterable<FileSystemEntity> {
   /// Returns only files.
   List<File> get files => whereType<File>().toList();

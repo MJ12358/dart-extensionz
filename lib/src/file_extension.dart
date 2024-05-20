@@ -164,7 +164,7 @@ extension FileExtension on File {
       return '';
     }
 
-    return _size(decimals, bytes);
+    return bytes.computerize(decimals: decimals);
   }
 
   /// Get the file size as a string asynchronous. eg. 5 KB
@@ -172,31 +172,8 @@ extension FileExtension on File {
   /// Use [decimals] to specify the number of decimal places.
   Future<String> sizeAsync([int decimals = 0]) {
     return length().then((int value) {
-      return _size(decimals, value);
+      return value.computerize(decimals: decimals);
     });
-  }
-
-  String _size(int decimals, int bytes) {
-    if (bytes <= 0) {
-      return '0 B';
-    }
-
-    const List<String> suffixes = <String>[
-      'B', // byte
-      'KB', // kilobyte
-      'MB', // megabyte
-      'GB', // gigabyte
-      'TB', // terabyte
-      'PB', // petabyte
-      'EB', // exabyte
-      'ZB', // zettabyte
-      'YB', // yottabyte
-    ];
-
-    final int i = (math.log(bytes) / math.log(1024)).floor();
-    final String size = (bytes / math.pow(1024, i)).toStringAsFixed(decimals);
-
-    return '$size ${suffixes[i]}';
   }
 }
 

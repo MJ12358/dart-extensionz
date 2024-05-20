@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.3.1
+
+- Move the `computerize` function into the public api.
+
 ## 6.3.0
 
 - Introduce `UriExtension`.

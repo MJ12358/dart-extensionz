@@ -141,6 +141,38 @@ extension NumberExtension on num {
     return '$size$delimeter${suffixes[exp]}';
   }
 
+  /// Receive a string with this number suffixed.
+  ///
+  /// Example: 1 B, 10 B, 1 KB, 1 MB, 1 GB
+  String computerize({
+    int decimals = 0,
+    String delimeter = ' ',
+  }) {
+    const List<String> suffixes = <String>[
+      'B', // byte
+      'KB', // kilobyte
+      'MB', // megabyte
+      'GB', // gigabyte
+      'TB', // terabyte
+      'PB', // petabyte
+      'EB', // exabyte
+      'ZB', // zettabyte
+      'YB', // yottabyte
+    ];
+
+    if (isNaN) {
+      return '';
+    }
+
+    if (this <= 0) {
+      return '0${delimeter}B';
+    }
+
+    final int i = (math.log(this) / math.log(1024)).floor();
+    final String size = (this / math.pow(1024, i)).toStringAsFixed(decimals);
+    return '$size$delimeter${suffixes[i]}';
+  }
+
   Cardinal toCardinal() {
     const List<Cardinal> array = Cardinal.values;
     final num value = ((this / 22.5) + 0.5).floor();
