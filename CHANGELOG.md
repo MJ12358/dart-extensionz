@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.3.2
+
+- Fix some datetime issues retrieving `endOf` and `startOf`.
+
 ## 6.3.1
 
 - Move the `computerize` function into the public api.

@@ -86,19 +86,20 @@ extension DateTimeExtension on DateTime {
   DateTime get endOfDay => copyWith(
         hour: 23,
         minute: 59,
+        second: 59,
         millisecond: 999,
         microsecond: 999,
       );
 
   DateTime get endOfHour => copyWith(
-        hour: 59,
         minute: 59,
+        second: 59,
         millisecond: 999,
         microsecond: 999,
       );
 
   DateTime get endOfMinute => copyWith(
-        minute: 59,
+        second: 59,
         millisecond: 999,
         microsecond: 999,
       );
@@ -128,7 +129,7 @@ extension DateTimeExtension on DateTime {
       );
 
   DateTime get startOfWeek =>
-      weekday == DateTime.sunday ? startOfDay : addDays(weekday).startOfDay;
+      weekday == DateTime.sunday ? startOfDay : addDays(-weekday).startOfDay;
 
   DateTime get startOfDay => clone.copyWith(
         hour: 0,

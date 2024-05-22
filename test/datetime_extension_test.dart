@@ -14,6 +14,46 @@ void main() {
     expect(test2.daysUntilWeekend, 3);
   });
 
+  test('endOf', () {
+    final DateTime test = DateTime(2020);
+
+    final DateTime endOfYear = DateTime(2020, 12, 31, 23, 59, 59, 999, 999);
+    final DateTime endOfMonth = DateTime(2020, 1, 31, 23, 59, 59, 999, 999);
+    final DateTime endOfWeek = DateTime(2020, 1, 4, 23, 59, 59, 999, 999);
+    final DateTime endOfDay = DateTime(2020, 1, 1, 23, 59, 59, 999, 999);
+    final DateTime endOfHour = DateTime(2020, 1, 1, 0, 59, 59, 999, 999);
+    final DateTime endOfMinute = DateTime(2020, 1, 1, 0, 0, 59, 999, 999);
+    final DateTime endOfSecond = DateTime(2020, 1, 1, 0, 0, 0, 999, 999);
+
+    expect(test.endOfYear, endOfYear);
+    expect(test.endOfMonth, endOfMonth);
+    expect(test.endOfWeek, endOfWeek);
+    expect(test.endOfDay, endOfDay);
+    expect(test.endOfHour, endOfHour);
+    expect(test.endOfMinute, endOfMinute);
+    expect(test.endOfSecond, endOfSecond);
+  });
+
+  test('startOf', () {
+    final DateTime test = DateTime(2020, 6, 15, 12, 30, 30, 500, 500);
+
+    final DateTime startOfYear = DateTime(2020);
+    final DateTime startOfMonth = DateTime(2020, 6);
+    final DateTime startOfWeek = DateTime(2020, 6, 14);
+    final DateTime startOfDay = DateTime(2020, 6, 15);
+    final DateTime startOfHour = DateTime(2020, 6, 15, 12);
+    final DateTime startOfMinute = DateTime(2020, 6, 15, 12, 30);
+    final DateTime startOfSecond = DateTime(2020, 6, 15, 12, 30, 30);
+
+    expect(test.startOfYear, startOfYear);
+    expect(test.startOfMonth, startOfMonth);
+    expect(test.startOfWeek, startOfWeek);
+    expect(test.startOfDay, startOfDay);
+    expect(test.startOfHour, startOfHour);
+    expect(test.startOfMinute, startOfMinute);
+    expect(test.startOfSecond, startOfSecond);
+  });
+
   test('equivalence', () {
     final DateTime test1 = DateTime(2020);
     final DateTime test2 = DateTime(2020, 1, 1, 12, 30);
