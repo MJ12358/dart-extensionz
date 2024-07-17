@@ -112,4 +112,22 @@ void main() {
     expect(337.5.toCardinal(), Cardinal.northNorthWest);
     expect(360.toCardinal(), Cardinal.north);
   });
+
+  test('toWeekDay', () {
+    final DateTime monday = DateTime(2020, 1, 6);
+    final DateTime tuesday = DateTime(2020, 1, 7);
+    final DateTime wednesday = DateTime(2020, 1, 8);
+    final DateTime thursday = DateTime(2020, 1, 9);
+    final DateTime friday = DateTime(2020, 1, 10);
+    final DateTime saturday = DateTime(2020, 1, 11);
+    final DateTime sunday = DateTime(2020, 1, 12);
+
+    expect(monday.weekday.toWeekDay(), 'Monday');
+    expect(tuesday.weekday.toWeekDay(), 'Tuesday');
+    expect(wednesday.weekday.toWeekDay(), 'Wednesday');
+    expect(thursday.weekday.toWeekDay(), 'Thursday');
+    expect(friday.weekday.toWeekDay(), 'Friday');
+    expect(saturday.weekday.toWeekDay(), 'Saturday');
+    expect(sunday.weekday.toWeekDay(), 'Sunday');
+  });
 }
