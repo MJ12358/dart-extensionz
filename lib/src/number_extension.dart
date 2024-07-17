@@ -35,6 +35,7 @@ extension NumberExtension on num {
     return this == 1;
   }
 
+  /// Delay [callback] for this [num] of seconds.
   Future<dynamic> delay([FutureOr<dynamic> Function()? callback]) async {
     return toSeconds().delay(callback);
   }
@@ -57,6 +58,26 @@ extension NumberExtension on num {
 
   Duration toDays() {
     return Duration(hours: (this * Duration.hoursPerDay).round());
+  }
+
+  String toWeekDay() {
+    switch (this) {
+      case 1:
+        return 'Monday';
+      case 2:
+        return 'Tuesday';
+      case 3:
+        return 'Wednesday';
+      case 4:
+        return 'Thursday';
+      case 5:
+        return 'Friday';
+      case 6:
+        return 'Saturday';
+      case 7:
+        return 'Sunday';
+    }
+    return '';
   }
 
   num stripTrailingZeros() {

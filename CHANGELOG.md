@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.3.4
+
+- Add `toWeekDay` to `NumberExtension`.
+
 ## 6.3.3
 
 - Add `week` getter to `DateTimeExtension`.
