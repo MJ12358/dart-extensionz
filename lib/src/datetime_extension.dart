@@ -44,6 +44,14 @@ extension DateTimeExtension on DateTime {
 
   DateTime get previousYear => clone.copyWith(year: year - 1);
 
+  /// Calculates week number from a date.
+  ///
+  /// https://stackoverflow.com/questions/49393231/how-to-get-day-of-year-week-of-year-from-a-datetime-dart-object
+  int get week {
+    final int day = int.parse(DateFormat('D').format(this));
+    return ((day - weekday + 10) / 7).floor();
+  }
+
   DateTime addMicroseconds(int value) {
     return add(Duration(microseconds: value));
   }
@@ -379,6 +387,7 @@ extension DateTimeExtension on DateTime {
 
   /// Creates a copy of this `DateTime` but with the given fields
   /// replaced with the new values.
+  // This method has been implemented, since 2.19!!!
   DateTime copyWith({
     int? year,
     int? month,
@@ -388,8 +397,9 @@ extension DateTimeExtension on DateTime {
     int? second,
     int? millisecond,
     int? microsecond,
+    bool? isUtc,
   }) {
-    return DateTime(
+    return ((isUtc ?? this.isUtc) ? DateTime.utc : DateTime.new)(
       year ?? this.year,
       month ?? this.month,
       day ?? this.day,

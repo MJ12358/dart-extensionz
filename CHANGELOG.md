@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.3.3
+
+- Add `week` getter to `DateTimeExtension`.
+
 ## 6.3.2
 
 - Fix some datetime issues retrieving `endOf` and `startOf`.

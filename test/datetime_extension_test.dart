@@ -2,6 +2,7 @@ import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
 void main() {
+  final DateTime now = DateTime.now();
   test('main', () {
     final DateTime test1 = DateTime(2020);
     final DateTime test2 = DateTime(2020, 1, 1, 5, 30, 30);
@@ -104,7 +105,6 @@ void main() {
   });
 
   test('timeAgo', () {
-    final DateTime now = DateTime.now();
     final DateTime dt1 = now.add(const Duration(days: -(365 * 3)));
     final DateTime dt2 = now.add(const Duration(days: -366));
     final DateTime dt3 = now.add(const Duration(days: -(365 ~/ 2)));
@@ -124,5 +124,38 @@ void main() {
     expect(dt7.timeAgo, '1 hour ago');
     expect(dt8.timeAgo, '5 minutes ago');
     expect(dt9.timeAgo, 'just now');
+  });
+
+  test('add', () {
+    final DateTime dt1 = now.add(const Duration(microseconds: 99));
+    final DateTime dt2 = now.add(const Duration(milliseconds: 99));
+    final DateTime dt3 = now.add(const Duration(seconds: 59));
+    final DateTime dt4 = now.add(const Duration(minutes: 59));
+    final DateTime dt5 = now.add(const Duration(hours: 23));
+    final DateTime dt6 = now.add(const Duration(days: 5));
+    final DateTime dt7 = now.add(const Duration(days: 20 * 7));
+    final DateTime dt8 = now.add(const Duration(days: 365));
+
+    expect(now.addMicroseconds(99), dt1);
+    expect(now.addMilliseconds(99), dt2);
+    expect(now.addSeconds(59), dt3);
+    expect(now.addMinutes(59), dt4);
+    expect(now.addHours(23), dt5);
+    expect(now.addDays(5), dt6);
+    expect(now.addWeeks(20), dt7);
+    expect(now.addYears(1), dt8);
+  });
+
+  test('week', () {
+    final DateTime dt1 = DateTime(2020);
+    final DateTime dt2 = DateTime(2020, 1, 6);
+    final DateTime dt15 = DateTime(2020, 4, 6);
+    final DateTime dt41 = DateTime(2020, 10, 5);
+    final DateTime dt53 = DateTime(2020, 12, 31);
+    expect(dt1.week, 1);
+    expect(dt2.week, 2);
+    expect(dt15.week, 15);
+    expect(dt41.week, 41);
+    expect(dt53.week, 53);
   });
 }
