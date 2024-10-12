@@ -26,7 +26,12 @@ void main() {
   group('toDateTime', () {
     const String value1 = '01/01/2020';
     const String value2 = '08:30 AM';
-    final DateTime value3 = DateTime(2020);
+
+    test('serialize', () {
+      final DateTime value = DateTime(2020);
+      expect(value.toString().toDateTime(), value);
+    });
+
     test(en_US, () {
       final DateTime? result1 = value1.toDateTime(
         pattern: 'MM/dd/yyyy',
@@ -38,7 +43,6 @@ void main() {
       );
       expect(result1, DateTime(2020));
       expect(result2, DateTime(1970, 1, 1, 8, 30));
-      expect(value3.toString().toDateTime(), value3);
     });
 
     test(en_GB, () {
@@ -52,7 +56,6 @@ void main() {
       );
       expect(result1, DateTime(2020));
       expect(result2, DateTime(1970, 1, 1, 8, 30));
-      expect(value3.toString().toDateTime(), value3);
     });
 
     test(de_DE, () {
@@ -66,7 +69,6 @@ void main() {
       );
       expect(result1, DateTime(2020));
       expect(result2, DateTime(1970, 1, 1, 8, 30));
-      expect(value3.toString().toDateTime(), value3);
     });
 
     test('backCompat', () {

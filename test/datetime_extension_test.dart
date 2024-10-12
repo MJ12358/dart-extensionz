@@ -73,7 +73,6 @@ void main() {
     expect(test1.isToday, false);
     expect(test1.isYesterday, false);
     expect(test1.isTomorrow, false);
-    expect(test1.isLeapYear, true); // 2020 was a leap year
   });
 
   test('season', () {
@@ -157,5 +156,18 @@ void main() {
     expect(dt15.week, 15);
     expect(dt41.week, 41);
     expect(dt53.week, 53);
+  });
+
+  test('leapYear', () {
+    final DateTime dt0 = DateTime(2020);
+    final DateTime dt1 = DateTime(2021);
+    final DateTime dt2 = DateTime(2022);
+    final DateTime dt3 = DateTime(2023);
+    final DateTime dt4 = DateTime(2024);
+    expect(dt0.isLeapYear, true);
+    expect(dt1.isLeapYear, false);
+    expect(dt2.isLeapYear, false);
+    expect(dt3.isLeapYear, false);
+    expect(dt4.isLeapYear, true);
   });
 }

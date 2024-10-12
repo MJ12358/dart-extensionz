@@ -251,7 +251,6 @@ extension IntlNumberExtension on num? {
   /// This uses `Intl.NumberFormat.decimalPatternDigits`.
   ///
   /// Create a number format that prints as DECIMAL_PATTERN.
-  // TODO: rename this to "toDecimal"
   String toDecimalPattern({
     String? locale,
     int? decimalDigits,
@@ -273,7 +272,6 @@ extension IntlNumberExtension on num? {
   /// This uses `Intl.NumberFormat.decimalPercentPattern`.
   ///
   /// Create a number format that prints as PERCENT_PATTERN.
-  // TODO: rename this to "toPercent"
   String toPercentPattern({
     String? locale,
     int? decimalDigits,
@@ -295,7 +293,6 @@ extension IntlNumberExtension on num? {
   /// This uses `Intl.NumberFormat.scientificPattern`.
   ///
   /// Create a number format that prints as SCIENTIFIC_PATTERN.
-  // TODO: rename this to "toScientific"
   String toScientificPattern({
     String? locale,
   }) {
@@ -417,7 +414,9 @@ extension IntlStringExtension on String? {
     final int seconds = _parseTime(time, 'S');
 
     return Duration(
-      days: days + (weeks * 7) + (years * 365),
+      days: days +
+          (weeks * DurationExtension.daysPerWeek) +
+          (years * DurationExtension.daysPerYear),
       hours: hours,
       minutes: minutes,
       seconds: seconds,

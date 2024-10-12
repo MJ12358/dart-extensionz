@@ -17,6 +17,14 @@ void main() {
     expect(nullTest.toBool(), false);
   });
 
+  test('toDuration', () {
+    expect(10.toMilliseconds(), const Duration(milliseconds: 10));
+    expect(10.toSeconds(), const Duration(seconds: 10));
+    expect(10.toMinutes(), const Duration(minutes: 10));
+    expect(10.toHours(), const Duration(hours: 10));
+    expect(10.toDays(), const Duration(days: 10));
+  });
+
   test('stripTrailingZeros', () {
     expect(12.34.stripTrailingZeros(), 12.34);
     expect(12.340.stripTrailingZeros(), 12.34);

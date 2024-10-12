@@ -10,6 +10,25 @@ enum Season {
 
 /// [DateTime] Extension.
 extension DateTimeExtension on DateTime {
+  /// Days in a month. This array uses 1-based month numbers, i.e. January is
+  /// the 1-st element in the array, not the 0-th.
+  static final List<int> _daysInMonth = <int>[
+    0,
+    31,
+    28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+  ];
+
+  /// Clone this [DateTime].
   DateTime get clone =>
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
 
@@ -52,45 +71,57 @@ extension DateTimeExtension on DateTime {
     return ((day - weekday + 10) / 7).floor();
   }
 
+  /// Adds microseconds to this [DateTime].
   DateTime addMicroseconds(int value) {
     return add(Duration(microseconds: value));
   }
 
+  /// Adds milliseconds to this [DateTime].
   DateTime addMilliseconds(int value) {
     return add(Duration(milliseconds: value));
   }
 
+  /// Adds seconds to this [DateTime].
   DateTime addSeconds(int value) {
     return add(Duration(seconds: value));
   }
 
+  /// Adds minutes to this [DateTime].
   DateTime addMinutes(int value) {
     return add(Duration(minutes: value));
   }
 
+  /// Adds hours to this [DateTime].
   DateTime addHours(int value) {
     return add(Duration(hours: value));
   }
 
+  /// Adds days to this [DateTime].
   DateTime addDays(int value) {
     return add(Duration(days: value));
   }
 
+  /// Adds weeks to this [DateTime].
   DateTime addWeeks(int value) {
     return addDays(value * 7);
   }
 
+  /// Adds years to this [DateTime].
   DateTime addYears(int value) {
     return copyWith(year: year + value);
   }
 
+  /// Returns the end of year for this [DateTime].
   DateTime get endOfYear =>
       clone.copyWith(year: year, month: DateTime.december).endOfMonth;
 
+  /// Returns the end of month for this [DateTime].
   DateTime get endOfMonth => DateTime(year, month + 1).addMicroseconds(-1);
 
+  /// Returns the end of week for this [DateTime].
   DateTime get endOfWeek => nextWeek.startOfWeek.addMicroseconds(-1);
 
+  /// Returns the end of day for this [DateTime].
   DateTime get endOfDay => copyWith(
         hour: 23,
         minute: 59,
@@ -99,6 +130,7 @@ extension DateTimeExtension on DateTime {
         microsecond: 999,
       );
 
+  /// Returns the end of hour for this [DateTime].
   DateTime get endOfHour => copyWith(
         minute: 59,
         second: 59,
@@ -106,17 +138,20 @@ extension DateTimeExtension on DateTime {
         microsecond: 999,
       );
 
+  /// Returns the end of minute for this [DateTime].
   DateTime get endOfMinute => copyWith(
         second: 59,
         millisecond: 999,
         microsecond: 999,
       );
 
+  /// Returns the end of second for this [DateTime].
   DateTime get endOfSecond => clone.copyWith(
         millisecond: 999,
         microsecond: 999,
       );
 
+  /// Returns the start of year for this [DateTime].
   DateTime get startOfYear => clone.copyWith(
         month: DateTime.january,
         day: 1,
@@ -127,6 +162,7 @@ extension DateTimeExtension on DateTime {
         microsecond: 0,
       );
 
+  /// Returns the start of month for this [DateTime].
   DateTime get startOfMonth => clone.copyWith(
         day: 1,
         hour: 0,
@@ -136,9 +172,11 @@ extension DateTimeExtension on DateTime {
         microsecond: 0,
       );
 
+  /// Returns the start of week for this [DateTime].
   DateTime get startOfWeek =>
       weekday == DateTime.sunday ? startOfDay : addDays(-weekday).startOfDay;
 
+  /// Returns the start of day for this [DateTime].
   DateTime get startOfDay => clone.copyWith(
         hour: 0,
         minute: 0,
@@ -147,6 +185,7 @@ extension DateTimeExtension on DateTime {
         microsecond: 0,
       );
 
+  /// Returns the start of hour for this [DateTime].
   DateTime get startOfHour => clone.copyWith(
         minute: 0,
         second: 0,
@@ -154,17 +193,20 @@ extension DateTimeExtension on DateTime {
         microsecond: 0,
       );
 
+  /// Returns the start of minute for this [DateTime].
   DateTime get startOfMinute => clone.copyWith(
         second: 0,
         millisecond: 0,
         microsecond: 0,
       );
 
+  /// Returns the start of second for this [DateTime].
   DateTime get startOfSecond => clone.copyWith(
         millisecond: 0,
         microsecond: 0,
       );
 
+  /// Equivalent to a nullable [isAtSameMomentAs].
   bool isSameMoment(DateTime? other) {
     if (other == null) {
       return false;
@@ -241,6 +283,7 @@ extension DateTimeExtension on DateTime {
     return year == now.year && month == now.month && day == now.day + 1;
   }
 
+  /// Returns true if [year] is a leap year.
   bool get isLeapYear {
     if (year % 4 != 0) {
       return false;
@@ -254,6 +297,15 @@ extension DateTimeExtension on DateTime {
     return true;
   }
 
+  /// Returns the number of days in the specified month.
+  int get daysInMonth {
+    if (month == DateTime.february && isLeapYear) {
+      return 29;
+    }
+    return _daysInMonth[month];
+  }
+
+  /// Returns the number of days until the weekend.
   int get daysUntilWeekend {
     if (isWeekend) {
       return 0;
@@ -261,6 +313,7 @@ extension DateTimeExtension on DateTime {
     return DateTime.saturday - weekday;
   }
 
+  /// Returns a [DateTime] that skips the weekend.
   DateTime get skipWeekend {
     switch (day) {
       case DateTime.saturday:
@@ -314,6 +367,7 @@ extension DateTimeExtension on DateTime {
     return result;
   }
 
+  /// Determines if [season] is equal to [this.season].
   bool isInSeason(Season season) => this.season == season;
 
   /// Returns the earliest date
@@ -333,21 +387,24 @@ extension DateTimeExtension on DateTime {
   /// Provides a fuzzy time like '3 years ago'.
   String get timeAgo {
     final Duration diff = DateTime.now().difference(this);
+    const num daysPerYear = DurationExtension.daysPerYear;
+    final num daysPerMonth = _daysInMonth[month];
+    const num daysPerWeek = DurationExtension.daysPerWeek;
 
-    if (diff.inDays > 365) {
-      final int years = (diff.inDays / 365).floor();
+    if (diff.inDays > daysPerYear) {
+      final int years = (diff.inDays / daysPerYear).floor();
       final String s = years == 1 ? 'year' : 'years';
       return '$years $s ago';
     }
 
-    if (diff.inDays > 30) {
-      final int months = (diff.inDays / 30).floor();
+    if (diff.inDays > daysPerMonth) {
+      final int months = (diff.inDays / daysPerMonth).floor();
       final String s = months == 1 ? 'month' : 'months';
       return '$months $s ago';
     }
 
-    if (diff.inDays > 7) {
-      final int weeks = (diff.inDays / 7).floor();
+    if (diff.inDays > daysPerWeek) {
+      final int weeks = (diff.inDays / daysPerWeek).floor();
       final String s = weeks == 1 ? 'week' : 'weeks';
       return '$weeks $s ago';
     }
@@ -385,7 +442,7 @@ extension DateTimeExtension on DateTime {
 
   bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
 
-  /// Creates a copy of this `DateTime` but with the given fields
+  /// Creates a copy of this [DateTime] but with the given fields
   /// replaced with the new values.
   // This method has been implemented, since 2.19!!!
   DateTime copyWith({

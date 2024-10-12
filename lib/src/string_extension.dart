@@ -52,6 +52,14 @@ extension StringExtension on String {
   /// Whether this [String] is not digits or alphabetic.
   bool get isNotAlphanumeric => !isAlphanumeric;
 
+  /// Whether this [String] is ASCII.
+  /// Code units/char codes less than or equal to 127.
+  bool get isAscii {
+    return split('')
+        .map((String e) => e.codeUnitAt(0))
+        .every((int f) => f <= 127);
+  }
+
   /// Get the line length of this [String].
   int get lineLength => '\n'.allMatches(this).length + 1;
 

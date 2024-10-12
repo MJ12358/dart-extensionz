@@ -96,6 +96,7 @@ void main() {
     expect('123'.isNumeric, true);
     expect('A1B2C3'.isNumeric, false);
     expect('ABC'.isNumeric, false);
+    expect('abc'.isNumeric, false);
     expect(r'$&@!'.isNumeric, false);
   });
 
@@ -103,7 +104,17 @@ void main() {
     expect('123'.isAlpha, false);
     expect('A1B2C3'.isAlpha, false);
     expect('ABC'.isAlpha, true);
+    expect('abc'.isAlpha, true);
     expect(r'$&@!'.isAlpha, false);
+  });
+
+  test('isAscii', () {
+    expect(''.isAscii, true);
+    expect('Test'.isAscii, true);
+    expect('ZZZ'.isAscii, true);
+    expect(r'`!@#$%^&*()'.isAscii, true);
+    expect('©'.isAscii, false);
+    expect('Ÿ'.isAscii, false);
   });
 
   test('lineLength', () {

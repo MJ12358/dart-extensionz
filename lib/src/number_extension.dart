@@ -36,26 +36,31 @@ extension NumberExtension on num {
   }
 
   /// Delay [callback] for this [num] of seconds.
-  Future<dynamic> delay([FutureOr<dynamic> Function()? callback]) async {
-    return toSeconds().delay(callback);
+  Future<T> delay<T>([FutureOr<T> Function()? callback]) async {
+    return toSeconds().delay<T>(callback);
   }
 
+  /// Convert this [num] in milliseconds to a [Duration].
   Duration toMilliseconds() {
     return Duration(microseconds: (this * 1000).round());
   }
 
+  /// Convert this [num] in seconds to a [Duration].
   Duration toSeconds() {
     return Duration(milliseconds: (this * 1000).round());
   }
 
+  /// Convert this [num] in minutes to a [Duration].
   Duration toMinutes() {
     return Duration(seconds: (this * Duration.secondsPerMinute).round());
   }
 
+  /// Convert this [num] in hours to a [Duration].
   Duration toHours() {
     return Duration(minutes: (this * Duration.minutesPerHour).round());
   }
 
+  /// Convert this [num] in days to a [Duration].
   Duration toDays() {
     return Duration(hours: (this * Duration.hoursPerDay).round());
   }
@@ -157,9 +162,9 @@ extension NumberExtension on num {
       return toString();
     }
 
-    final int exp = (math.log(this) / math.log(1000)).floor();
-    final String size = (this / math.pow(1000, exp)).toStringAsFixed(decimals);
-    return '$size$delimeter${suffixes[exp]}';
+    final int i = (math.log(this) / math.log(1000)).floor();
+    final String size = (this / math.pow(1000, i)).toStringAsFixed(decimals);
+    return '$size$delimeter${suffixes[i]}';
   }
 
   /// Receive a string with this number suffixed.
@@ -186,7 +191,7 @@ extension NumberExtension on num {
     }
 
     if (this <= 0) {
-      return '0${delimeter}B';
+      return '0$delimeter${suffixes[0]}';
     }
 
     final int i = (math.log(this) / math.log(1024)).floor();

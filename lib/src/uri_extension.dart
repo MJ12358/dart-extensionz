@@ -2,6 +2,7 @@ part of dart_extensionz;
 
 /// [Uri] Extension.
 extension UriExtension on Uri {
+  /// Adds a path to this [Uri].
   Uri addPath(String value) {
     final List<String> segments = List<String>.of(pathSegments);
     segments.add(value);
@@ -10,6 +11,7 @@ extension UriExtension on Uri {
     );
   }
 
+  /// Adds a query to this [Uri].
   Uri addQuery(String key, String value) {
     final Map<String, String> parameters =
         Map<String, String>.of(queryParameters);
@@ -33,6 +35,8 @@ extension UriExtension on Uri {
       queryParameters.isNotEmpty ? queryParameters : null;
   String? get _fragment => fragment;
 
+  /// Creates a copy of this [Uri] but with the given fields
+  /// replaced with the new values.
   Uri copyWith({
     String? scheme,
     String? userInfo,

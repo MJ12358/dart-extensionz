@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## 6.3.5
+
+- Add `isAscii` to `StringExtension`.
+- Add `daysInMonth` to `DateTimeExtension`.
+
 ## 6.3.4
 
 - Add `toWeekDay` to `NumberExtension`.
