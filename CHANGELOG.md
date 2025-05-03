@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## 6.4.0
+
+- Add `FileType` extension lists.
+
 ## 6.3.5
 
 - Add `isAscii` to `StringExtension`.

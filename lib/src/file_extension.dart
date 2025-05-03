@@ -7,7 +7,46 @@ enum FileType {
   video,
   audio,
   text,
-  unknown,
+  unknown;
+
+  static List<String> get imageExtensions => <String>[
+        'jpg',
+        'jpeg',
+        'png',
+        'gif',
+        'bmp',
+        'tiff',
+        'webp',
+      ];
+
+  static List<String> get videoExtensions => <String>[
+        'mp4',
+        'avi',
+        'mkv',
+        'mov',
+        'wmv',
+        'flv',
+        'webm',
+      ];
+
+  static List<String> get audioExtensions => <String>[
+        'mp3',
+        'wav',
+        'aac',
+        'ogg',
+        'flac',
+        'm4a',
+      ];
+
+  static List<String> get textExtensions => <String>[
+        'txt',
+        'csv',
+        'json',
+        'xml',
+        'html',
+        'css',
+        'js',
+      ];
 }
 
 /// [File] Extension.
@@ -61,16 +100,20 @@ extension FileExtension on File {
   /// Get the file type as an enum.
   FileType get type {
     final String mimeType = this.mimeType;
-    if (mimeType.startsWith('image/')) {
+    if (FileType.imageExtensions.contains(extension) ||
+        mimeType.startsWith('image/')) {
       return FileType.image;
     }
-    if (mimeType.startsWith('video/')) {
+    if (FileType.videoExtensions.contains(extension) ||
+        mimeType.startsWith('video/')) {
       return FileType.video;
     }
-    if (mimeType.startsWith('audio/')) {
+    if (FileType.audioExtensions.contains(extension) ||
+        mimeType.startsWith('audio/')) {
       return FileType.audio;
     }
-    if (mimeType.startsWith('text/')) {
+    if (FileType.textExtensions.contains(extension) ||
+        mimeType.startsWith('text/')) {
       return FileType.text;
     }
     return FileType.unknown;
