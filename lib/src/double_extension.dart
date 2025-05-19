@@ -35,10 +35,8 @@ extension DoubleExtension on double {
     switch (mode) {
       case RoundingMode.ceiling:
         temp = (this * mod).ceil();
-        break;
       case RoundingMode.floor:
         temp = (this * mod).floor();
-        break;
       case RoundingMode.half:
       default:
         temp = (this * mod).round();

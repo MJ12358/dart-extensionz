@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## 7.0.0
+
+- Update dependencies.
+- Raise minimum dart version.
+
 ## 6.4.0
 
 - Add `FileType` extension lists.

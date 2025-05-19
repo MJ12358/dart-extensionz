@@ -81,8 +81,9 @@ extension NumberExtension on num {
         return 'Saturday';
       case 7:
         return 'Sunday';
+      case num():
+        return '';
     }
-    return '';
   }
 
   num stripTrailingZeros() {

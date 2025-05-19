@@ -339,17 +339,14 @@ extension DateTimeExtension on DateTime {
       case DateTime.february:
       case DateTime.march:
         result = Season.winter;
-        break;
       case DateTime.april:
       case DateTime.may:
       case DateTime.june:
         result = Season.spring;
-        break;
       case DateTime.july:
       case DateTime.august:
       case DateTime.september:
         result = Season.summer;
-        break;
       default:
         result = Season.autumn;
     }
