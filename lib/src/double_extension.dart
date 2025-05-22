@@ -38,7 +38,6 @@ extension DoubleExtension on double {
       case RoundingMode.floor:
         temp = (this * mod).floor();
       case RoundingMode.half:
-      default:
         temp = (this * mod).round();
     }
 

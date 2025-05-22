@@ -1,6 +1,6 @@
 # Dart Extensionz
 
-## 7.0.1
+## 7.0.2
 
 - Update dependencies.
 - Raise minimum dart version.
