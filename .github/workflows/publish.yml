@@ -1,0 +1,73 @@
+name: Publish to pub.dev
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+  workflow_dispatch:
+
+jobs:
+  publish:
+
+    permissions:
+      contents: write
+      id-token: write # Required for authentication using OIDC
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Read pubspec for version number
+      - name: Get Version
+        id: version
+        uses: KJ002/read-yaml@main
+        with:
+          file: "./pubspec.yaml"
+          key-path: '["version"]'
+
+      # Get release notes
+      - name: Get Release Notes
+        id: release_notes
+        uses: kiyoon/parse-changelog-action@v1
+        with:
+          changelog-file-path: CHANGELOG.md
+          version: ${{ steps.version.outputs.data }}
+
+      # Get Dart
+      - name: Install Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      # Get Dart dependencies
+      - name: Install dependencies
+        run: dart pub get
+
+      # Run linter
+      - name: Analyze
+        run: dart analyze
+
+      # Run tests
+      - name: Run tests
+        run: dart test
+        
+      # Get pub.dev credentials
+      - uses: flutter-actions/setup-pubdev-credentials@v1
+
+      # Check if the package is ready to be published
+      - name: Check Publish Warnings
+        run: dart pub publish --dry-run
+
+      # Publish the package to pub.dev
+      - name: Publish Package
+        run: dart pub publish -f
+
+      # Create a release in GitHub
+      - name: Create Release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ steps.version.outputs.data }}
+          commit: ${{ github.sha }}
+          body: ${{ steps.release_notes.outputs.body }}
