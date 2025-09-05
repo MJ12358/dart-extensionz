@@ -427,6 +427,16 @@ extension DateTimeExtension on DateTime {
     return 'just now';
   }
 
+  /// Subtracts the milliseconds and microseconds from this [DateTime].
+  DateTime get minusMilliMicro {
+    return subtract(
+      Duration(
+        milliseconds: millisecond,
+        microseconds: microsecond,
+      ),
+    );
+  }
+
   DateTime operator +(Duration duration) => add(duration);
 
   DateTime operator -(Duration duration) => subtract(duration);

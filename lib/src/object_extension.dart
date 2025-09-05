@@ -117,7 +117,7 @@ extension ObjectExtension on Object {
 /// Nullable [Object] Extension.
 extension NullableObjectExtension on Object? {
   /// Determines if this [Object] is empty.
-  bool get isEmpty => this == null || this!.isBlank;
+  bool get isEmpty => this == null || this!.isEmpty;
 
   /// Determines if this [Object] is blank.
   bool get isBlank => this == null || this!.isBlank;

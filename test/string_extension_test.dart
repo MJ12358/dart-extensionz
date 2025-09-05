@@ -187,4 +187,65 @@ void main() {
     expect(value.mask(), '####ing');
     expect(value.mask(end: value.length, char: '*'), '*******');
   });
+
+  test('wordToNumber', () {
+    final Map<String, int> result = <String, int>{
+      'one': 1,
+      'two': 2,
+      'three': 3,
+      'four': 4,
+      'five': 5,
+      'six': 6,
+      'seven': 7,
+      'eight': 8,
+      'nine': 9,
+      'ten': 10,
+      'eleven': 11,
+      'twelve': 12,
+      'thirteen': 13,
+      'fourteen': 14,
+      'fifteen': 15,
+      'sixteen': 16,
+      'seventeen': 17,
+      'eighteen': 18,
+      'nineteen': 19,
+      'twenty': 20,
+      'twenty one': 21,
+      'twenty two': 22,
+      'twenty three': 23,
+      'twenty four': 24,
+      'twenty five': 25,
+      'twenty six': 26,
+      'twenty seven': 27,
+      'twenty eight': 28,
+      'twenty nine': 29,
+      'thirty': 30,
+      'thirty three': 33,
+      'forty': 40,
+      'forty four': 44,
+      'fifty': 50,
+      'fifty five': 55,
+      'sixty': 60,
+      'sixty six': 66,
+      'seventy': 70,
+      'seventy seven': 77,
+      'eighty': 80,
+      'eighty eight': 88,
+      'ninety': 90,
+      'ninety nine': 99,
+      'one hundred': 100,
+      'one hundred five': 105,
+      'one hundred and five': 105,
+      'two hundred two': 202,
+      'two hundred and two': 202,
+      'one thousand thirty two': 1032,
+      'two thousand thirty two': 2032,
+      'one million one hundred thirty two': 1000132,
+      'two million two hundred and thirty two': 2000232,
+      'one billion one million one thousand one hundred thirty two': 1001001132,
+    };
+    for (final MapEntry<String, int> me in result.entries) {
+      expect(me.key.wordToNumber(), me.value);
+    }
+  });
 }

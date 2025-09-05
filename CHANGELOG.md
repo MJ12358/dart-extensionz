@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## [7.1.0]
+
+- Add `wordToNumber` to `StringExtension`.
+- Add `minusMilliMicro` to `DateTimeExtension`.
+- Fix `ObjectExtension` `isEmpty` to utilize Dart.
+
 ## [7.0.2]
 
 - Update dependencies.
