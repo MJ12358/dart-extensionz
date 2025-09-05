@@ -1,73 +1,65 @@
-name: Publish to pub.dev
+name: Publish
 
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
-  workflow_dispatch:
+      - 'v[0-9]+.[0-9]+.[0-9]+' # tag-pattern on pub.dev: 'v{{version}}'
 
 jobs:
   publish:
 
     permissions:
-      contents: write
+      contents: write # Required to update releases
       id-token: write # Required for authentication using OIDC
     
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repo
+        uses: actions/checkout@v4
 
-      # Read pubspec for version number
-      - name: Get Version
-        id: version
-        uses: KJ002/read-yaml@main
+      - name: Read pubspec.yaml
+        id: pubspec
+        uses: nichmor/minimal-read-yaml@v0.0.2
         with:
-          file: "./pubspec.yaml"
-          key-path: '["version"]'
+          config: "./pubspec.yaml"
 
-      # Get release notes
       - name: Get Release Notes
         id: release_notes
         uses: kiyoon/parse-changelog-action@v1
         with:
           changelog-file-path: CHANGELOG.md
-          version: ${{ steps.version.outputs.data }}
+          version: ${{ steps.pubspec.outputs['version'] }}
 
-      # Get Dart
-      - name: Install Dart
+      - name: Setup Dart
         uses: dart-lang/setup-dart@v1
         with:
           sdk: stable
 
-      # Get Dart dependencies
-      - name: Install dependencies
+      - name: Get dependencies
         run: dart pub get
 
-      # Run linter
       - name: Analyze
         run: dart analyze
 
-      # Run tests
       - name: Run tests
         run: dart test
         
-      # Get pub.dev credentials
-      - uses: flutter-actions/setup-pubdev-credentials@v1
+      - name: Get pub.dev Credentials
+        uses: flutter-actions/setup-pubdev-credentials@v1
 
-      # Check if the package is ready to be published
       - name: Check Publish Warnings
         run: dart pub publish --dry-run
 
-      # Publish the package to pub.dev
       - name: Publish Package
         run: dart pub publish -f
 
-      # Create a release in GitHub
-      - name: Create Release in GitHub
+      - name: Create Release
         uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
+          replacesArtifacts: false
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ steps.version.outputs.data }}
+          tag: v${{ steps.pubspec.outputs['version'] }}
           commit: ${{ github.sha }}
           body: ${{ steps.release_notes.outputs.body }}
