@@ -316,8 +316,11 @@ extension StringExtension on String {
   }
 }
 
+/// Convert [String] words to [num] Numbers.
 extension WordToNumber on String {
   static final Map<String, int> _wordByNumber = <String, int>{
+    'o': 0,
+    'oh': 0,
     'zero': 0,
     'one': 1,
     'two': 2,
@@ -356,16 +359,39 @@ extension WordToNumber on String {
     'trillion': 1000000000000,
   };
 
-  int? wordToNumber() {
-    final List<String> words = toLowerCase().split(RegExp(r'\s+|-'));
+  static final List<String> _decimals = <String>[
+    'point',
+    'dot',
+    'decimal',
+  ];
+
+  /// Converts English number words to numeric values
+  num? wordToNumber() {
+    final List<String> words = toLowerCase()
+        .replaceAll(RegExp(r'[^a-z\s\-\.]'), '')
+        .split(RegExp(r'\s+|-'))
+        .where((String word) => word.isNotEmpty)
+        .toList();
+
+    // Check for decimal point
+    final int decimalIndex = words.indexWhere(
+      (String word) => _decimals.contains(word) || word == '.',
+    );
+
+    if (decimalIndex != -1) {
+      return _parseDecimalNumber(words, decimalIndex);
+    } else {
+      return _parseInteger(words);
+    }
+  }
+
+  /// Parses integer numbers (without decimal points)
+  int? _parseInteger(List<String> words) {
     int result = 0;
     int current = 0;
     bool isValid = false;
 
     for (final String word in words) {
-      if (word.isEmpty) {
-        continue;
-      }
       if (_wordByNumber.containsKey(word)) {
         current += _wordByNumber[word]!;
         isValid = true;
@@ -381,5 +407,52 @@ extension WordToNumber on String {
     }
 
     return isValid ? result + current : null;
+  }
+
+  /// Parses decimal numbers
+  num? _parseDecimalNumber(List<String> words, int decimalIndex) {
+    final List<String> integerPart = words.sublist(0, decimalIndex);
+    final List<String> decimalPart = words.sublist(decimalIndex + 1);
+
+    // Parse integer part
+    final int? integerValue = _parseInteger(integerPart);
+    if (integerValue == null) {
+      return null;
+    }
+
+    // Parse decimal part
+    final num? decimalValue = _parseDecimalPart(decimalPart);
+
+    if (decimalValue == null) {
+      return null;
+    } else {
+      return integerValue + decimalValue;
+    }
+  }
+
+  /// Parses the decimal portion (digits after the point)
+  num? _parseDecimalPart(List<String> words) {
+    if (words.isEmpty) {
+      return 0.0;
+    }
+
+    String decimalString = '';
+
+    for (final String word in words) {
+      if (!_wordByNumber.containsKey(word)) {
+        return null; // Unknown word in decimal part
+      }
+      final int digit = _wordByNumber[word]!;
+      // Convert the number to string and add each digit individually
+      final String numberString = digit.toString();
+      // ignore: use_string_buffers
+      decimalString += numberString;
+    }
+
+    try {
+      return double.parse('0.$decimalString');
+    } catch (e) {
+      return null;
+    }
   }
 }

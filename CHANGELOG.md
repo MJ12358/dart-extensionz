@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [7.1.2]
+
+- Fix `wordToNumber` to accomidate decimals.
+
 ## [7.1.1]
 
 - Modify `wordToNumber` to output null incase of an invalid string.

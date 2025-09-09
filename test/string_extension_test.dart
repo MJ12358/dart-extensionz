@@ -189,15 +189,21 @@ void main() {
   });
 
   test('wordToNumber', () {
-    final Map<String, int?> result = <String, int?>{
+    final Map<String, num?> result = <String, num?>{
       '': null,
       'null': null,
       'invalid': null,
       'zero': 0,
       'one': 1,
+      'one point one': 1.1,
+      'one point oh one': 1.01,
       'two': 2,
+      'two dot two': 2.2,
       'three': 3,
+      'three decimal three': 3.3,
       'four': 4,
+      'four point one four': 4.14,
+      'four point fourteen': 4.14,
       'five': 5,
       'six': 6,
       'seven': 7,
@@ -213,6 +219,8 @@ void main() {
       'seventeen': 17,
       'eighteen': 18,
       'nineteen': 19,
+      'nineteen point nine': 19.9,
+      'nineteen dot nineteen': 19.19,
       'twenty': 20,
       'twenty one': 21,
       'twenty two': 22,
@@ -223,6 +231,7 @@ void main() {
       'twenty seven': 27,
       'twenty eight': 28,
       'twenty nine': 29,
+      'twenty nine dot nine': 29.9,
       'thirty': 30,
       'thirty three': 33,
       'forty': 40,
@@ -238,11 +247,16 @@ void main() {
       'ninety': 90,
       'ninety nine': 99,
       'one hundred': 100,
+      'one hundred point one': 100.1,
       'one hundred five': 105,
       'one hundred and five': 105,
+      'one hundred five point nineteen': 105.19,
       'two hundred two': 202,
       'two hundred and two': 202,
+      'two hundred and two dot one six': 202.16,
+      'two hundred two point sixteen': 202.16,
       'one thousand thirty two': 1032,
+      'one thousand and thirty two point eighteen': 1032.18,
       'two thousand thirty two': 2032,
       'one million one hundred thirty two': 1000132,
       'two million two hundred and thirty two': 2000232,
@@ -250,7 +264,7 @@ void main() {
       'six trillion five billion four million three thousand two hundred ten':
           6005004003210,
     };
-    for (final MapEntry<String, int?> me in result.entries) {
+    for (final MapEntry<String, num?> me in result.entries) {
       expect(me.key.wordToNumber(), me.value);
     }
   });
