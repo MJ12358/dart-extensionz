@@ -189,7 +189,11 @@ void main() {
   });
 
   test('wordToNumber', () {
-    final Map<String, int> result = <String, int>{
+    final Map<String, int?> result = <String, int?>{
+      '': null,
+      'null': null,
+      'invalid': null,
+      'zero': 0,
       'one': 1,
       'two': 2,
       'three': 3,
@@ -243,8 +247,10 @@ void main() {
       'one million one hundred thirty two': 1000132,
       'two million two hundred and thirty two': 2000232,
       'one billion one million one thousand one hundred thirty two': 1001001132,
+      'six trillion five billion four million three thousand two hundred ten':
+          6005004003210,
     };
-    for (final MapEntry<String, int> me in result.entries) {
+    for (final MapEntry<String, int?> me in result.entries) {
       expect(me.key.wordToNumber(), me.value);
     }
   });

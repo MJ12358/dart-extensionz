@@ -353,16 +353,22 @@ extension WordToNumber on String {
     'thousand': 1000,
     'million': 1000000,
     'billion': 1000000000,
+    'trillion': 1000000000000,
   };
 
-  int wordToNumber() {
+  int? wordToNumber() {
     final List<String> words = toLowerCase().split(RegExp(r'\s+|-'));
     int result = 0;
     int current = 0;
+    bool isValid = false;
 
     for (final String word in words) {
+      if (word.isEmpty) {
+        continue;
+      }
       if (_wordByNumber.containsKey(word)) {
         current += _wordByNumber[word]!;
+        isValid = true;
       } else if (_multipliers.containsKey(word)) {
         final int multiplier = _multipliers[word]!;
         if (current == 0) {
@@ -370,9 +376,10 @@ extension WordToNumber on String {
         }
         result += current * multiplier;
         current = 0;
+        isValid = true;
       }
     }
 
-    return result + current;
+    return isValid ? result + current : null;
   }
 }

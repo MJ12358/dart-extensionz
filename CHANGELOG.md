@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [7.1.1]
+
+- Modify `wordToNumber` to output null incase of an invalid string.
+
 ## [7.1.0]
 
 - Add `wordToNumber` to `StringExtension`.
