@@ -117,6 +117,15 @@ void main() {
     expect('Ÿ'.isAscii, false);
   });
 
+  test('isNull', () {
+    expect('null'.isNull, true);
+    expect('nil'.isNull, true);
+    expect('nill'.isNull, true);
+    expect('nullptr'.isNull, true);
+    expect('test'.isNull, false);
+    expect('this is null'.isNull, false);
+  });
+
   test('lineLength', () {
     const String test0 = 'No Lines Here';
     const String test1 = 'T\n';
@@ -189,6 +198,7 @@ void main() {
   });
 
   test('wordToNumber', () {
+    // ignore: lines_longer_than_80_chars
     final Map<String, num?> result = <String, num?>{
       '': null,
       'null': null,
@@ -257,10 +267,18 @@ void main() {
       'two hundred two point sixteen': 202.16,
       'one thousand thirty two': 1032,
       'one thousand and thirty two point eighteen': 1032.18,
+      'twelve hundred point eighteen': 1200.18,
       'two thousand thirty two': 2032,
+      'two thousand two hundred thirty six': 2236,
+      'twenty two hundred thirty six': 2236,
+      'thirty six hundred thirty six': 3636,
+      'one hundred thousand two hundred thirty two': 100232,
+      'two hundred thirty two thousand two hundred thirty two': 232232,
       'one million one hundred thirty two': 1000132,
       'two million two hundred and thirty two': 2000232,
       'one billion one million one thousand one hundred thirty two': 1001001132,
+      'three hundred billion two hundred million one hundred thousand thirty two':
+          300200100032,
       'six trillion five billion four million three thousand two hundred ten':
           6005004003210,
     };
