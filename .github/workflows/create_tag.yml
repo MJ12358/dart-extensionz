@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'CHANGELOG.md'
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
