@@ -277,6 +277,7 @@ void main() {
       'one million one hundred thirty two': 1000132,
       'two million two hundred and thirty two': 2000232,
       'one billion one million one thousand one hundred thirty two': 1001001132,
+      // ignore: lines_longer_than_80_chars
       'three hundred billion two hundred million one hundred thousand thirty two':
           300200100032,
       'six trillion five billion four million three thousand two hundred ten':

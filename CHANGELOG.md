@@ -1,6 +1,6 @@
 # Dart Extensionz
 
-## [7.1.3]
+## [7.1.4]
 
 - Fix `wordToNumber` to accomidate multipliers in integer spaces.
 
