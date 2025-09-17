@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [7.1.5]
+
+- Fix `levenshtein` when working with large strings.
+
 ## [7.1.4]
 
 - Fix `wordToNumber` to accomidate multipliers in integer spaces.

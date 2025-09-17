@@ -145,6 +145,8 @@ void main() {
     expect('kitten'.levenshtein('sitting'), 3);
     expect('saturday'.levenshtein('sunday'), 3);
     expect('rosettacode'.levenshtein('raisethysword'), 8);
+    expect('hello world'.levenshtein('world hello'), 8);
+    expect('abcdefghijklm'.levenshtein('nopqrstuvwxyz'), 13);
   });
 
   test('repeat', () {

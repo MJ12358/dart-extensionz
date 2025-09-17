@@ -192,8 +192,6 @@ extension StringExtension on String {
   /// The Levenshtein distance between two strings is defined as
   /// the minimum number of edits needed to transform one string into the other.
   int levenshtein(String other) {
-    // if either string is empty,
-    // difference is inserting all chars from the other
     if (isEmpty) {
       return other.length;
     }
@@ -201,29 +199,40 @@ extension StringExtension on String {
       return length;
     }
 
-    // if first letters are the same, the difference is whatever is
-    // required to edit the rest of the strings
-    if (this[0] == other[0]) {
-      return substring(1).levenshtein(other.substring(1));
+    final String s1 = this;
+    final String s2 = other;
+    final int m = s1.length;
+    final int n = s2.length;
+
+    // Create a DP table
+    final List<List<int>> dp =
+        List<List<int>>.generate(m + 1, (int i) => List<int>.filled(n + 1, 0));
+
+    // Initialize first row and column
+    for (int i = 0; i <= m; i++) {
+      dp[i][0] = i;
+    }
+    for (int j = 0; j <= n; j++) {
+      dp[0][j] = j;
     }
 
-    // else try:
-    //      changing first letter of [this] to that of [other],
-    //      remove first letter of [this], or
-    //      remove first letter of [other]
-    int a = substring(1).levenshtein(other.substring(1));
-    final int b = levenshtein(other.substring(1));
-    final int c = substring(1).levenshtein(other);
-
-    if (a > b) {
-      a = b;
+    // Fill the DP table
+    for (int i = 1; i <= m; i++) {
+      for (int j = 1; j <= n; j++) {
+        if (s1[i - 1] == s2[j - 1]) {
+          dp[i][j] = dp[i - 1][j - 1];
+        } else {
+          dp[i][j] = 1 +
+              <int>[
+                dp[i - 1][j], // deletion
+                dp[i][j - 1], // insertion
+                dp[i - 1][j - 1], // substitution
+              ].reduce((int a, int b) => a < b ? a : b);
+        }
+      }
     }
-    if (a > c) {
-      a = c;
-    }
 
-    // any of which is 1 edit plus editing the rest of the strings
-    return a + 1;
+    return dp[m][n];
   }
 
   /// Repeat a string a number of [times] with a [separator].
