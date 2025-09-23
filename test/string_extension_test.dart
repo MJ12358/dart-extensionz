@@ -200,15 +200,19 @@ void main() {
   });
 
   test('wordToNumber', () {
-    // ignore: lines_longer_than_80_chars
     final Map<String, num?> result = <String, num?>{
       '': null,
       'null': null,
       'invalid': null,
       'zero': 0,
+      'point five': 0.5,
+      'dot five': 0.5,
+      'zero point five': 0.5,
       'one': 1,
-      'one point one': 1.1,
       'one point oh one': 1.01,
+      'one point zero one': 1.01,
+      'one point one': 1.1,
+      'one dot one': 1.1,
       'two': 2,
       'two dot two': 2.2,
       'three': 3,

@@ -395,7 +395,8 @@ extension WordToNumber on String {
         .indexWhere((String word) => _decimals.contains(word) || word == '.');
 
     if (decimalIndex != -1) {
-      final int? intPart = _parseInteger(words.sublist(0, decimalIndex));
+      final int? intPart =
+          decimalIndex > 0 ? _parseInteger(words.sublist(0, decimalIndex)) : 0;
       final double? deciPart = _parseDecimal(words.sublist(decimalIndex + 1));
       return intPart != null && deciPart != null ? intPart + deciPart : null;
     } else {

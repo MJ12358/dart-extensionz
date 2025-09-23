@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [7.1.6]
+
+- Fix `wordToNumber` to account for empty integer part when handling decimals.
+
 ## [7.1.5]
 
 - Fix `levenshtein` when working with large strings.
