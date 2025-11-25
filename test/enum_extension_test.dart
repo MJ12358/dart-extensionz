@@ -80,8 +80,14 @@ void main() {
   });
 
   test('get', () {
-    final TestEnum t = TestEnum.values.get('helloworld');
-    expect(t, TestEnum.helloWorld);
+    expect(TestEnum.values.get(null), null);
+    expect(TestEnum.values.get(''), null);
+    expect(TestEnum.values.get('one'), TestEnum.one);
+    expect(TestEnum.values.get('One'), TestEnum.one);
+    expect(TestEnum.values.get('ONE'), TestEnum.one);
+    expect(TestEnum.values.get('oNe'), TestEnum.one);
+    expect(TestEnum.values.get('   one   '), TestEnum.one);
+    expect(TestEnum.values.get('helloworld'), TestEnum.helloWorld);
     expect(TestEnum.values.get('helloWorld'), TestEnum.helloWorld);
     expect(TestEnum.values.get('helloworld'), TestEnum.helloWorld);
     expect(TestEnum.values.get('hello world'), TestEnum.helloWorld);

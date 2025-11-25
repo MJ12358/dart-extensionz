@@ -12,7 +12,7 @@ extension IterableExtension<T> on Iterable<T> {
 
     for (int i = 0; i < len; i += chunkSize) {
       final int start = i > len ? i - len : i;
-      yield skip(start).take(chunkSize).toList();
+      yield skip(start).take(chunkSize).toList(growable: false);
     }
   }
 

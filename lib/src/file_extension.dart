@@ -151,7 +151,7 @@ extension FileExtension on File {
     // list the files that match the incoming [displayName]
     final List<File> fileList = dirList.files
         .where((File e) => e.displayName.contains(displayName))
-        .toList();
+        .toList(growable: false);
 
     final int count = fileList.length;
 

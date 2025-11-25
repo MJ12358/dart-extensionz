@@ -19,14 +19,14 @@ extension EnumsExtension<T> on Iterable<Enum> {
   /// Get all enum labels as a list.
   ///
   /// See `label` getter for details on what defines a label.
-  List<String> get labels => map((Enum e) => e.label).toList();
+  List<String> get labels => map((Enum e) => e.label).toList(growable: false);
 
   /// Get all enum names as a list.
-  List<String> get names => asNameMap().keys.toList();
+  List<String> get names => asNameMap().keys.toList(growable: false);
 
   /// Sort enums alphabetically.
   List<Enum> get alphabetical {
-    final List<Enum> results = toList();
+    final List<Enum> results = toList(growable: false);
     results.sort((Enum a, Enum b) {
       return a.name.toLowerCase().compareTo(b.name.toLowerCase());
     });
@@ -36,19 +36,20 @@ extension EnumsExtension<T> on Iterable<Enum> {
   /// Get an enum from a [String].
   ///
   /// Works like [byName] except won't throw if not found
-  /// and allows fuzzy string matching.
+  /// and allows fuzzy string matching by removing spaces and underscores.
   T? get(String? element) {
     if (element == null) {
       return null;
     }
-    final String value = element
-        .replaceAll(RegExp(' +'), '')
-        .replaceAll(RegExp('_+'), '')
-        .toLowerCase();
+
+    final String value =
+        element.replaceAll(RegExp(r'[\s_]+'), '').toLowerCase();
+
     final Map<String, Enum> map = asNameMap().map(
       (String key, Enum value) =>
           MapEntry<String, Enum>(key.toLowerCase(), value),
     );
+
     return map[value] as T?;
   }
 }
@@ -75,7 +76,8 @@ extension NullableEnumsExtension<T> on Iterable<Enum?>? {
     if (this == null) {
       return <String>[];
     }
-    final Iterable<Enum> result = this!.toList().whereType<Enum>();
+    final Iterable<Enum> result =
+        this!.toList(growable: false).whereType<Enum>();
     return result.isEmpty ? <String>[] : result.labels;
   }
 
@@ -87,7 +89,8 @@ extension NullableEnumsExtension<T> on Iterable<Enum?>? {
     if (this == null) {
       return <String>[];
     }
-    final Iterable<Enum> result = this!.toList().whereType<Enum>();
+    final Iterable<Enum> result =
+        this!.toList(growable: false).whereType<Enum>();
     return result.isEmpty ? <String>[] : result.names;
   }
 }

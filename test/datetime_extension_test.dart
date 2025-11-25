@@ -15,6 +15,53 @@ void main() {
     expect(test2.daysUntilWeekend, 3);
   });
 
+  test('nextDay', () {
+    final DateTime test = DateTime(2020);
+    final DateTime nextDay = DateTime(2020, 1, 2);
+    expect(test.nextDay, nextDay);
+  });
+
+  test('previousDay', () {
+    final DateTime test = DateTime(2020);
+    final DateTime previousDay = DateTime(2019, 12, 31);
+    expect(test.previousDay, previousDay);
+  });
+
+  test('nextMonth', () {
+    final DateTime test = DateTime(2020, 3, 15);
+    final DateTime nextMonth = DateTime(2020, 4, 15);
+    expect(test.nextMonth, nextMonth);
+  });
+
+  test('previousMonth', () {
+    final DateTime test = DateTime(2020, 3, 15);
+    final DateTime previousMonth = DateTime(2020, 2, 15);
+    expect(test.previousMonth, previousMonth);
+  });
+
+  test('nextYear', () {
+    final DateTime test = DateTime(2020, 3, 15);
+    final DateTime nextYear = DateTime(2021, 3, 15);
+    expect(test.nextYear, nextYear);
+  });
+
+  test('previousYear', () {
+    final DateTime test = DateTime(2020, 3, 15);
+    final DateTime previousYear = DateTime(2019, 3, 15);
+    expect(test.previousYear, previousYear);
+  });
+
+  test('week', () {
+    final DateTime test = DateTime(2020);
+    final DateTime nextWeek = DateTime(2020, 1, 8);
+    final DateTime previousWeek = DateTime(2019, 12, 25);
+    expect(test.nextWeek, nextWeek);
+    expect(test.previousWeek, previousWeek);
+    expect(test.week, 1);
+    expect(nextWeek.week, 2);
+    expect(previousWeek.week, 52);
+  });
+
   test('endOf', () {
     final DateTime test = DateTime(2020);
 
@@ -101,6 +148,24 @@ void main() {
     expect(winterStart.season, Season.winter);
     expect(winter.season, Season.winter);
     expect(winterEnd.season, Season.winter);
+  });
+
+  test('dayOfWeek', () {
+    final DateTime monday = DateTime(2023, 1, 2);
+    final DateTime tuesday = DateTime(2023, 1, 3);
+    final DateTime wednesday = DateTime(2023, 1, 4);
+    final DateTime thursday = DateTime(2023, 1, 5);
+    final DateTime friday = DateTime(2023, 1, 6);
+    final DateTime saturday = DateTime(2023, 1, 7);
+    final DateTime sunday = DateTime(2023, 1, 8);
+
+    expect(monday.dayOfWeek, DayOfWeek.monday);
+    expect(tuesday.dayOfWeek, DayOfWeek.tuesday);
+    expect(wednesday.dayOfWeek, DayOfWeek.wednesday);
+    expect(thursday.dayOfWeek, DayOfWeek.thursday);
+    expect(friday.dayOfWeek, DayOfWeek.friday);
+    expect(saturday.dayOfWeek, DayOfWeek.saturday);
+    expect(sunday.dayOfWeek, DayOfWeek.sunday);
   });
 
   test('timeAgo', () {

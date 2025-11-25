@@ -15,13 +15,14 @@ extension FileSystemEntityExtension on FileSystemEntity {
 /// [Iterable<FileSystemEntity>] Extension.
 extension FileSystemEntitiesExtension on Iterable<FileSystemEntity> {
   /// Returns only files.
-  List<File> get files => whereType<File>().toList();
+  List<File> get files => whereType<File>().toList(growable: false);
 
   /// Returns only directories.
-  List<Directory> get directories => whereType<Directory>().toList();
+  List<Directory> get directories =>
+      whereType<Directory>().toList(growable: false);
 
   /// Returns only links.
-  List<Link> get links => whereType<Link>().toList();
+  List<Link> get links => whereType<Link>().toList(growable: false);
 }
 
 /// Nullable [FileSystemEntity] Extension.
@@ -39,15 +40,17 @@ extension NullableFileSystemEntityExtension on FileSystemEntity? {
 /// Nullable [Iterable<FileSystemEntity>] Extension.
 extension NullableFileSystemEntitiesExtension on Iterable<FileSystemEntity?>? {
   /// Returns only files.
-  List<File> get files =>
-      this != null ? this!.whereType<File>().toList() : const <File>[];
+  List<File> get files => this != null
+      ? this!.whereType<File>().toList(growable: false)
+      : const <File>[];
 
   /// Returns only directories.
   List<Directory> get directories => this != null
-      ? this!.whereType<Directory>().toList()
+      ? this!.whereType<Directory>().toList(growable: false)
       : const <Directory>[];
 
   /// Returns only links.
-  List<Link> get links =>
-      this != null ? this!.whereType<Link>().toList() : const <Link>[];
+  List<Link> get links => this != null
+      ? this!.whereType<Link>().toList(growable: false)
+      : const <Link>[];
 }

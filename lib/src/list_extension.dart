@@ -43,7 +43,7 @@ extension ListExtension<T> on List<T> {
         (T value) => value is List
             ? value.removeNull()
             : (value is Map ? value.removeNull() : value),
-      ).toList();
+      ).toList(growable: false);
   }
 }
 
@@ -58,7 +58,7 @@ extension NullableListObjectExtension on List<Object?>? {
     if (this == null) {
       return <T>[];
     }
-    return this!.cast<T?>().whereType<T>().toList();
+    return this!.cast<T?>().whereType<T>().toList(growable: false);
   }
 
   /// Convert a list of objects to a list of enums from [values].
@@ -68,6 +68,9 @@ extension NullableListObjectExtension on List<Object?>? {
       return null;
     }
     final Map<String, Enum> nameMap = values.asNameMap();
-    return list.map((String e) => nameMap[e]).whereType<T>().toList();
+    return list
+        .map((String e) => nameMap[e])
+        .whereType<T>()
+        .toList(growable: false);
   }
 }

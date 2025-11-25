@@ -284,8 +284,9 @@ extension StringExtension on String {
     }
     final List<String> words = trim().split(RegExp(r'(\s+)'));
     final RegExp regex = filter ?? RegExp('([^a-zA-Z]+)');
-    final List<String> filteredWords =
-        words.where((String e) => e.replaceAll(regex, '').isNotEmpty).toList();
+    final List<String> filteredWords = words
+        .where((String e) => e.replaceAll(regex, '').isNotEmpty)
+        .toList(growable: false);
     return filteredWords.length;
   }
 
@@ -409,7 +410,7 @@ extension WordToNumber on String {
         .replaceAll(RegExp(r'[^a-z\s\-\.]'), '')
         .split(RegExp(r'\s+|-'))
         .where((String word) => word.isNotEmpty)
-        .toList();
+        .toList(growable: false);
   }
 
   /// Parses integer numbers (without decimal points)

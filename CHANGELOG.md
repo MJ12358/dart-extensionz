@@ -1,5 +1,18 @@
 # Dart Extensionz
 
+## [8.0.0]
+
+- Add `DayOfWeek` enum.
+- Add `Month` enum.
+- Optimize `DateTimeExtension` `copyWith` calls.
+- Optimize `EnumsExtension`.`get` enum from string function.
+- Optimize `toList` calls by using `growable: false`.
+- Make `DateTimeExtension`.`tomorrow`/`yesterday` static.
+- Move `timeAgo` and `season` to own extension for readability.
+- Remove `DateTimeExtension`.`copyWith` as this has been implemented since Dart v2.19.
+- Add more tests.
+- Update dev dependencies.
+
 ## [7.1.6]
 
 - Fix `wordToNumber` to account for empty integer part when handling decimals.

@@ -1,5 +1,41 @@
 part of dart_extensionz;
 
+/// Days of the week.
+enum DayOfWeek {
+  monday(DateTime.monday),
+  tuesday(DateTime.tuesday),
+  wednesday(DateTime.wednesday),
+  thursday(DateTime.thursday),
+  friday(DateTime.friday),
+  saturday(DateTime.saturday),
+  sunday(DateTime.sunday);
+
+  const DayOfWeek(this.value);
+
+  final int value;
+}
+
+/// Months of the year.
+enum Month {
+  january(DateTime.january, 31),
+  february(DateTime.february, 28),
+  march(DateTime.march, 31),
+  april(DateTime.april, 30),
+  may(DateTime.may, 31),
+  june(DateTime.june, 30),
+  july(DateTime.july, 31),
+  august(DateTime.august, 31),
+  september(DateTime.september, 30),
+  october(DateTime.october, 31),
+  november(DateTime.november, 30),
+  december(DateTime.december, 31);
+
+  const Month(this.value, this.days);
+
+  final int value;
+  final int days;
+}
+
 /// A period of the year that is distinguished by special climate conditions.
 enum Season {
   spring,
@@ -10,24 +46,6 @@ enum Season {
 
 /// [DateTime] Extension.
 extension DateTimeExtension on DateTime {
-  /// Days in a month. This array uses 1-based month numbers, i.e. January is
-  /// the 1-st element in the array, not the 0-th.
-  static final List<int> _daysInMonth = <int>[
-    0,
-    31,
-    28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31,
-  ];
-
   /// Clone this [DateTime].
   DateTime get clone =>
       DateTime.fromMicrosecondsSinceEpoch(microsecondsSinceEpoch, isUtc: isUtc);
@@ -38,10 +56,10 @@ extension DateTimeExtension on DateTime {
   int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
 
   /// Equivalent to `DateTime.now().add(Duration(days: 1))`.
-  DateTime get tomorrow => DateTime.now().nextDay;
+  static DateTime get tomorrow => DateTime.now().nextDay;
 
   /// Equivalent to `DateTime.now().add(Duration(days: -1))`.
-  DateTime get yesterday => DateTime.now().previousDay;
+  static DateTime get yesterday => DateTime.now().previousDay;
 
   /// Equivalent to `this.add(Duration(days: 1))`.
   DateTime get nextDay => addDays(1);
@@ -55,20 +73,20 @@ extension DateTimeExtension on DateTime {
   /// Equivalent to `this.add(Duration(days: -7))`.
   DateTime get previousWeek => addWeeks(-1);
 
-  DateTime get nextMonth => clone.copyWith(month: month + 1);
+  DateTime get nextMonth => copyWith(month: month + 1);
 
-  DateTime get previousMonth => clone.copyWith(month: month - 1);
+  DateTime get previousMonth => copyWith(month: month - 1);
 
-  DateTime get nextYear => clone.copyWith(year: year + 1);
+  DateTime get nextYear => copyWith(year: year + 1);
 
-  DateTime get previousYear => clone.copyWith(year: year - 1);
+  DateTime get previousYear => copyWith(year: year - 1);
 
   /// Calculates week number from a date.
   ///
   /// https://stackoverflow.com/questions/49393231/how-to-get-day-of-year-week-of-year-from-a-datetime-dart-object
   int get week {
     final int day = int.parse(DateFormat('D').format(this));
-    return ((day - weekday + 10) / 7).floor();
+    return (day - weekday + 10) ~/ 7;
   }
 
   /// Adds microseconds to this [DateTime].
@@ -113,7 +131,7 @@ extension DateTimeExtension on DateTime {
 
   /// Returns the end of year for this [DateTime].
   DateTime get endOfYear =>
-      clone.copyWith(year: year, month: DateTime.december).endOfMonth;
+      copyWith(year: year, month: DateTime.december).endOfMonth;
 
   /// Returns the end of month for this [DateTime].
   DateTime get endOfMonth => DateTime(year, month + 1).addMicroseconds(-1);
@@ -146,13 +164,13 @@ extension DateTimeExtension on DateTime {
       );
 
   /// Returns the end of second for this [DateTime].
-  DateTime get endOfSecond => clone.copyWith(
+  DateTime get endOfSecond => copyWith(
         millisecond: 999,
         microsecond: 999,
       );
 
   /// Returns the start of year for this [DateTime].
-  DateTime get startOfYear => clone.copyWith(
+  DateTime get startOfYear => copyWith(
         month: DateTime.january,
         day: 1,
         hour: 0,
@@ -163,7 +181,7 @@ extension DateTimeExtension on DateTime {
       );
 
   /// Returns the start of month for this [DateTime].
-  DateTime get startOfMonth => clone.copyWith(
+  DateTime get startOfMonth => copyWith(
         day: 1,
         hour: 0,
         minute: 0,
@@ -177,7 +195,7 @@ extension DateTimeExtension on DateTime {
       weekday == DateTime.sunday ? startOfDay : addDays(-weekday).startOfDay;
 
   /// Returns the start of day for this [DateTime].
-  DateTime get startOfDay => clone.copyWith(
+  DateTime get startOfDay => copyWith(
         hour: 0,
         minute: 0,
         second: 0,
@@ -186,7 +204,7 @@ extension DateTimeExtension on DateTime {
       );
 
   /// Returns the start of hour for this [DateTime].
-  DateTime get startOfHour => clone.copyWith(
+  DateTime get startOfHour => copyWith(
         minute: 0,
         second: 0,
         millisecond: 0,
@@ -194,14 +212,14 @@ extension DateTimeExtension on DateTime {
       );
 
   /// Returns the start of minute for this [DateTime].
-  DateTime get startOfMinute => clone.copyWith(
+  DateTime get startOfMinute => copyWith(
         second: 0,
         millisecond: 0,
         microsecond: 0,
       );
 
   /// Returns the start of second for this [DateTime].
-  DateTime get startOfSecond => clone.copyWith(
+  DateTime get startOfSecond => copyWith(
         millisecond: 0,
         microsecond: 0,
       );
@@ -284,38 +302,22 @@ extension DateTimeExtension on DateTime {
   }
 
   /// Returns true if [year] is a leap year.
-  bool get isLeapYear {
-    if (year % 4 != 0) {
-      return false;
-    }
-    if (year % 100 != 0) {
-      return true;
-    }
-    if (year % 400 != 0) {
-      return false;
-    }
-    return true;
-  }
+  bool get isLeapYear => year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
 
   /// Returns the number of days in the specified month.
   int get daysInMonth {
     if (month == DateTime.february && isLeapYear) {
       return 29;
     }
-    return _daysInMonth[month];
+    return Month.values.firstWhere((Month m) => m.value == month).days;
   }
 
   /// Returns the number of days until the weekend.
-  int get daysUntilWeekend {
-    if (isWeekend) {
-      return 0;
-    }
-    return DateTime.saturday - weekday;
-  }
+  int get daysUntilWeekend => isWeekend ? 0 : DateTime.saturday - weekday;
 
   /// Returns a [DateTime] that skips the weekend.
   DateTime get skipWeekend {
-    switch (day) {
+    switch (weekday) {
       case DateTime.saturday:
         return addDays(2);
       case DateTime.sunday:
@@ -325,67 +327,55 @@ extension DateTimeExtension on DateTime {
     }
   }
 
-  /// Return `Season` of this date.
-  /// Seasons are defined as:
-  /// - Spring: March 20 - June 20
-  /// - Summer: June 21 - September 22
-  /// - Autumn: September 23 - December 20
-  /// - Winter: December 21 - March 19
-  Season get season {
-    Season result;
-
-    switch (month) {
-      case DateTime.january:
-      case DateTime.february:
-      case DateTime.march:
-        result = Season.winter;
-      case DateTime.april:
-      case DateTime.may:
-      case DateTime.june:
-        result = Season.spring;
-      case DateTime.july:
-      case DateTime.august:
-      case DateTime.september:
-        result = Season.summer;
-      default:
-        result = Season.autumn;
-    }
-
-    if (month == DateTime.march && day >= 20) {
-      result = Season.spring;
-    } else if (month == DateTime.june && day >= 21) {
-      result = Season.summer;
-    } else if (month == DateTime.september && day >= 23) {
-      result = Season.autumn;
-    } else if (month == DateTime.december && day >= 21) {
-      result = Season.winter;
-    }
-
-    return result;
+  /// Returns the day of the week as a [DayOfWeek] enum.
+  DayOfWeek get dayOfWeek {
+    return DayOfWeek.values.firstWhere((DayOfWeek d) => d.value == weekday);
   }
 
-  /// Determines if [season] is equal to [this.season].
-  bool isInSeason(Season season) => this.season == season;
-
-  /// Returns the earliest date
+  /// Returns the earliest date.
   DateTime min(DateTime other) {
     return (millisecondsSinceEpoch < other.millisecondsSinceEpoch)
         ? this
         : other;
   }
 
-  /// Returns the later date
+  /// Returns the later date.
   DateTime max(DateTime other) {
     return (millisecondsSinceEpoch > other.millisecondsSinceEpoch)
         ? this
         : other;
   }
 
+  /// Subtracts the milliseconds and microseconds from this [DateTime].
+  DateTime get minusMilliMicro {
+    return subtract(
+      Duration(
+        milliseconds: millisecond,
+        microseconds: microsecond,
+      ),
+    );
+  }
+
+  DateTime operator +(Duration duration) => add(duration);
+
+  DateTime operator -(Duration duration) => subtract(duration);
+
+  bool operator <(DateTime other) => isBefore(other);
+
+  bool operator <=(DateTime other) =>
+      isBefore(other) || isAtSameMomentAs(other);
+
+  bool operator >(DateTime other) => isAfter(other);
+
+  bool operator >=(DateTime other) => isAfter(other) || isAtSameMomentAs(other);
+}
+
+extension DateTimeAgoExtension on DateTime {
   /// Provides a fuzzy time like '3 years ago'.
   String get timeAgo {
     final Duration diff = DateTime.now().difference(this);
     const num daysPerYear = DurationExtension.daysPerYear;
-    final num daysPerMonth = _daysInMonth[month];
+    final num daysPerMonth = daysInMonth;
     const num daysPerWeek = DurationExtension.daysPerWeek;
 
     if (diff.inDays > daysPerYear) {
@@ -426,52 +416,48 @@ extension DateTimeExtension on DateTime {
 
     return 'just now';
   }
+}
 
-  /// Subtracts the milliseconds and microseconds from this [DateTime].
-  DateTime get minusMilliMicro {
-    return subtract(
-      Duration(
-        milliseconds: millisecond,
-        microseconds: microsecond,
-      ),
-    );
+extension DateTimeSeasonExtension on DateTime {
+  /// Return the [Season] of this date.
+  /// Seasons are defined as:
+  /// - Spring: March 20 - June 20
+  /// - Summer: June 21 - September 22
+  /// - Autumn: September 23 - December 20
+  /// - Winter: December 21 - March 19
+  Season get season {
+    Season result;
+
+    switch (month) {
+      case DateTime.january:
+      case DateTime.february:
+      case DateTime.march:
+        result = Season.winter;
+      case DateTime.april:
+      case DateTime.may:
+      case DateTime.june:
+        result = Season.spring;
+      case DateTime.july:
+      case DateTime.august:
+      case DateTime.september:
+        result = Season.summer;
+      default:
+        result = Season.autumn;
+    }
+
+    if (month == DateTime.march && day >= 20) {
+      result = Season.spring;
+    } else if (month == DateTime.june && day >= 21) {
+      result = Season.summer;
+    } else if (month == DateTime.september && day >= 23) {
+      result = Season.autumn;
+    } else if (month == DateTime.december && day >= 21) {
+      result = Season.winter;
+    }
+
+    return result;
   }
 
-  DateTime operator +(Duration duration) => add(duration);
-
-  DateTime operator -(Duration duration) => subtract(duration);
-
-  bool operator <(DateTime other) => isBefore(other);
-
-  bool operator <=(DateTime other) => isBefore(other) || isSameMoment(other);
-
-  bool operator >(DateTime other) => isAfter(other);
-
-  bool operator >=(DateTime other) => isAfter(other) || isSameMoment(other);
-
-  /// Creates a copy of this [DateTime] but with the given fields
-  /// replaced with the new values.
-  // This method has been implemented, since 2.19!!!
-  DateTime copyWith({
-    int? year,
-    int? month,
-    int? day,
-    int? hour,
-    int? minute,
-    int? second,
-    int? millisecond,
-    int? microsecond,
-    bool? isUtc,
-  }) {
-    return ((isUtc ?? this.isUtc) ? DateTime.utc : DateTime.new)(
-      year ?? this.year,
-      month ?? this.month,
-      day ?? this.day,
-      hour ?? this.hour,
-      minute ?? this.minute,
-      second ?? this.second,
-      millisecond ?? this.millisecond,
-      microsecond ?? this.microsecond,
-    );
-  }
+  /// Determines if [season] is equal to [this.season].
+  bool isInSeason(Season season) => this.season == season;
 }
