@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## [8.1.0]
+
+- Add `nullable` to `DurationExtension`.
+- Add `random` to `EnumsExtension`.
+
 ## [8.0.0]
 
 - Add `DayOfWeek` enum.

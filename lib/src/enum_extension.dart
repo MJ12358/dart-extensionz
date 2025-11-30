@@ -33,6 +33,13 @@ extension EnumsExtension<T> on Iterable<Enum> {
     return results;
   }
 
+  /// Get a random enum from this iterable.
+  Enum get random {
+    final List<Enum> results = toList(growable: false);
+    results.shuffle();
+    return results.first;
+  }
+
   /// Get an enum from a [String].
   ///
   /// Works like [byName] except won't throw if not found

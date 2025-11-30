@@ -79,6 +79,11 @@ void main() {
     expect(TestEnum.values.alphabetical, result);
   });
 
+  test('random', () {
+    final TestEnum randomEnum = TestEnum.values.random;
+    expect(TestEnum.values.contains(randomEnum), isTrue);
+  });
+
   test('get', () {
     expect(TestEnum.values.get(null), null);
     expect(TestEnum.values.get(''), null);

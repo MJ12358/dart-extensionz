@@ -39,6 +39,38 @@ extension DurationExtension on Duration {
     return Future<T>.delayed(this, callback);
   }
 
+  /// Creates a nullable [Duration].
+  ///
+  /// If all parameters are null or zero, returns null.
+  Duration? nullable({
+    int? days,
+    int? hours,
+    int? minutes,
+    int? seconds,
+    int? milliseconds,
+    int? microseconds,
+  }) {
+    final bool hasValue = (days != null && days != 0) ||
+        (hours != null && hours != 0) ||
+        (minutes != null && minutes != 0) ||
+        (seconds != null && seconds != 0) ||
+        (milliseconds != null && milliseconds != 0) ||
+        (microseconds != null && microseconds != 0);
+
+    if (!hasValue) {
+      return null;
+    }
+
+    return Duration(
+      days: days ?? 0,
+      hours: hours ?? 0,
+      minutes: minutes ?? 0,
+      seconds: seconds ?? 0,
+      milliseconds: milliseconds ?? 0,
+      microseconds: microseconds ?? 0,
+    );
+  }
+
   /// Creates a copy of this `Duration` but with the given fields
   /// replaced with the new values.
   Duration copyWith({
