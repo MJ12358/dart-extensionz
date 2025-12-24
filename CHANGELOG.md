@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [8.1.1]
+
+- Account for a negative `Duration` within `IntlDurationExtension`.
+
 ## [8.1.0]
 
 - Add `nullable` to `DurationExtension`.

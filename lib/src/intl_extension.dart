@@ -48,17 +48,21 @@ extension IntlDurationExtension on Duration? {
       return '';
     }
 
+    final bool isNegative = this!.isNegative;
+    final Duration duration = isNegative ? this!.abs() : this!;
+
+    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
+      duration.inMilliseconds,
+      isUtc: isUtc,
+    );
+
     final DateFormat dateFormat = DateFormat(
       pattern,
       locale,
     );
 
-    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
-      this!.inMilliseconds,
-      isUtc: isUtc,
-    );
-
-    return dateFormat.format(dateTime);
+    final String formatted = dateFormat.format(dateTime);
+    return isNegative ? '-$formatted' : formatted;
   }
 
   /// Humanize a Duration.

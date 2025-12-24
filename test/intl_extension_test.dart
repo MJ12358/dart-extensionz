@@ -150,22 +150,31 @@ void main() {
   });
 
   test('formatDuration', () {
-    const Duration? result = null;
+    const Duration? result0 = null;
 
-    const Duration result1 = Duration(
+    const Duration result1 = Duration.zero;
+
+    const Duration result2 = Duration(
       minutes: 1,
       seconds: 32,
     );
 
-    const Duration result2 = Duration(
+    const Duration result3 = Duration(
       seconds: 48,
       milliseconds: 860,
     );
 
-    expect(result.format(), '');
-    expect(result1.format(), '00:01:32:000');
-    expect(result1.format(pattern: "m 'm' ss 's'"), '1 m 32 s');
-    expect(result2.format(pattern: "ss 's' SSS 'ms'"), '48 s 860 ms');
+    const Duration result4 = Duration(
+      minutes: -1,
+      seconds: -32,
+    );
+
+    expect(result0.format(), '');
+    expect(result1.format(), '00:00:00:000');
+    expect(result2.format(), '00:01:32:000');
+    expect(result2.format(pattern: "m 'm' ss 's'"), '1 m 32 s');
+    expect(result3.format(pattern: "ss 's' SSS 'ms'"), '48 s 860 ms');
+    expect(result4.format(), '-00:01:32:000');
   });
 
   test('humanize', () {
