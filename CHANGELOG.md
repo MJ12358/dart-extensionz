@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [8.2.0]
+
+- Add `toAlpha` and `toNumeric` to `StringExtension`.
+
 ## [8.1.1]
 
 - Account for a negative `Duration` within `IntlDurationExtension`.

@@ -154,6 +154,17 @@ extension StringExtension on String {
     return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
   }
 
+  /// Remove all non-alphabetic characters from this [String].
+  String toAlpha() {
+    const String regex = r'[^A-Za-zÀ-ÖØ-öø-ÿĀ-žƀ-ɏḀ-ỿ\s]+';
+    return replaceAll(RegExp(regex), '');
+  }
+
+  /// Remove all non-numeric characters from this [String].
+  String toNumeric() {
+    return replaceAll(RegExp(r'\D'), '');
+  }
+
   /// Title case this [String].
   ///
   /// The first letter of each word is capitalized.

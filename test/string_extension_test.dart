@@ -54,6 +54,26 @@ void main() {
     expect('N/A'.initials, 'N A');
   });
 
+  test('toAlpha', () {
+    expect('123'.toAlpha(), '');
+    expect('A1B2C3'.toAlpha(), 'ABC');
+    expect('ABC'.toAlpha(), 'ABC');
+    expect('abc'.toAlpha(), 'abc');
+    expect(r'$&@!'.toAlpha(), '');
+    expect('A!B@C#1%3^'.toAlpha(), 'ABC');
+    expect("Hęllo, wórld! i am 'foo'".toAlpha(), 'Hęllo wórld i am foo');
+  });
+
+  test('toNumeric', () {
+    expect('123'.toNumeric(), '123');
+    expect('A1B2C3'.toNumeric(), '123');
+    expect('ABC'.toNumeric(), '');
+    expect('abc'.toNumeric(), '');
+    expect(r'$&@!'.toNumeric(), '');
+    expect('A!B@C#1%3^'.toNumeric(), '13');
+    expect("Hęllo, wórld! i am 'foo' 2024.".toNumeric(), '2024');
+  });
+
   test('toCamelCase', () {
     expect(''.toCamelCase(), '');
     expect('a'.toCamelCase(), 'a');
