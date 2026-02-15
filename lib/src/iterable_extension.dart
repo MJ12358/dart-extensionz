@@ -28,12 +28,83 @@ extension IterableExtension<T> on Iterable<T> {
 
 /// [Iterable] [Comparable] Extension.
 extension IterableComparableExtension<T extends Comparable<T>> on Iterable<T> {
+  /// Returns the largest element in the list.
   T get max {
     return reduce((T a, T b) => a.compareTo(b) >= 0 ? a : b);
   }
 
+  /// Returns the smallest element in the list.
   T get min {
     return reduce((T a, T b) => a.compareTo(b) >= 0 ? b : a);
+  }
+}
+
+/// [Iterable<Comparable?>] Extension.
+extension IterableNullableComparableExtension<T extends Comparable<T>>
+    on Iterable<T?> {
+  /// Returns the largest element in the list or null
+  /// if the list is empty after type checking.
+  T? get max {
+    final Iterable<T> iterable = whereType<T>();
+    if (iterable.isEmpty) {
+      return null;
+    }
+    return iterable.max;
+  }
+
+  /// Returns the smallest element in the list or null
+  /// if the list is empty after type checking.
+  T? get min {
+    final Iterable<T> iterable = whereType<T>();
+    if (iterable.isEmpty) {
+      return null;
+    }
+    return iterable.min;
+  }
+}
+
+/// [Iterable<num>] Extension.
+extension IterableNumberExtension<T extends num> on Iterable<T> {
+  /// Sum a list of numbers.
+  num? get sum {
+    if (isEmpty) {
+      return null;
+    }
+    num result = 0;
+    for (final num value in this) {
+      result += value;
+    }
+    return result;
+  }
+
+  /// Average a list of numbers.
+  num? get average {
+    if (isEmpty) {
+      return null;
+    }
+    num result = 0.0;
+    int count = 0;
+    for (final num value in this) {
+      count++;
+      result += (value - result) / count;
+    }
+    return result;
+  }
+
+  /// Returns the largest number in the list.
+  T? get max {
+    if (isEmpty) {
+      return null;
+    }
+    return reduce((T a, T b) => a >= b ? a : b);
+  }
+
+  /// Returns the smallest number in the list.
+  T? get min {
+    if (isEmpty) {
+      return null;
+    }
+    return reduce((T a, T b) => a >= b ? b : a);
   }
 }
 
@@ -46,11 +117,7 @@ extension IterableNullableNumberExtension on Iterable<num?> {
     if (iterable.isEmpty) {
       return null;
     }
-    num result = 0;
-    for (final num value in iterable) {
-      result += value;
-    }
-    return result;
+    return iterable.sum;
   }
 
   /// Average a list of numbers but will return null
@@ -60,12 +127,26 @@ extension IterableNullableNumberExtension on Iterable<num?> {
     if (iterable.isEmpty) {
       return null;
     }
-    num result = 0.0;
-    int count = 0;
-    for (final num value in iterable) {
-      count++;
-      result += (value - result) / count;
+    return iterable.average;
+  }
+
+  /// Returns the largest number in the list or null
+  /// if the list is empty after type checking.
+  num? get max {
+    final Iterable<num> iterable = whereType<num>();
+    if (iterable.isEmpty) {
+      return null;
     }
-    return result;
+    return iterable.max;
+  }
+
+  /// Returns the smallest number in the list or null
+  /// if the list is empty after type checking.
+  num? get min {
+    final Iterable<num> iterable = whereType<num>();
+    if (iterable.isEmpty) {
+      return null;
+    }
+    return iterable.min;
   }
 }

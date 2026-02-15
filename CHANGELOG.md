@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## [8.3.0]
+
+- Add more `Iterable` extensions.
+- Add more tests.
+- Update dependencies.
+
 ## [8.2.0]
 
 - Add `toAlpha` and `toNumeric` to `StringExtension`.
