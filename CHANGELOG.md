@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## [8.4.0]
+
+- Add `NullableDoubleExtension`.
+- Add more tests.
+
 ## [8.3.0]
 
 - Add more `Iterable` extensions.

@@ -44,3 +44,21 @@ extension DoubleExtension on double {
     return temp / mod;
   }
 }
+
+extension NullableDoubleExtension on double? {
+  /// Returns the real part of this double.
+  int? get real => this?.real;
+
+  /// Returns the fractional part of this double.
+  double? get fractional => this?.fractional;
+
+  /// Round a double.
+  ///
+  /// Use [mode] to specify ceil, floor or half (default)
+  double? roundDouble({
+    int places = 2,
+    RoundingMode mode = RoundingMode.half,
+  }) {
+    return this?.roundDouble(places: places, mode: mode);
+  }
+}
