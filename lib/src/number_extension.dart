@@ -31,6 +31,7 @@ extension NumberExtension on num {
   /// Returns the length of this [num].
   int get length => '$this'.length;
 
+  /// Converts this [num] to a [bool].
   bool toBool() {
     return this == 1;
   }
@@ -206,6 +207,27 @@ extension NumberExtension on num {
     final num mod = value % 16;
     return array[mod.toInt()];
   }
+
+  /// Rounds this [num] to a double
+  /// with the given number of [places].
+  double? roundDouble({
+    int places = 2,
+    RoundingMode mode = RoundingMode.half,
+  }) {
+    final num mod = math.pow(10.0, places);
+    final int temp;
+
+    switch (mode) {
+      case RoundingMode.ceiling:
+        temp = (this * mod).ceil();
+      case RoundingMode.floor:
+        temp = (this * mod).floor();
+      case RoundingMode.half:
+        temp = (this * mod).round();
+    }
+
+    return temp / mod;
+  }
 }
 
 /// Nullable [num] Extension.
@@ -213,7 +235,17 @@ extension NullableNumberExtension on num? {
   /// Returns the length of this [num].
   int get length => this != null ? this!.length : 0;
 
+  /// Converts this [num] to a [bool].
   bool toBool() {
     return this != null && this!.toBool();
+  }
+
+  /// Rounds this [num] to a double
+  /// with the given number of [places].
+  double? roundDouble({
+    int places = 2,
+    RoundingMode mode = RoundingMode.half,
+  }) {
+    return this?.roundDouble(places: places, mode: mode);
   }
 }

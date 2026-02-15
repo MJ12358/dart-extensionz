@@ -1,8 +1,9 @@
 # Dart Extensionz
 
-## [8.4.0]
+## [8.5.0]
 
 - Add `NullableDoubleExtension`.
+- Move `roundDouble` from `double` to `num` type.
 - Add more tests.
 
 ## [8.3.0]

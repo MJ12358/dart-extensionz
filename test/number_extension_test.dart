@@ -138,4 +138,22 @@ void main() {
     expect(saturday.weekday.toWeekDay(), 'Saturday');
     expect(sunday.weekday.toWeekDay(), 'Sunday');
   });
+
+  test('roundDouble', () {
+    expect(1.roundDouble(), 1.00);
+    expect(12.0.roundDouble(), 12.0);
+    expect(12.34.roundDouble(), 12.34);
+    expect(12.3499.roundDouble(), 12.35);
+    expect(12.3499.roundDouble(mode: RoundingMode.floor), 12.34);
+    expect(12.34499999.roundDouble(places: 3), 12.345);
+    expect(
+      12.34499999.roundDouble(places: 3, mode: RoundingMode.floor),
+      12.344,
+    );
+    expect(
+      12.34499999.roundDouble(places: 3, mode: RoundingMode.ceiling),
+      12.345,
+    );
+    expect(null.roundDouble(), null);
+  });
 }

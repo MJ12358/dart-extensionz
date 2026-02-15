@@ -21,28 +21,6 @@ extension DoubleExtension on double {
     }
     return double.parse('${isNegative ? '-' : ''}0.${parts[1]}');
   }
-
-  /// Round a double.
-  ///
-  /// Use [mode] to specify ceil, floor or half (default)
-  double roundDouble({
-    int places = 2,
-    RoundingMode mode = RoundingMode.half,
-  }) {
-    final num mod = math.pow(10.0, places);
-    final int temp;
-
-    switch (mode) {
-      case RoundingMode.ceiling:
-        temp = (this * mod).ceil();
-      case RoundingMode.floor:
-        temp = (this * mod).floor();
-      case RoundingMode.half:
-        temp = (this * mod).round();
-    }
-
-    return temp / mod;
-  }
 }
 
 extension NullableDoubleExtension on double? {
@@ -51,14 +29,4 @@ extension NullableDoubleExtension on double? {
 
   /// Returns the fractional part of this double.
   double? get fractional => this?.fractional;
-
-  /// Round a double.
-  ///
-  /// Use [mode] to specify ceil, floor or half (default)
-  double? roundDouble({
-    int places = 2,
-    RoundingMode mode = RoundingMode.half,
-  }) {
-    return this?.roundDouble(places: places, mode: mode);
-  }
 }
