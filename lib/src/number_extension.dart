@@ -210,7 +210,7 @@ extension NumberExtension on num {
 
   /// Rounds this [num] to a double
   /// with the given number of [places].
-  double? roundDouble({
+  double roundDouble({
     int places = 2,
     RoundingMode mode = RoundingMode.half,
   }) {
@@ -238,14 +238,5 @@ extension NullableNumberExtension on num? {
   /// Converts this [num] to a [bool].
   bool toBool() {
     return this != null && this!.toBool();
-  }
-
-  /// Rounds this [num] to a double
-  /// with the given number of [places].
-  double? roundDouble({
-    int places = 2,
-    RoundingMode mode = RoundingMode.half,
-  }) {
-    return this?.roundDouble(places: places, mode: mode);
   }
 }

@@ -36,25 +36,27 @@ void main() {
   test('sum', () {
     expect(<int>[1, 2, 3].sum, 6);
     expect(<double>[1.5, 2.5, 3.5].sum, 7.5);
-    expect(<int>[].sum, null);
+    expect(<int>[].sum, 0);
   });
 
-  test('sum with nullables', () {
+  test('sum with null', () {
     expect(<int?>[1, 2, 3, null].sum, 6);
     expect(<double?>[1.5, 2.5, 3.5, null].sum, 7.5);
     expect(<int?>[null].sum, null);
+    expect(<int?>[].sum, null);
   });
 
   test('average', () {
     expect(<int>[1, 2, 3].average, 2.0);
     expect(<double>[1.5, 2.5, 3.5].average, 2.5);
-    expect(<int>[].average, null);
+    expect(<int>[].average, 0);
   });
 
-  test('average with nullables', () {
+  test('average with null', () {
     expect(<int?>[1, 2, 3, null].average, 2.0);
     expect(<double?>[1.5, 2.5, 3.5, null].average, 2.5);
     expect(<int?>[null].average, null);
+    expect(<int?>[].average, null);
   });
 
   test('max', () {
@@ -64,12 +66,13 @@ void main() {
     expect(<String>['a', 'b', 'c'].max, 'c');
   });
 
-  test('max with nullables', () {
+  test('max with null', () {
     expect(<int?>[1, 2, 3, null].max, 3);
     expect(<int?>[-1, -2, -3, null].max, -1);
     expect(<double?>[1.5, 2.5, 3.5, null].max, 3.5);
     expect(<String?>['a', 'b', 'c', null].max, 'c');
     expect(<int?>[null].max, null);
+    expect(<int?>[].max, null);
   });
 
   test('min', () {
@@ -79,11 +82,86 @@ void main() {
     expect(<String>['a', 'b', 'c'].min, 'a');
   });
 
-  test('min with nullables', () {
+  test('min with null', () {
     expect(<int?>[1, 2, 3, null].min, 1);
     expect(<int?>[-1, -2, -3, null].min, -3);
     expect(<double?>[1.5, 2.5, 3.5, null].min, 1.5);
     expect(<String?>['a', 'b', 'c', null].min, 'a');
     expect(<int?>[null].min, null);
+    expect(<int?>[].min, null);
+  });
+
+  test('max comparable', () {
+    final List<Duration> result1 = <Duration>[
+      const Duration(seconds: 1),
+      const Duration(seconds: 2),
+      const Duration(seconds: 3),
+    ];
+    final List<Duration> result2 = <Duration>[
+      const Duration(seconds: 3),
+      const Duration(seconds: 2),
+      const Duration(seconds: 1),
+      Duration.zero,
+    ];
+    expect(result1.max, const Duration(seconds: 3));
+    expect(result2.max, const Duration(seconds: 3));
+  });
+
+  test('max comparable with null', () {
+    final List<Duration?> result1 = <Duration?>[
+      const Duration(seconds: 1),
+      const Duration(seconds: 2),
+      const Duration(seconds: 3),
+      null,
+    ];
+    final List<Duration?> result2 = <Duration?>[
+      const Duration(seconds: 3),
+      const Duration(seconds: 2),
+      const Duration(seconds: 1),
+      Duration.zero,
+      null,
+    ];
+    final List<Duration?> result3 = <Duration?>[null];
+    expect(result1.max, const Duration(seconds: 3));
+    expect(result2.max, const Duration(seconds: 3));
+    expect(result3.max, null);
+    expect(<Duration?>[].max, null);
+  });
+
+  test('min comparable', () {
+    final List<Duration> result1 = <Duration>[
+      const Duration(seconds: 1),
+      const Duration(seconds: 2),
+      const Duration(seconds: 3),
+    ];
+    final List<Duration> result2 = <Duration>[
+      const Duration(seconds: 3),
+      const Duration(seconds: 2),
+      const Duration(seconds: 1),
+      Duration.zero,
+    ];
+    expect(result1.min, const Duration(seconds: 1));
+    expect(result2.min, Duration.zero);
+  });
+
+  test('min comparable with null', () {
+    final List<Duration?> result1 = <Duration?>[
+      const Duration(seconds: 1),
+      const Duration(seconds: 2),
+      const Duration(seconds: 3),
+      null,
+    ];
+    final List<Duration?> result2 = <Duration?>[
+      const Duration(seconds: 3),
+      const Duration(seconds: 2),
+      const Duration(seconds: 1),
+      Duration.zero,
+      null,
+    ];
+    final List<Duration?> result3 = <Duration?>[null];
+    expect(result1.min, const Duration(seconds: 1));
+    expect(result2.min, Duration.zero);
+    expect(result3.min, null);
+    expect(<Duration?>[].min, null);
   });
 }

@@ -154,6 +154,5 @@ void main() {
       12.34499999.roundDouble(places: 3, mode: RoundingMode.ceiling),
       12.345,
     );
-    expect(null.roundDouble(), null);
   });
 }

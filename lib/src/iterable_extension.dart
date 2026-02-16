@@ -66,10 +66,7 @@ extension IterableNullableComparableExtension<T extends Comparable<T>>
 /// [Iterable<num>] Extension.
 extension IterableNumberExtension<T extends num> on Iterable<T> {
   /// Sum a list of numbers.
-  num? get sum {
-    if (isEmpty) {
-      return null;
-    }
+  num get sum {
     num result = 0;
     for (final num value in this) {
       result += value;
@@ -78,10 +75,7 @@ extension IterableNumberExtension<T extends num> on Iterable<T> {
   }
 
   /// Average a list of numbers.
-  num? get average {
-    if (isEmpty) {
-      return null;
-    }
+  num get average {
     num result = 0.0;
     int count = 0;
     for (final num value in this) {
@@ -92,18 +86,12 @@ extension IterableNumberExtension<T extends num> on Iterable<T> {
   }
 
   /// Returns the largest number in the list.
-  T? get max {
-    if (isEmpty) {
-      return null;
-    }
+  T get max {
     return reduce((T a, T b) => a >= b ? a : b);
   }
 
   /// Returns the smallest number in the list.
-  T? get min {
-    if (isEmpty) {
-      return null;
-    }
+  T get min {
     return reduce((T a, T b) => a >= b ? b : a);
   }
 }

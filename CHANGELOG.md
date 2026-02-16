@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [8.5.1]
+
+- Fix some nullable vs non-nullable outputs.
+
 ## [8.5.0]
 
 - Add `NullableDoubleExtension`.
