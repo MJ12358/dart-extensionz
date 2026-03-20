@@ -7,28 +7,28 @@ extension DurationExtension on Duration {
   static const int monthsPerYear = 12;
   static const int daysPerWeek = 7;
 
-  /// Get the years of this `Duration`.
+  /// Get the years of this [Duration].
   int get years => inDays ~/ daysPerYear;
 
-  /// Get the weeks of this `Duration`.
+  /// Get the weeks of this [Duration].
   int get weeks => (inDays % daysPerYear) ~/ daysPerWeek;
 
-  /// Get the days of this `Duration`.
+  /// Get the days of this [Duration].
   int get days => (inDays % daysPerYear) % daysPerWeek;
 
-  /// Get the hours of this `Duration`.
+  /// Get the hours of this [Duration].
   int get hours => inHours % Duration.hoursPerDay;
 
-  /// Get the minutes of this `Duration`.
+  /// Get the minutes of this [Duration].
   int get minutes => inMinutes % Duration.minutesPerHour;
 
-  /// Get the seconds of this `Duration`.
+  /// Get the seconds of this [Duration].
   int get seconds => inSeconds % Duration.secondsPerMinute;
 
-  /// Get the milliseconds of this `Duration`.
+  /// Get the milliseconds of this [Duration].
   int get milliseconds => inMilliseconds % Duration.millisecondsPerSecond;
 
-  /// Get the microseconds of this `Duration`.
+  /// Get the microseconds of this [Duration].
   int get microseconds => inMicroseconds % Duration.microsecondsPerMillisecond;
 
   /// Divides this Duration by [other] and
@@ -41,37 +41,13 @@ extension DurationExtension on Duration {
 
   /// Creates a nullable [Duration].
   ///
-  /// If all parameters are null or zero, returns null.
-  Duration? nullable({
-    int? days,
-    int? hours,
-    int? minutes,
-    int? seconds,
-    int? milliseconds,
-    int? microseconds,
-  }) {
-    final bool hasValue = (days != null && days != 0) ||
-        (hours != null && hours != 0) ||
-        (minutes != null && minutes != 0) ||
-        (seconds != null && seconds != 0) ||
-        (milliseconds != null && milliseconds != 0) ||
-        (microseconds != null && microseconds != 0);
-
-    if (!hasValue) {
-      return null;
-    }
-
-    return Duration(
-      days: days ?? 0,
-      hours: hours ?? 0,
-      minutes: minutes ?? 0,
-      seconds: seconds ?? 0,
-      milliseconds: milliseconds ?? 0,
-      microseconds: microseconds ?? 0,
-    );
+  /// Returns null if the duration is zero,
+  /// otherwise returns the duration itself.
+  Duration? nullable() {
+    return inMicroseconds == 0 ? null : this;
   }
 
-  /// Creates a copy of this `Duration` but with the given fields
+  /// Creates a copy of this [Duration] but with the given fields
   /// replaced with the new values.
   Duration copyWith({
     int? days,

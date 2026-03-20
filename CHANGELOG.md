@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## [8.5.2]
+
+- Fix `nullable` on `DurationExtension`.
+- Add more tests.
+- Update dependencies.
+
 ## [8.5.1]
 
 - Fix some nullable vs non-nullable outputs.
