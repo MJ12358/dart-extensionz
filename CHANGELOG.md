@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [8.5.3]
+
+- Add thumbnail to pub.dev.
+
 ## [8.5.2]
 
 - Fix `nullable` on `DurationExtension`.
