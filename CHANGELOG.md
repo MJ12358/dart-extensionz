@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## [8.5.4]
+
+- Add a type safe getter to `MapExtension`.
+- Add more tests.
+
 ## [8.5.3]
 
 - Add thumbnail to pub.dev.
