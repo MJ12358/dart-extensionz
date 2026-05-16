@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [9.0.1]
+
+- Fix some migration issues with `IterableExtension`.
+
 ## [9.0.0]
 
 - **BREAKING**:
