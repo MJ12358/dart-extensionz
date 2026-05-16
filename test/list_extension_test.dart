@@ -4,7 +4,20 @@ import 'package:test/test.dart';
 import 'enum_extension_test.dart';
 
 void main() {
-  test('main', () {
+  test('castTo', () {
+    const List<Object?>? test1 = null;
+    expect(test1.castTo<int>(), <int>[]);
+    expect(test1.castTo<String>(), <String>[]);
+    expect(test1.castTo<double>(), <double>[]);
+    final List<Object?> test2 = <Object?>[1, 'test', 2, 'example', null];
+    expect(test2.castTo<int>(), <int>[1, 2]);
+    expect(test2.castTo<String>(), <String>['test', 'example']);
+    expect(test2.castTo<double>(), <double>[]);
+    final List<Object?> test3 = <Object?>[null, null, 1];
+    expect(test3.castTo<int>(), <int>[1]);
+  });
+
+  test('clone', () {
     final List<int> result = <int>[0, 1, 2, 3];
     final List<int> other = <int>[4, 5, 6, 7];
 
@@ -32,6 +45,16 @@ void main() {
     expect(value2.containsIgnoreCase(null), isFalse);
     expect(value2.containsIgnoreCase(1), isTrue);
     expect(value2.containsIgnoreCase('1'), isTrue);
+  });
+
+  test('lastIndex', () {
+    final List<String> value = <String>['test', 'Test', 'TEST'];
+    final List<String> value1 = <String>['derp', 'testing', 'TESTING'];
+    final List<int> value2 = <int>[1, 2, 3];
+
+    expect(value.lastIndex, 2);
+    expect(value1.lastIndex, 2);
+    expect(value2.lastIndex, 2);
   });
 
   test('min', () {
@@ -62,6 +85,35 @@ void main() {
     expect(
       TestEnum.values.names.toEnum(TestEnum.values),
       TestEnum.values,
+    );
+  });
+
+  test('removeNull', () {
+    const List<int>? test1 = null;
+    expect(test1.removeNull(), <int>[]);
+
+    final List<int?> test2 = <int?>[0, 1, null, 2, 3];
+    expect(test2.removeNull(), <int>[0, 1, 2, 3]);
+
+    final List<Object?> test3 = <Object?>[
+      0,
+      1,
+      null,
+      2,
+      3,
+      <int?>[4, null, 5],
+      <String, Object?>{'a': 6, 'b': null, 'c': 7},
+    ];
+    expect(
+      test3.removeNull(),
+      <Object?>[
+        0,
+        1,
+        2,
+        3,
+        <int>[4, 5],
+        <String, Object>{'a': 6, 'c': 7},
+      ],
     );
   });
 }

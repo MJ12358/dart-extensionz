@@ -1,9 +1,9 @@
 part of dart_extensionz;
 
 /// [Set] Extension.
-extension SetExtension<T> on Set<T> {
+extension SetExtension<T> on Set<T>? {
   /// A clone of this [Set<T>].
-  Set<T> get clone => Set<T>.from(this);
+  Set<T> get clone => this != null ? Set<T>.from(this!) : <T>{};
 
   /// Clone this set, then add [other] to it.
   Set<T> cloneAdd(Set<T> other) {

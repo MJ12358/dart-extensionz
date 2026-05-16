@@ -1,5 +1,12 @@
 # Dart Extensionz
 
+## [9.0.0]
+
+- **BREAKING**:
+  - Consolidate nullable and non-nullable extensions.
+- Add more comments.
+- Add more tests.
+
 ## [8.5.4]
 
 - Add a type safe getter to `MapExtension`.

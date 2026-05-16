@@ -2,7 +2,7 @@ import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('get from map', () {
+  test('get', () {
     final Map<String, Object?> map = <String, Object?>{
       'a': 1,
       'b': 2,
@@ -25,7 +25,7 @@ void main() {
     expect(map.get<String>('e'), isNull);
   });
 
-  test('get from nullable map', () {
+  test('get from nullable', () {
     Map<String, Object?>? map;
     map = <String, Object?>{
       'a': 1,
@@ -49,20 +49,20 @@ void main() {
     expect(map.get<String>('e'), isNull);
   });
 
-  test('removeNull from map', () {
-    final Map<String, Object?> map = <String, Object?>{
+  test('removeNull', () {
+    const Map<String, Object?>? test1 = null;
+    expect(test1.removeNull(), <String, Object?>{});
+
+    final Map<String, Object?> test2 = <String, Object?>{
       'a': 1,
       'b': null,
       'c': <String?>['x', null, 'y'],
       'd': <String, Object?>{'nested': null},
     };
-
-    final Map<String, Object?> expected = <String, Object?>{
+    expect(test2.removeNull(), <String, Object?>{
       'a': 1,
       'c': <String>['x', 'y'],
       'd': <String, Object?>{},
-    };
-
-    expect(map.removeNull(), expected);
+    });
   });
 }

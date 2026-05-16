@@ -80,7 +80,7 @@ void main() {
   });
 
   test('random', () {
-    final TestEnum randomEnum = TestEnum.values.random;
+    final TestEnum? randomEnum = TestEnum.values.random;
     expect(TestEnum.values.contains(randomEnum), isTrue);
   });
 

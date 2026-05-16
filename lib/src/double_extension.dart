@@ -9,24 +9,19 @@ enum RoundingMode {
 }
 
 /// [double] Extension.
-extension DoubleExtension on double {
+extension DoubleExtension on double? {
   /// Returns the real part of this double.
-  int get real => truncate();
+  int? get real => this?.truncate();
 
   /// Returns the fractional part of this double.
-  double get fractional {
+  double? get fractional {
+    if (this == null) {
+      return null;
+    }
     final List<String> parts = toString().split('.');
     if (parts.length != 2) {
       return 0;
     }
-    return double.parse('${isNegative ? '-' : ''}0.${parts[1]}');
+    return double.parse('${this!.isNegative ? '-' : ''}0.${parts[1]}');
   }
-}
-
-extension NullableDoubleExtension on double? {
-  /// Returns the real part of this double.
-  int? get real => this?.real;
-
-  /// Returns the fractional part of this double.
-  double? get fractional => this?.fractional;
 }

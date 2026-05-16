@@ -66,6 +66,7 @@ extension NumberExtension on num {
     return Duration(hours: (this * Duration.hoursPerDay).round());
   }
 
+  /// Convert this [num] in weeks to a [String].
   String toWeekDay() {
     switch (this) {
       case 1:
@@ -87,6 +88,7 @@ extension NumberExtension on num {
     }
   }
 
+  /// Strips trailing zeros from this [num].
   num stripTrailingZeros() {
     final bool hasTrailingZero = truncateToDouble() == this;
     if (hasTrailingZero) {

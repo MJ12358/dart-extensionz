@@ -309,8 +309,9 @@ void main() {
       'six trillion five billion four million three thousand two hundred ten':
           6005004003210,
     };
-    for (final MapEntry<String, num?> me in result.entries) {
-      expect(me.key.wordToNumber(), me.value);
+    for (final MapEntry<String, num?>(:String key, :num? value)
+        in result.entries) {
+      expect(key.wordToNumber(), value);
     }
   });
 }

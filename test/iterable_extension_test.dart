@@ -42,8 +42,8 @@ void main() {
   test('sum with null', () {
     expect(<int?>[1, 2, 3, null].sum, 6);
     expect(<double?>[1.5, 2.5, 3.5, null].sum, 7.5);
-    expect(<int?>[null].sum, null);
-    expect(<int?>[].sum, null);
+    expect(<int?>[null].sum, 0);
+    expect(<int?>[].sum, 0);
   });
 
   test('average', () {
@@ -55,8 +55,8 @@ void main() {
   test('average with null', () {
     expect(<int?>[1, 2, 3, null].average, 2.0);
     expect(<double?>[1.5, 2.5, 3.5, null].average, 2.5);
-    expect(<int?>[null].average, null);
-    expect(<int?>[].average, null);
+    expect(<int?>[null].average, 0);
+    expect(<int?>[].average, 0);
   });
 
   test('max', () {

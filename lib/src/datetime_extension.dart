@@ -18,7 +18,7 @@ enum DayOfWeek {
 /// Months of the year.
 enum Month {
   january(DateTime.january, 31),
-  february(DateTime.february, 28),
+  february(DateTime.february, 28), // 29 in leap years
   march(DateTime.march, 31),
   april(DateTime.april, 30),
   may(DateTime.may, 31),
@@ -53,6 +53,7 @@ extension DateTimeExtension on DateTime {
   /// Returns only year, month and day.
   DateTime get date => DateTime(year, month, day);
 
+  /// Returns the seconds since epoch.
   int get secondsSinceEpoch => millisecondsSinceEpoch ~/ 1000;
 
   /// Equivalent to `DateTime.now().add(Duration(days: 1))`.
@@ -73,12 +74,16 @@ extension DateTimeExtension on DateTime {
   /// Equivalent to `this.add(Duration(days: -7))`.
   DateTime get previousWeek => addWeeks(-1);
 
+  /// Equivalent to `this.copyWith(month: month + 1)`.
   DateTime get nextMonth => copyWith(month: month + 1);
 
+  /// Equivalent to `this.copyWith(month: month - 1)`.
   DateTime get previousMonth => copyWith(month: month - 1);
 
+  /// Equivalent to `this.copyWith(year: year + 1)`.
   DateTime get nextYear => copyWith(year: year + 1);
 
+  /// Equivalent to `this.copyWith(year: year - 1)`.
   DateTime get previousYear => copyWith(year: year - 1);
 
   /// Calculates week number from a date.
@@ -232,6 +237,7 @@ extension DateTimeExtension on DateTime {
     return isAtSameMomentAs(other);
   }
 
+  /// Returns true if [other] is in the same year as this [DateTime].
   bool isSameYear(DateTime? other) {
     if (other == null) {
       return false;
@@ -239,6 +245,7 @@ extension DateTimeExtension on DateTime {
     return year == other.year;
   }
 
+  /// Returns true if [other] is in the same month as this [DateTime].
   bool isSameMonth(DateTime? other) {
     if (other == null) {
       return false;
@@ -246,6 +253,7 @@ extension DateTimeExtension on DateTime {
     return isSameYear(other) && month == other.month;
   }
 
+  /// Returns true if [other] is in the same week as this [DateTime].
   bool isSameWeek(DateTime? other) {
     if (other == null) {
       return false;
@@ -253,6 +261,7 @@ extension DateTimeExtension on DateTime {
     return startOfWeek == other.startOfWeek;
   }
 
+  /// Returns true if [other] is in the same day as this [DateTime].
   bool isSameDay(DateTime? other) {
     if (other == null) {
       return false;
@@ -260,6 +269,7 @@ extension DateTimeExtension on DateTime {
     return isSameMonth(other) && day == other.day;
   }
 
+  /// Returns true if [other] is in the same hour as this [DateTime].
   bool isSameHour(DateTime? other) {
     if (other == null) {
       return false;
@@ -267,6 +277,7 @@ extension DateTimeExtension on DateTime {
     return startOfHour == other.startOfHour;
   }
 
+  /// Returns true if [other] is in the same minute as this [DateTime].
   bool isSameMinute(DateTime? other) {
     if (other == null) {
       return false;
@@ -274,6 +285,7 @@ extension DateTimeExtension on DateTime {
     return startOfMinute == other.startOfMinute;
   }
 
+  /// Returns true if [other] is in the same second as this [DateTime].
   bool isSameSecond(DateTime? other) {
     if (other == null) {
       return false;
@@ -281,21 +293,26 @@ extension DateTimeExtension on DateTime {
     return secondsSinceEpoch == other.secondsSinceEpoch;
   }
 
+  /// Returns true if this [DateTime] is in the weekend.
   bool get isWeekend =>
       weekday == DateTime.saturday || weekday == DateTime.sunday;
 
+  /// Returns true if this [DateTime] is in the weekday.
   bool get isWeekday => !isWeekend;
 
+  /// Returns true if this [DateTime] is today.
   bool get isToday {
     final DateTime now = DateTime.now();
     return year == now.year && month == now.month && day == now.day;
   }
 
+  /// Returns true if this [DateTime] is yesterday.
   bool get isYesterday {
     final DateTime now = DateTime.now();
     return year == now.year && month == now.month && day == now.day - 1;
   }
 
+  /// Returns true if this [DateTime] is tomorrow.
   bool get isTomorrow {
     final DateTime now = DateTime.now();
     return year == now.year && month == now.month && day == now.day + 1;
