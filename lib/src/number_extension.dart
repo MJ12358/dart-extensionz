@@ -241,4 +241,67 @@ extension NullableNumberExtension on num? {
   bool toBool() {
     return this != null && this!.toBool();
   }
+
+  /// Plus operator that returns null
+  /// if either of the operands are null.
+  num? operator +(num? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+    return this! + other;
+  }
+
+  /// Minus operator that returns null
+  /// if either of the operands are null.
+  num? operator -(num? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+    return this! - other;
+  }
+
+  /// Multiplication operator that returns null
+  /// if either of the operands are null.
+  num? operator *(num? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+    return this! * other;
+  }
+
+  /// Division operator that returns null
+  /// if either of the operands are null.
+  num? operator /(num? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+    return this! / other;
+  }
+
+  /// Modulo operator that returns null
+  /// if either of the operands are null.
+  num? operator %(num? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+    return this! % other;
+  }
+
+  /// Integer division operator that returns null
+  /// if either of the operands are null.
+  num? operator ~/(num? other) {
+    if (this == null || other == null) {
+      return null;
+    }
+    return this! ~/ other;
+  }
+
+  /// Negation operator that returns null
+  /// if this is null.
+  num? operator -() {
+    if (this == null) {
+      return null;
+    }
+    return -this!;
+  }
 }

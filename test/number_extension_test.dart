@@ -155,4 +155,39 @@ void main() {
       12.345,
     );
   });
+
+  test('operators', () {
+    // Normal operations
+    const num a = 1;
+    const num b = 2;
+    expect(a + b, 3);
+    expect(a - b, -1);
+    expect(a * b, 2);
+    expect(a / b, 0.5);
+    expect(a ~/ b, 0);
+    expect(a % b, 1);
+    expect(-a % b, 1);
+    expect(a % -b, 1);
+    expect(-a % -b, 1);
+    // Null-aware operations (null on the left)
+    const num? c = null;
+    const num d = 2;
+    expect(c + d, null);
+    expect(c - d, null);
+    expect(c * d, null);
+    expect(c / d, null);
+    expect(c ~/ d, null);
+    expect(c % d, null);
+    expect(-c, null);
+    // Null-aware operations
+    const num? e = null;
+    const num? f = null;
+    expect(e + f, null);
+    expect(e - f, null);
+    expect(e * f, null);
+    expect(e / f, null);
+    expect(e ~/ f, null);
+    expect(e % f, null);
+    expect(-e, null);
+  });
 }

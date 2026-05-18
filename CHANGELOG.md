@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [9.1.0]
+
+- Add nullable number operators.
+
 ## [9.0.2]
 
 - Fix some migration issues with `IterableExtension`.
