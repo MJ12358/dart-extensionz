@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [Stream] Extension.
 extension StreamExtension<T> on Stream<T> {

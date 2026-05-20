@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// Cardinal directions.
 enum Cardinal {

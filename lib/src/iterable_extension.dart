@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [Iterable] Extension.
 extension IterableExtension<T> on Iterable<T> {

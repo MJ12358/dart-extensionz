@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [Set] Extension.
 extension SetExtension<T> on Set<T>? {

@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [Enum] Extension.
 extension EnumExtension<T> on Enum? {

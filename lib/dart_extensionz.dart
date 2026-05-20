@@ -1,5 +1,3 @@
-library dart_extensionz;
-
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;

@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [Future] Extension.
 extension FutureExtension<T> on Future<T> {

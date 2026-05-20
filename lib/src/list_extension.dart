@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [List] Extension.
 extension ListExtension<T> on List<T?>? {

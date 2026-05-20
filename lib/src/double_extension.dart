@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// Indicates how the least significant returned digit
 /// of a rounded result is to be calculated.

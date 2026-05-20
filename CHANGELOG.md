@@ -1,5 +1,9 @@
 # Dart Extensionz
 
+## [9.1.1]
+
+- Fix static analysis warning: "part-of directive uses a library name"
+
 ## [9.1.0]
 
 - Add nullable number operators.

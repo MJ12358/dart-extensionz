@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// The platform that user interaction should adapt to target.
 enum TargetPlatform {

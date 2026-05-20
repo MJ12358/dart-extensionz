@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// An identifier indicating the type of
 /// information contained in an electronic format.

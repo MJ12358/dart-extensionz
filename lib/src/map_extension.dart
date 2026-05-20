@@ -1,4 +1,4 @@
-part of dart_extensionz;
+part of '../dart_extensionz.dart';
 
 /// [Map] Extension.
 extension MapExtension<K, V> on Map<K, V>? {
