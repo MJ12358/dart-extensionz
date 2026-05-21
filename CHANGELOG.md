@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## [9.1.2]
+
+- Fix some lints.
+- Add more comments.
+- Update dependencies.
+
 ## [9.1.1]
 
 - Fix static analysis warning: "part-of directive uses a library name"

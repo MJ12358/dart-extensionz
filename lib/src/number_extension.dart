@@ -1,6 +1,8 @@
 part of '../dart_extensionz.dart';
 
+/// {@template dart_extensionz.cardinal}
 /// Cardinal directions.
+/// {@endtemplate}
 enum Cardinal {
   north(initials: 'N'),
   northNorthEast(initials: 'NNE'),
@@ -19,10 +21,12 @@ enum Cardinal {
   northWest(initials: 'NW'),
   northNorthWest(initials: 'NNW');
 
+  /// {@macro dart_extensionz.cardinal}
   const Cardinal({
     required this.initials,
   });
 
+  /// The initials of this cardinal direction.
   final String initials;
 }
 

@@ -104,18 +104,45 @@ extension ObjectExtension on Object? {
     return Object;
   }
 
+  /// Determines if this [Object] is [bool].
   bool get isBool => this is bool;
+
+  /// Determines if this [Object] is [double].
   bool get isDouble => this is double;
+
+  /// Determines if this [Object] is [Enum].
   bool get isEnum => this is Enum;
+
+  /// Determines if this [Object] is [Future].
   bool get isFuture => this is Future;
+
+  /// Determines if this [Object] is [int].
   bool get isInt => this is int;
+
+  /// Determines if this [Object] is [Iterable].
   bool get isIterable => this is Iterable;
+
+  /// Determines if this [Object] is [List].
   bool get isList => this is List;
+
+  /// Determines if this [Object] is [Map].
   bool get isMap => this is Map;
+
+  /// Determines if this [Object] is [num].
   bool get isNum => this is num;
+
+  /// Determines if this [Object] is [Runes].
   bool get isRunes => this is Runes;
+
+  /// Determines if this [Object] is [Set].
   bool get isSet => this is Set;
+
+  /// Determines if this [Object] is [Stream].
   bool get isStream => this is Stream;
+
+  /// Determines if this [Object] is [String].
   bool get isString => this is String;
+
+  /// Determines if this [Object] is [Symbol].
   bool get isSymbol => this is Symbol;
 }

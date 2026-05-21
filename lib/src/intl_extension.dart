@@ -328,24 +328,24 @@ extension IntlStringExtension on String? {
       return null;
     }
 
-    String? _pattern = pattern;
+    String? pattern0 = pattern;
 
-    if (_pattern == null) {
+    if (pattern0 == null) {
       const String clock12Regex = r'^\d{1,2}:\d{1,2}\s\w{2}$';
       const String clock24Regex = r'^\d{1,2}:\d{1,2}$';
 
       if (this!.hasMatch(clock12Regex)) {
-        _pattern = 'hh:mm a';
+        pattern0 = 'hh:mm a';
       } else if (this!.hasMatch(clock24Regex)) {
-        _pattern = 'hh:mm';
+        pattern0 = 'hh:mm';
       } else {
-        _pattern = "YYYY-MM-DD'T'HH:mm:ss.SSSSSSS";
+        pattern0 = "YYYY-MM-DD'T'HH:mm:ss.SSSSSSS";
       }
     }
 
     try {
       return DateFormat(
-        _pattern,
+        pattern0,
         locale,
       ).parseLoose(this!, isUtc);
     } on FormatException catch (_) {
@@ -366,9 +366,9 @@ extension IntlStringExtension on String? {
       return null;
     }
 
-    String? _pattern = pattern;
+    String? p = pattern;
 
-    if (_pattern == null) {
+    if (p == null) {
       const String isoRegex =
           r'^P((\d+Y)?(\d+M)?(\d+W)?(\d+D)?)(T(\d+H)?(\d+M)?(.+S)?)?$';
       const String dartRegex = r'^(\d+:)?(\d+:)?(\d+.)?(\d+)?$';
@@ -379,12 +379,12 @@ extension IntlStringExtension on String? {
           return _parseDartDuration();
         }
       } catch (_) {
-        _pattern = 'HH:mm:ss.SSSSSS';
+        p = 'HH:mm:ss.SSSSSS';
       }
     }
 
     final DateTime? dateTime = toDateTime(
-      pattern: _pattern,
+      pattern: p,
       locale: locale,
       isUtc: true,
     );

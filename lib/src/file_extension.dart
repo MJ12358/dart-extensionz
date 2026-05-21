@@ -9,6 +9,7 @@ enum FileType {
   text,
   unknown;
 
+  /// List of common image file extensions.
   static List<String> get imageExtensions => <String>[
         'jpg',
         'jpeg',
@@ -19,6 +20,7 @@ enum FileType {
         'webp',
       ];
 
+  /// List of common video file extensions.
   static List<String> get videoExtensions => <String>[
         'mp4',
         'avi',
@@ -29,6 +31,7 @@ enum FileType {
         'webm',
       ];
 
+  /// List of common audio file extensions.
   static List<String> get audioExtensions => <String>[
         'mp3',
         'wav',
@@ -38,6 +41,7 @@ enum FileType {
         'm4a',
       ];
 
+  /// List of common text file extensions.
   static List<String> get textExtensions => <String>[
         'txt',
         'csv',

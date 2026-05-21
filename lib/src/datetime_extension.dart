@@ -1,6 +1,11 @@
 part of '../dart_extensionz.dart';
 
+/// {@template dart_extensionz.day_of_week}
 /// Days of the week.
+///
+/// The values of the [DayOfWeek] enum correspond
+/// to the [DateTime] weekday values.
+/// {@endtemplate}
 enum DayOfWeek {
   monday(DateTime.monday),
   tuesday(DateTime.tuesday),
@@ -10,12 +15,19 @@ enum DayOfWeek {
   saturday(DateTime.saturday),
   sunday(DateTime.sunday);
 
+  /// {@macro dart_extensionz.day_of_week}
   const DayOfWeek(this.value);
 
+  /// The value of the day of the week, where Monday is 1 and Sunday is 7.
   final int value;
 }
 
+/// {@template dart_extensionz.month}
 /// Months of the year.
+///
+/// The values of the [Month] enum correspond
+/// to the [DateTime] month values.
+/// {@endtemplate}
 enum Month {
   january(DateTime.january, 31),
   february(DateTime.february, 28), // 29 in leap years
@@ -30,9 +42,13 @@ enum Month {
   november(DateTime.november, 30),
   december(DateTime.december, 31);
 
+  /// {@macro dart_extensionz.month}
   const Month(this.value, this.days);
 
+  /// The value of the month, where January is 1 and December is 12.
   final int value;
+
+  /// The number of days in the month, not accounting for leap years.
   final int days;
 }
 
@@ -373,20 +389,27 @@ extension DateTimeExtension on DateTime {
     );
   }
 
+  /// Plus operators for [DateTime].
   DateTime operator +(Duration duration) => add(duration);
 
+  /// Minus operators for [DateTime].
   DateTime operator -(Duration duration) => subtract(duration);
 
+  /// Less than operator for [DateTime].
   bool operator <(DateTime other) => isBefore(other);
 
+  /// Less than or equal to operator for [DateTime].
   bool operator <=(DateTime other) =>
       isBefore(other) || isAtSameMomentAs(other);
 
+  /// Greater than operator for [DateTime].
   bool operator >(DateTime other) => isAfter(other);
 
+  /// Greater than or equal to operator for [DateTime].
   bool operator >=(DateTime other) => isAfter(other) || isAtSameMomentAs(other);
 }
 
+/// [DateTime] Extension for fuzzy time.
 extension DateTimeAgoExtension on DateTime {
   /// Provides a fuzzy time like '3 years ago'.
   String get timeAgo {
@@ -435,6 +458,7 @@ extension DateTimeAgoExtension on DateTime {
   }
 }
 
+/// [DateTime] Extension for seasons.
 extension DateTimeSeasonExtension on DateTime {
   /// Return the [Season] of this date.
   /// Seasons are defined as:

@@ -2,6 +2,8 @@ part of '../dart_extensionz.dart';
 
 /// [Future] Extension.
 extension FutureExtension<T> on Future<T> {
+  /// Returns a [Future] that completes with the result of this [Future]
+  /// after a delay of [duration].
   Future<T> delayed({
     Duration duration = const Duration(milliseconds: 350),
     bool eagerError = false,

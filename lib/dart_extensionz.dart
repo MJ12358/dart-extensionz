@@ -1,3 +1,6 @@
+/// A set of Dart extensions I use in various projects.
+library;
+
 import 'dart:async';
 import 'dart:io';
 import 'dart:math' as math;

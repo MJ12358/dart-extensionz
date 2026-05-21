@@ -2,9 +2,16 @@ part of '../dart_extensionz.dart';
 
 /// [Duration] Extension.
 extension DurationExtension on Duration {
+  /// Number of days in a year.
   static const int daysPerYear = 365;
+
+  /// Number of weeks in a year.
   static const int weeksPerYear = 52;
+
+  /// Number of months in a year.
   static const int monthsPerYear = 12;
+
+  /// Number of days in a week.
   static const int daysPerWeek = 7;
 
   /// Get the years of this [Duration].
