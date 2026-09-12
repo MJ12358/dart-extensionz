@@ -63,14 +63,14 @@ void main() {
     expect(t1.runtimeType.toString().toType(), bool);
     expect(t2.runtimeType.toString().toType(), double);
     // expect(t3.runtimeType.toString().toType(), enum);
-    expect(t4.runtimeType.toString().toType(), Future);
+    expect(t4.runtimeType.toString().toType(), Future<dynamic>);
     expect(t5.runtimeType.toString().toType(), int);
     // expect(t6.runtimeType.toString().toType(), Iterable);
-    expect(t7.runtimeType.toString().toType(), List);
+    expect(t7.runtimeType.toString().toType(), List<dynamic>);
     // expect(t8.runtimeType.toString().toType(), num);
     expect(t9.runtimeType.toString().toType(), Runes);
-    expect(t10.runtimeType.toString().toType(), Set);
-    expect(t11.runtimeType.toString().toType(), Stream);
+    expect(t10.runtimeType.toString().toType(), Set<dynamic>);
+    expect(t11.runtimeType.toString().toType(), Stream<dynamic>);
     expect(t12.runtimeType.toString().toType(), String);
     expect(t13.runtimeType.toString().toType(), Symbol);
     expect(null.runtimeType.toString().toType(), Null);

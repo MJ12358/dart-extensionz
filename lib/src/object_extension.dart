@@ -63,19 +63,19 @@ extension ObjectExtension on Object? {
       return Enum;
     }
     if (s == 'future') {
-      return Future;
+      return Future<dynamic>;
     }
     if (s == 'int') {
       return int;
     }
     if (s == 'iterable') {
-      return Iterable;
+      return Iterable<dynamic>;
     }
     if (s == 'list') {
-      return List;
+      return List<dynamic>;
     }
     if (s == 'map') {
-      return Map;
+      return Map<dynamic, dynamic>;
     }
     if (s == 'never') {
       return Never;
@@ -87,10 +87,10 @@ extension ObjectExtension on Object? {
       return Runes;
     }
     if (s == 'set') {
-      return Set;
+      return Set<dynamic>;
     }
     if (s == 'stream' || s == 'controllerstream') {
-      return Stream;
+      return Stream<dynamic>;
     }
     if (s == 'string') {
       return String;

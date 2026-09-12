@@ -204,7 +204,7 @@ void main() {
 
     test(en_GB, () {
       final String result = value.toCompactCurrency(locale: en_GB);
-      expect(result, '£1.2M');
+      expect(result, '£1.2m');
     });
 
     test(de_DE, () {

@@ -1,5 +1,11 @@
 # Dart Extensionz
 
+## [10.0.0]
+
+- Fix lints.
+- Update minimum Dart version.
+- Update dependencies.
+
 ## [9.1.2]
 
 - Fix some lints.
