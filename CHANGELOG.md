@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## [10.1.0]
+
+- Add `Uint8ListExtension`.
+- Fix some code formatting.
+
 ## [10.0.0]
 
 - Fix lints.
