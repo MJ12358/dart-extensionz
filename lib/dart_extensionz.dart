@@ -2,8 +2,10 @@
 library;
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:typed_data';
 
 import 'package:intl/intl.dart';
 
@@ -26,4 +28,5 @@ part 'src/platform_extension.dart';
 part 'src/set_extension.dart';
 part 'src/stream_extension.dart';
 part 'src/string_extension.dart';
+part 'src/uint8list_extension.dart';
 part 'src/uri_extension.dart';
