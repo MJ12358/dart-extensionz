@@ -13,8 +13,9 @@ extension UriExtension on Uri {
 
   /// Adds a query to this [Uri].
   Uri addQuery(String key, String value) {
-    final Map<String, String> parameters =
-        Map<String, String>.of(queryParameters);
+    final Map<String, String> parameters = Map<String, String>.of(
+      queryParameters,
+    );
     parameters.update(
       key,
       (String value) => value,

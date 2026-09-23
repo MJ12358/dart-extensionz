@@ -11,46 +11,46 @@ enum FileType {
 
   /// List of common image file extensions.
   static List<String> get imageExtensions => <String>[
-        'jpg',
-        'jpeg',
-        'png',
-        'gif',
-        'bmp',
-        'tiff',
-        'webp',
-      ];
+    'jpg',
+    'jpeg',
+    'png',
+    'gif',
+    'bmp',
+    'tiff',
+    'webp',
+  ];
 
   /// List of common video file extensions.
   static List<String> get videoExtensions => <String>[
-        'mp4',
-        'avi',
-        'mkv',
-        'mov',
-        'wmv',
-        'flv',
-        'webm',
-      ];
+    'mp4',
+    'avi',
+    'mkv',
+    'mov',
+    'wmv',
+    'flv',
+    'webm',
+  ];
 
   /// List of common audio file extensions.
   static List<String> get audioExtensions => <String>[
-        'mp3',
-        'wav',
-        'aac',
-        'ogg',
-        'flac',
-        'm4a',
-      ];
+    'mp3',
+    'wav',
+    'aac',
+    'ogg',
+    'flac',
+    'm4a',
+  ];
 
   /// List of common text file extensions.
   static List<String> get textExtensions => <String>[
-        'txt',
-        'csv',
-        'json',
-        'xml',
-        'html',
-        'css',
-        'js',
-      ];
+    'txt',
+    'csv',
+    'json',
+    'xml',
+    'html',
+    'css',
+    'js',
+  ];
 }
 
 /// [File] Extension.
@@ -876,8 +876,7 @@ const Map<String, String> _mimeTypeMap = <String, String>{
       'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
   'ppt': 'application/vnd.ms-powerpoint',
   'pptm': 'application/vnd.ms-powerpoint.presentation.macroenabled.12',
-  'pptx':
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
   'pqa': 'application/vnd.palm',
   'prc': 'application/x-mobipocket-ebook',
   'pre': 'application/vnd.lotus-freelance',

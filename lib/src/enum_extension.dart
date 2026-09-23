@@ -71,13 +71,14 @@ extension EnumsExtension<T> on Iterable<Enum?>? {
       return null;
     }
 
-    final String value =
-        element.replaceAll(RegExp(r'[\s_]+'), '').toLowerCase();
+    final String value = element
+        .replaceAll(RegExp(r'[\s_]+'), '')
+        .toLowerCase();
 
     final Map<String, Enum> map = this!.whereType<Enum>().asNameMap().map(
-          (String key, Enum value) =>
-              MapEntry<String, Enum>(key.toLowerCase(), value),
-        );
+      (String key, Enum value) =>
+          MapEntry<String, Enum>(key.toLowerCase(), value),
+    );
 
     return map[value] as T?;
   }

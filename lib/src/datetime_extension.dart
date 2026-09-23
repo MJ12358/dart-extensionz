@@ -162,54 +162,54 @@ extension DateTimeExtension on DateTime {
 
   /// Returns the end of day for this [DateTime].
   DateTime get endOfDay => copyWith(
-        hour: 23,
-        minute: 59,
-        second: 59,
-        millisecond: 999,
-        microsecond: 999,
-      );
+    hour: 23,
+    minute: 59,
+    second: 59,
+    millisecond: 999,
+    microsecond: 999,
+  );
 
   /// Returns the end of hour for this [DateTime].
   DateTime get endOfHour => copyWith(
-        minute: 59,
-        second: 59,
-        millisecond: 999,
-        microsecond: 999,
-      );
+    minute: 59,
+    second: 59,
+    millisecond: 999,
+    microsecond: 999,
+  );
 
   /// Returns the end of minute for this [DateTime].
   DateTime get endOfMinute => copyWith(
-        second: 59,
-        millisecond: 999,
-        microsecond: 999,
-      );
+    second: 59,
+    millisecond: 999,
+    microsecond: 999,
+  );
 
   /// Returns the end of second for this [DateTime].
   DateTime get endOfSecond => copyWith(
-        millisecond: 999,
-        microsecond: 999,
-      );
+    millisecond: 999,
+    microsecond: 999,
+  );
 
   /// Returns the start of year for this [DateTime].
   DateTime get startOfYear => copyWith(
-        month: DateTime.january,
-        day: 1,
-        hour: 0,
-        minute: 0,
-        second: 0,
-        millisecond: 0,
-        microsecond: 0,
-      );
+    month: DateTime.january,
+    day: 1,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+    microsecond: 0,
+  );
 
   /// Returns the start of month for this [DateTime].
   DateTime get startOfMonth => copyWith(
-        day: 1,
-        hour: 0,
-        minute: 0,
-        second: 0,
-        millisecond: 0,
-        microsecond: 0,
-      );
+    day: 1,
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+    microsecond: 0,
+  );
 
   /// Returns the start of week for this [DateTime].
   DateTime get startOfWeek =>
@@ -217,33 +217,33 @@ extension DateTimeExtension on DateTime {
 
   /// Returns the start of day for this [DateTime].
   DateTime get startOfDay => copyWith(
-        hour: 0,
-        minute: 0,
-        second: 0,
-        millisecond: 0,
-        microsecond: 0,
-      );
+    hour: 0,
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+    microsecond: 0,
+  );
 
   /// Returns the start of hour for this [DateTime].
   DateTime get startOfHour => copyWith(
-        minute: 0,
-        second: 0,
-        millisecond: 0,
-        microsecond: 0,
-      );
+    minute: 0,
+    second: 0,
+    millisecond: 0,
+    microsecond: 0,
+  );
 
   /// Returns the start of minute for this [DateTime].
   DateTime get startOfMinute => copyWith(
-        second: 0,
-        millisecond: 0,
-        microsecond: 0,
-      );
+    second: 0,
+    millisecond: 0,
+    microsecond: 0,
+  );
 
   /// Returns the start of second for this [DateTime].
   DateTime get startOfSecond => copyWith(
-        millisecond: 0,
-        microsecond: 0,
-      );
+    millisecond: 0,
+    microsecond: 0,
+  );
 
   /// Equivalent to a nullable [isAtSameMomentAs].
   bool isSameMoment(DateTime? other) {

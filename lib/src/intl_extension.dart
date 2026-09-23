@@ -116,10 +116,12 @@ extension IntlDurationExtension on Duration? {
     if (sParts.isNotEmpty) {
       final String mParts = sParts[sParts.length - 1];
 
-      final int milliseconds =
-          int.parse(mParts.substring(0, mParts.length ~/ 2));
-      final int microseconds =
-          int.parse(mParts.substring(mParts.length ~/ 2, mParts.length));
+      final int milliseconds = int.parse(
+        mParts.substring(0, mParts.length ~/ 2),
+      );
+      final int microseconds = int.parse(
+        mParts.substring(mParts.length ~/ 2, mParts.length),
+      );
 
       if (milliseconds != 0) {
         result.add('$milliseconds$valueSeparator$ms');
@@ -154,8 +156,11 @@ extension IntlDurationExtension on Duration? {
       strBuffer.write('${this!.days.abs().stripTrailingZeros()}D');
     }
 
-    if (<num>[this!.hours, this!.minutes, this!.seconds]
-        .any((num e) => e != 0)) {
+    if (<num>[
+      this!.hours,
+      this!.minutes,
+      this!.seconds,
+    ].any((num e) => e != 0)) {
       strBuffer.write('T');
 
       if (this!.hours != 0) {
@@ -418,7 +423,8 @@ extension IntlStringExtension on String? {
     final int seconds = _parseTime(time, 'S');
 
     return Duration(
-      days: days +
+      days:
+          days +
           (weeks * DurationExtension.daysPerWeek) +
           (years * DurationExtension.daysPerYear),
       hours: hours,

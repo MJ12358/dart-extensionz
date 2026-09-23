@@ -27,8 +27,12 @@ extension StringExtension on String {
   /// Possible true values are:
   ///   "null", "nil", "nill", "nullptr"
   bool get isNull {
-    return <String>['null', 'nil', 'nill', 'nullptr']
-        .contains(trim().toLowerCase());
+    return <String>[
+      'null',
+      'nil',
+      'nill',
+      'nullptr',
+    ].contains(trim().toLowerCase());
   }
 
   /// Whether this [String] can be parsed as a [num].
@@ -89,8 +93,16 @@ extension StringExtension on String {
   /// Possible true values are:
   ///   "y", "yes", "on", "ok", "true", "t", "1", "online"
   bool toBool() {
-    return <String>['y', 'yes', 'on', 'ok', 'true', 't', '1', 'online']
-        .contains(trim().toLowerCase());
+    return <String>[
+      'y',
+      'yes',
+      'on',
+      'ok',
+      'true',
+      't',
+      '1',
+      'online',
+    ].contains(trim().toLowerCase());
   }
 
   /// Equivalent to `int.tryParse(this)`.
@@ -106,6 +118,17 @@ extension StringExtension on String {
   /// Equivalent to `double.tryParse(this)`.
   double? toDouble() {
     return double.tryParse(this);
+  }
+
+  /// Converts this [String] to a [Uint8List].
+  ///
+  /// Uses Base64 decoding if possible, or falls back to UTF-8 encoding.
+  Uint8List toUint8List() {
+    try {
+      return base64.decode(this);
+    } on FormatException {
+      return Uint8List.fromList(codeUnits);
+    }
   }
 
   /// Convert a string to an enum from [values].
@@ -216,8 +239,10 @@ extension StringExtension on String {
     final int n = s2.length;
 
     // Create a DP table
-    final List<List<int>> dp =
-        List<List<int>>.generate(m + 1, (int i) => List<int>.filled(n + 1, 0));
+    final List<List<int>> dp = List<List<int>>.generate(
+      m + 1,
+      (int i) => List<int>.filled(n + 1, 0),
+    );
 
     // Initialize first row and column
     for (int i = 0; i <= m; i++) {
@@ -233,7 +258,8 @@ extension StringExtension on String {
         if (s1[i - 1] == s2[j - 1]) {
           dp[i][j] = dp[i - 1][j - 1];
         } else {
-          dp[i][j] = 1 +
+          dp[i][j] =
+              1 +
               <int>[
                 dp[i - 1][j], // deletion
                 dp[i][j - 1], // insertion
@@ -403,12 +429,14 @@ extension WordToNumber on String {
     }
 
     // Check for decimal point.
-    final int decimalIndex = words
-        .indexWhere((String word) => _decimals.contains(word) || word == '.');
+    final int decimalIndex = words.indexWhere(
+      (String word) => _decimals.contains(word) || word == '.',
+    );
 
     if (decimalIndex != -1) {
-      final int? intPart =
-          decimalIndex > 0 ? _parseInteger(words.sublist(0, decimalIndex)) : 0;
+      final int? intPart = decimalIndex > 0
+          ? _parseInteger(words.sublist(0, decimalIndex))
+          : 0;
       final double? deciPart = _parseDecimal(words.sublist(decimalIndex + 1));
       return intPart != null && deciPart != null ? intPart + deciPart : null;
     } else {
@@ -478,6 +506,23 @@ extension WordToNumber on String {
       return double.parse('0.$decimalString');
     } catch (_) {
       return null;
+    }
+  }
+}
+
+extension NullableStringExtension on String? {
+  /// Converts the nullable [String] to a [Uint8List],
+  /// using Base64 decoding if possible,
+  /// or falling back to UTF-8 encoding,
+  /// or returns null if the [String] is null.
+  Uint8List? toUint8List() {
+    if (this == null) {
+      return null;
+    }
+    try {
+      return base64.decode(this!);
+    } on FormatException {
+      return Uint8List.fromList(this!.codeUnits);
     }
   }
 }
