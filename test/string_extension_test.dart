@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dart_extensionz/dart_extensionz.dart';
 import 'package:test/test.dart';
 
@@ -32,6 +34,12 @@ void main() {
     expect('false'.toBool(), false);
     expect('f'.toBool(), false);
     expect('0'.toBool(), false);
+  });
+
+  test('toUint8List', () {
+    const String str = 'SGVsbG8=';
+    final Uint8List bytes = str.toUint8List();
+    expect(bytes, Uint8List.fromList(<int>[72, 101, 108, 108, 111]));
   });
 
   test('toEnum', () {
