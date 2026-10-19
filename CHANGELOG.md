@@ -1,5 +1,10 @@
 # Dart Extensionz
 
+## [10.2.0]
+
+- Bump Dart version.
+- Update dependencies.
+
 ## [10.1.0]
 
 - Add `Uint8ListExtension`.
